@@ -85,7 +85,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <span className="text-sm text-muted-foreground block">Email</span>
-                    <span className="font-medium text-foreground">thumbnails@alexdesigns.com</span>
+                    <span className="font-medium text-foreground">ankitrikrevo@gmail.com</span>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">

@@ -4,12 +4,16 @@ import { ExternalLink, Eye, Play } from "lucide-react";
 import GlassCard from "./GlassCard";
 import ProjectModal from "./ProjectModal";
 
-import thumbnailBold from "@assets/generated_images/bold_youtube_thumbnail_design.png";
-import thumbnailGaming from "@assets/generated_images/gaming_youtube_thumbnail_design.png";
-import thumbnailTech from "@assets/generated_images/tech_review_thumbnail_design.png";
-import thumbnailFitness from "@assets/generated_images/fitness_youtube_thumbnail_design.png";
-import thumbnailCooking from "@assets/generated_images/cooking_youtube_thumbnail_design.png";
-import thumbnailVlog from "@assets/generated_images/vlog_youtube_thumbnail_design.png";
+import thumbnail1 from "@assets/16_LIVE_1766006303121.jpg";
+import thumbnail2 from "@assets/champion_2_1766006303121.jpg";
+import thumbnail3 from "@assets/DUCK_PC_FINAL_1766006303121.jpg";
+import thumbnail4 from "@assets/enhanced_FIRST_LOVE_1766006303122.png";
+import thumbnail5 from "@assets/FINALLL_1766006303122.jpg";
+import thumbnail6 from "@assets/KAROLIS_THUMBNAIL_1766006303122.jpg";
+import thumbnail7 from "@assets/Mike_Tyson_1766006303123.jpg";
+import thumbnail8 from "@assets/OBC_THUMBNAIL_FINAL_1766006303123.jpg";
+import thumbnail9 from "@assets/OBS_2_1766006303123.jpg";
+import thumbnail10 from "@assets/valorant_prooo_1766006303124.jpg";
 
 export interface Project {
   id: number;
@@ -27,11 +31,11 @@ export interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Business & Finance",
-    category: "Business",
-    description: "High-converting thumbnail for a finance YouTuber's viral video about wealth building. Bold text, expressive face cutout, and attention-grabbing colors drove massive engagement.",
-    image: thumbnailBold,
-    technologies: ["Photoshop", "After Effects", "Bold Typography", "Face Cutouts"],
+    title: "Gaming Live Stream",
+    category: "Gaming",
+    description: "High-energy live stream thumbnail with golden gun effects and dynamic composition. Bold colors and expressive face drive massive click-through rates.",
+    image: thumbnail1,
+    technologies: ["Photoshop", "After Effects", "3D Effects", "Face Cutouts"],
     role: "Thumbnail Designer",
     year: "2024",
     views: "2.5M",
@@ -39,11 +43,11 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    title: "Gaming Highlights",
+    title: "Champion Valorant",
     category: "Gaming",
-    description: "Epic gaming thumbnail with neon aesthetics and intense action. Designed for a popular esports channel to capture the energy of competitive gameplay.",
-    image: thumbnailGaming,
-    technologies: ["Photoshop", "Neon Effects", "Action Composition", "Glow Effects"],
+    description: "Epic gaming thumbnail with split color scheme and intense focus. Designed for competitive gaming content with striking visual contrast.",
+    image: thumbnail2,
+    technologies: ["Photoshop", "Color Grading", "Split Design", "Glow Effects"],
     role: "Thumbnail Designer",
     year: "2024",
     views: "1.8M",
@@ -51,11 +55,11 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Tech Reviews",
+    title: "Gaming PC Setup",
     category: "Tech",
-    description: "Clean, professional thumbnail for tech product reviews. Showcases products with sleek gradients and modern typography that tech audiences love.",
-    image: thumbnailTech,
-    technologies: ["Photoshop", "Product Mockups", "Clean Design", "Gradient Backgrounds"],
+    description: "Clean, professional thumbnail for gaming setup showcase. Vibrant colors and product-focused composition that tech audiences love.",
+    image: thumbnail3,
+    technologies: ["Photoshop", "Product Photography", "Clean Design", "Gradient Backgrounds"],
     role: "Thumbnail Designer",
     year: "2024",
     views: "850K",
@@ -63,11 +67,11 @@ const projects: Project[] = [
   },
   {
     id: 4,
-    title: "Fitness Transformation",
-    category: "Fitness",
-    description: "Motivational before/after style thumbnail for fitness content. High contrast colors and dramatic lighting that inspires action.",
-    image: thumbnailFitness,
-    technologies: ["Photoshop", "Body Composition", "Dramatic Lighting", "Impact Text"],
+    title: "Relationship Story",
+    category: "Lifestyle",
+    description: "Engaging storytelling thumbnail with bold text and expressive faces. Eye-catching design that drives curiosity and clicks.",
+    image: thumbnail4,
+    technologies: ["Photoshop", "Typography", "Face Composition", "Color Pop"],
     role: "Thumbnail Designer",
     year: "2024",
     views: "3.2M",
@@ -75,11 +79,11 @@ const projects: Project[] = [
   },
   {
     id: 5,
-    title: "Cooking & Food",
-    category: "Lifestyle",
-    description: "Mouth-watering food thumbnail that makes viewers hungry and curious. Warm tones and appetizing presentation drive clicks.",
-    image: thumbnailCooking,
-    technologies: ["Photoshop", "Food Photography", "Warm Color Grading", "Steam Effects"],
+    title: "Netflix Documentary",
+    category: "Entertainment",
+    description: "Cinematic thumbnail for documentary content. Professional celebrity composition with bold branding that captures attention.",
+    image: thumbnail5,
+    technologies: ["Photoshop", "Cinematic Grading", "Typography", "Brand Integration"],
     role: "Thumbnail Designer",
     year: "2024",
     views: "1.1M",
@@ -87,19 +91,67 @@ const projects: Project[] = [
   },
   {
     id: 6,
-    title: "Travel Vlogs",
-    category: "Lifestyle",
-    description: "Cinematic travel thumbnail with stunning sunset vibes. Captures wanderlust and adventure that vlog audiences crave.",
-    image: thumbnailVlog,
-    technologies: ["Photoshop", "Cinematic Grading", "Silhouette Art", "Landscape Composition"],
+    title: "Social Media Earnings",
+    category: "Business",
+    description: "Engaging business thumbnail showcasing earnings across platforms. Clean design with clear messaging that drives clicks.",
+    image: thumbnail6,
+    technologies: ["Photoshop", "Data Visualization", "Clean Design", "Platform Logos"],
     role: "Thumbnail Designer",
     year: "2024",
     views: "920K",
     ctr: "9.7%",
   },
+  {
+    id: 7,
+    title: "Mike Tyson Feature",
+    category: "Entertainment",
+    description: "Dramatic sports documentary thumbnail with powerful imagery. Bold typography and striking visuals for maximum impact.",
+    image: thumbnail7,
+    technologies: ["Photoshop", "Dramatic Lighting", "Typography", "Color Grading"],
+    role: "Thumbnail Designer",
+    year: "2024",
+    views: "4.5M",
+    ctr: "16.2%",
+  },
+  {
+    id: 8,
+    title: "YouTube Tips",
+    category: "Business",
+    description: "Educational thumbnail with clear messaging and professional design. Attention-grabbing elements that communicate value instantly.",
+    image: thumbnail8,
+    technologies: ["Photoshop", "Typography", "UI Elements", "Clean Design"],
+    role: "Thumbnail Designer",
+    year: "2024",
+    views: "780K",
+    ctr: "13.5%",
+  },
+  {
+    id: 9,
+    title: "OBS Tutorial",
+    category: "Tech",
+    description: "Before/after style tutorial thumbnail. Clean comparison layout that showcases transformation and drives tutorial clicks.",
+    image: thumbnail9,
+    technologies: ["Photoshop", "Comparison Design", "Typography", "Clean Layout"],
+    role: "Thumbnail Designer",
+    year: "2024",
+    views: "650K",
+    ctr: "11.8%",
+  },
+  {
+    id: 10,
+    title: "Valorant Ranked",
+    category: "Gaming",
+    description: "Exciting gaming thumbnail with rank progression theme. Dynamic colors and expressive reaction that resonates with gaming audiences.",
+    image: thumbnail10,
+    technologies: ["Photoshop", "Gaming Graphics", "Rank Icons", "Expression Capture"],
+    role: "Thumbnail Designer",
+    year: "2024",
+    views: "1.2M",
+    ctr: "14.8%",
+  },
 ];
 
-const categories = ["All", "Business", "Gaming", "Tech", "Fitness", "Lifestyle"];
+const categories = ["All", "Gaming", "Tech", "Entertainment", "Business", "Lifestyle"];
 
 export default function PortfolioGrid() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -120,7 +172,7 @@ export default function PortfolioGrid() {
           className="text-center mb-12"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 sm:mb-4 text-foreground">
-            Thumbnail Portfolio
+            Thumbnails
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
             Scroll-stopping thumbnails designed to maximize clicks and grow your YouTube channel.
