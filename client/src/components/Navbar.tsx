@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./ThemeToggle";
+import logoImage from "@assets/logo_1766005991563.jpeg";
 
 const navItems = [
   { label: "Home", href: "#home" },
@@ -55,12 +56,13 @@ export default function Navbar() {
                 e.preventDefault();
                 scrollToSection("#home");
               }}
-              className="text-xl font-bold tracking-tight text-foreground"
+              className="flex items-center gap-2 text-xl font-bold tracking-tight text-foreground"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               data-testid="link-logo"
             >
-              Alex<span className="text-primary">.</span>
+              <img src={logoImage} alt="Ankit Rikrevo" className="w-8 h-8 rounded-full object-cover" />
+              <span>Ankit<span className="text-primary">.</span></span>
             </motion.a>
 
             <div className="hidden md:flex items-center gap-1">

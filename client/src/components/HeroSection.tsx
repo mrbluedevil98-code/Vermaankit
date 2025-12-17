@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowDown, Sparkles, Youtube, TrendingUp, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import GlassCard from "./GlassCard";
-import profileImage from "@assets/generated_images/professional_freelancer_headshot_portrait.png";
+import profileImage from "@assets/logo_1766005991563.jpeg";
 
 export default function HeroSection() {
   const scrollToWork = () => {

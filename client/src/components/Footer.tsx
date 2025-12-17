@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Heart, Youtube } from "lucide-react";
 import { SiLinkedin, SiFiverr, SiX } from "react-icons/si";
+import logoImage from "@assets/logo_1766005991563.jpeg";
 
 const socialLinks = [
   { icon: Youtube, href: "#", label: "YouTube" },
@@ -39,11 +40,11 @@ export default function Footer() {
                   e.preventDefault();
                   scrollToSection("#home");
                 }}
-                className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2"
+                className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-3"
                 data-testid="link-footer-logo"
               >
-                <Youtube className="w-6 h-6 text-red-500" />
-                ThumbnailPro
+                <img src={logoImage} alt="Ankit Rikrevo" className="w-10 h-10 rounded-full object-cover" />
+                Ankit Rikrevo
               </a>
               <p className="text-muted-foreground mt-2 max-w-xs">
                 Scroll-stopping thumbnails that get your videos the clicks they deserve.
