@@ -22,16 +22,16 @@ export default function Footer() {
   };
 
   return (
-    <footer className="py-12 px-4">
+    <footer className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="max-w-6xl mx-auto"
+        className="max-w-7xl mx-auto"
       >
-        <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl rounded-3xl border border-white/20 dark:border-white/10 p-8 md:p-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/20 dark:border-white/10 p-6 sm:p-8 md:p-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
             <div className="text-center md:text-left">
               <a
                 href="#home"
@@ -50,12 +50,12 @@ export default function Footer() {
               </p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
               {footerLinks.map((link) => (
                 <button
                   key={link.label}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-xs sm:text-sm text-muted-foreground hover:text-red-500 dark:hover:text-red-400 transition-colors"
                   data-testid={`link-footer-${link.label.toLowerCase()}`}
                 >
                   {link.label}

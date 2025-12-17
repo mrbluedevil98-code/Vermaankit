@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 export default function AnimatedBackground() {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950 transition-colors duration-500" />
+      <div className="absolute inset-0 bg-gradient-to-br from-rose-50 via-red-50 to-orange-100 dark:from-neutral-950 dark:via-red-950/30 dark:to-neutral-900 transition-colors duration-500" />
       
       <motion.div
-        className="absolute top-0 -left-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-violet-400/30 to-purple-400/30 dark:from-violet-600/20 dark:to-purple-600/20 blur-3xl"
+        className="absolute top-0 -left-1/4 w-[500px] h-[500px] md:w-[600px] md:h-[600px] rounded-full bg-gradient-to-r from-red-400/30 to-rose-400/30 dark:from-red-600/20 dark:to-rose-600/20 blur-3xl"
         animate={{
           x: [0, 100, 0],
           y: [0, 50, 0],
@@ -19,7 +19,7 @@ export default function AnimatedBackground() {
       />
       
       <motion.div
-        className="absolute top-1/3 -right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-blue-400/30 to-cyan-400/30 dark:from-blue-600/20 dark:to-cyan-600/20 blur-3xl"
+        className="absolute top-1/3 -right-1/4 w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full bg-gradient-to-r from-orange-400/30 to-amber-400/30 dark:from-orange-600/20 dark:to-amber-600/20 blur-3xl"
         animate={{
           x: [0, -80, 0],
           y: [0, 80, 0],
@@ -32,7 +32,7 @@ export default function AnimatedBackground() {
       />
       
       <motion.div
-        className="absolute -bottom-1/4 left-1/3 w-[700px] h-[700px] rounded-full bg-gradient-to-r from-pink-400/20 to-rose-400/20 dark:from-pink-600/15 dark:to-rose-600/15 blur-3xl"
+        className="absolute -bottom-1/4 left-1/3 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full bg-gradient-to-r from-rose-400/20 to-pink-400/20 dark:from-rose-600/15 dark:to-pink-600/15 blur-3xl"
         animate={{
           x: [0, 60, 0],
           y: [0, -40, 0],

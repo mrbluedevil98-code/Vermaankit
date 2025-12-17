@@ -110,8 +110,8 @@ export default function PortfolioGrid() {
     : projects.filter((p) => p.category === selectedCategory);
 
   return (
-    <section id="work" className="py-20 md:py-32 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section id="work" className="py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -119,10 +119,10 @@ export default function PortfolioGrid() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 sm:mb-4 text-foreground">
             Thumbnail Portfolio
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
             Scroll-stopping thumbnails designed to maximize clicks and grow your YouTube channel.
           </p>
         </motion.div>
@@ -132,15 +132,15 @@ export default function PortfolioGrid() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-2 mb-12"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 px-2"
         >
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
                 selectedCategory === category
-                  ? "bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-lg shadow-red-500/25"
+                  ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25"
                   : "bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/30 dark:border-white/10 text-foreground/80 hover:text-foreground hover:bg-white/70 dark:hover:bg-white/10"
               }`}
               data-testid={`button-filter-${category.toLowerCase()}`}
@@ -152,7 +152,7 @@ export default function PortfolioGrid() {
 
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
         >
           {filteredProjects.map((project, index) => (
             <motion.div

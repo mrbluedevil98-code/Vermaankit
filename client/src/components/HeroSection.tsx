@@ -10,9 +10,9 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-20 pb-12">
-      <div className="max-w-6xl mx-auto w-full">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+    <section id="home" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 sm:pt-20 pb-12">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-20">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -74,34 +74,34 @@ export default function HeroSection() {
               </GlassCard>
             </motion.div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-foreground">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 text-foreground leading-tight">
               <span className="block">Thumbnails that</span>
-              <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 dark:from-red-400 dark:via-orange-400 dark:to-yellow-400 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-red-500 via-rose-500 to-red-600 dark:from-red-400 dark:via-rose-400 dark:to-red-500 bg-clip-text text-transparent">
                 Get Clicks
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-muted-foreground max-w-lg mb-8 mx-auto lg:mx-0">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-lg mb-6 sm:mb-8 mx-auto lg:mx-0 leading-relaxed">
               I design scroll-stopping YouTube thumbnails that boost your CTR and grow your channel. 
               Let's make your videos impossible to ignore.
             </p>
 
-            <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-start mb-8">
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6 justify-center lg:justify-start mb-6 sm:mb-8">
               <div className="flex items-center gap-2">
-                <TrendingUp className="w-5 h-5 text-green-500" />
-                <span className="text-sm text-muted-foreground">Avg. 40% CTR increase</span>
+                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-green-500" />
+                <span className="text-xs sm:text-sm text-muted-foreground">Avg. 40% CTR increase</span>
               </div>
               <div className="flex items-center gap-2">
-                <Eye className="w-5 h-5 text-blue-500" />
-                <span className="text-sm text-muted-foreground">10M+ Views generated</span>
+                <Eye className="w-4 h-4 sm:w-5 sm:h-5 text-red-500" />
+                <span className="text-xs sm:text-sm text-muted-foreground">10M+ Views generated</span>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start w-full sm:w-auto">
               <Button
                 size="lg"
                 onClick={scrollToWork}
-                className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white px-8 rounded-xl shadow-lg shadow-red-500/25"
+                className="w-full sm:w-auto bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 sm:px-8 rounded-xl shadow-lg shadow-red-500/25"
                 data-testid="button-view-work"
               >
                 View My Thumbnails
@@ -110,7 +110,7 @@ export default function HeroSection() {
                 variant="outline"
                 size="lg"
                 onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-                className="rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/30 dark:border-white/10"
+                className="w-full sm:w-auto rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/30 dark:border-white/10"
                 data-testid="button-get-in-touch"
               >
                 Hire Me

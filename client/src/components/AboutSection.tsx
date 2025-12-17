@@ -50,8 +50,8 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-20 md:py-32 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section id="about" className="py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -59,15 +59,15 @@ export default function AboutSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 sm:mb-4 text-foreground">
             Why Choose Me?
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
             I specialize in creating thumbnails that stand out in the sea of content and get viewers to click.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 sm:mb-16">
           {services.map((service, index) => (
             <GlassCard key={service.title} className="p-6" delay={0.1 * index}>
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 mb-4">
@@ -79,7 +79,7 @@ export default function AboutSection() {
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 mb-16">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-12 sm:mb-16">
           <GlassCard className="p-8" delay={0.1}>
             <h3 className="text-2xl font-semibold mb-4 text-foreground">My Approach</h3>
             <div className="space-y-4 text-muted-foreground">
@@ -115,7 +115,7 @@ export default function AboutSection() {
           </GlassCard>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
           {stats.map((stat, index) => (
             <GlassCard
               key={stat.label}
