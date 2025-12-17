@@ -1,14 +1,29 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, MessageSquare, DollarSign, Youtube, Zap, Clock, CheckCircle2, Star, ArrowRight } from "lucide-react";
-import { SiLinkedin, SiFiverr, SiX, SiInstagram } from "react-icons/si";
+import { Send, Mail, MessageSquare, DollarSign, Youtube, Zap, Clock, CheckCircle2, Star, ArrowRight, Loader2 } from "lucide-react";
+import { SiLinkedin, SiFiverr, SiInstagram } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import GlassCard from "./GlassCard";
 import { useToast } from "@/hooks/use-toast";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+
+const contactFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  channelUrl: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
+  packageType: z.string().optional(),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
+
+type ContactFormData = z.infer<typeof contactFormSchema>;
 
 const pricingTiers = [
   { value: "basic", label: "Basic - 1 Thumbnail ($25)" },
@@ -18,10 +33,10 @@ const pricingTiers = [
 ];
 
 const platforms = [
-  { icon: Youtube, href: "#", label: "YouTube", color: "text-red-500", bg: "bg-red-500/10 dark:bg-red-500/20" },
-  { icon: SiInstagram, href: "#", label: "Instagram", color: "text-pink-500", bg: "bg-pink-500/10 dark:bg-pink-500/20" },
-  { icon: SiFiverr, href: "#", label: "Fiverr", color: "text-green-500", bg: "bg-green-500/10 dark:bg-green-500/20" },
-  { icon: SiLinkedin, href: "#", label: "LinkedIn", color: "text-blue-500", bg: "bg-blue-500/10 dark:bg-blue-500/20" },
+  { icon: Youtube, href: "https://youtube.com/@ankitrikrevo", label: "YouTube", color: "text-red-500", bg: "bg-red-500/10 dark:bg-red-500/20" },
+  { icon: SiInstagram, href: "https://instagram.com/ankitrikrevo", label: "Instagram", color: "text-pink-500", bg: "bg-pink-500/10 dark:bg-pink-500/20" },
+  { icon: SiFiverr, href: "https://fiverr.com/ankitrikrevo", label: "Fiverr", color: "text-green-500", bg: "bg-green-500/10 dark:bg-green-500/20" },
+  { icon: SiLinkedin, href: "https://linkedin.com/in/ankitrikrevo", label: "LinkedIn", color: "text-blue-500", bg: "bg-blue-500/10 dark:bg-blue-500/20" },
 ];
 
 const features = [
@@ -38,34 +53,41 @@ const stats = [
 
 export default function ContactSection() {
   const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    channelUrl: "",
-    package: "",
-    message: "",
+  
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      channelUrl: "",
+      packageType: "",
+      message: "",
+    },
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    toast({
-      title: "Request sent!",
-      description: "I'll get back to you within 24 hours with a quote.",
-    });
-    
-    setFormData({ name: "", email: "", channelUrl: "", package: "", message: "" });
-    setIsSubmitting(false);
-  };
+  const contactMutation = useMutation({
+    mutationFn: async (data: ContactFormData) => {
+      const response = await apiRequest("POST", "/api/contact", data);
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Message sent!",
+        description: data.message || "I'll get back to you within 24 hours with a quote.",
+      });
+      form.reset();
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Failed to send message",
+        description: error.message || "Please try again later.",
+        variant: "destructive",
+      });
+    },
+  });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const onSubmit = (data: ContactFormData) => {
+    contactMutation.mutate(data);
   };
 
   return (
@@ -208,6 +230,8 @@ export default function ContactSection() {
                   <motion.a
                     key={platform.label}
                     href={platform.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -241,107 +265,139 @@ export default function ContactSection() {
                 </div>
               </div>
               
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid md:grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <Label htmlFor="name" className="text-foreground text-sm">Your Name</Label>
-                    <Input
-                      id="name"
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                  <div className="grid md:grid-cols-2 gap-5">
+                    <FormField
+                      control={form.control}
                       name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="John Doe"
-                      required
-                      className="bg-white/50 dark:bg-white/5 backdrop-blur border-white/30 dark:border-white/10 rounded-xl h-11"
-                      data-testid="input-name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-foreground text-sm">Your Name</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="John Doe"
+                              className="bg-white/50 dark:bg-white/5 backdrop-blur border-white/30 dark:border-white/10 rounded-xl h-11"
+                              data-testid="input-name"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-foreground text-sm">Email Address</Label>
-                    <Input
-                      id="email"
+                    <FormField
+                      control={form.control}
                       name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="john@example.com"
-                      required
-                      className="bg-white/50 dark:bg-white/5 backdrop-blur border-white/30 dark:border-white/10 rounded-xl h-11"
-                      data-testid="input-email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-foreground text-sm">Email Address</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder="john@example.com"
+                              className="bg-white/50 dark:bg-white/5 backdrop-blur border-white/30 dark:border-white/10 rounded-xl h-11"
+                              data-testid="input-email"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="channelUrl" className="text-foreground text-sm">YouTube Channel URL</Label>
-                  <Input
-                    id="channelUrl"
+                  <FormField
+                    control={form.control}
                     name="channelUrl"
-                    value={formData.channelUrl}
-                    onChange={handleChange}
-                    placeholder="https://youtube.com/@yourchannel"
-                    className="bg-white/50 dark:bg-white/5 backdrop-blur border-white/30 dark:border-white/10 rounded-xl h-11"
-                    data-testid="input-channel"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-foreground text-sm">YouTube Channel URL (Optional)</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="https://youtube.com/@yourchannel"
+                            className="bg-white/50 dark:bg-white/5 backdrop-blur border-white/30 dark:border-white/10 rounded-xl h-11"
+                            data-testid="input-channel"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="package" className="text-foreground text-sm">Select Package</Label>
-                  <Select
-                    value={formData.package}
-                    onValueChange={(value) => setFormData((prev) => ({ ...prev, package: value }))}
-                  >
-                    <SelectTrigger className="bg-white/50 dark:bg-white/5 backdrop-blur border-white/30 dark:border-white/10 rounded-xl h-11" data-testid="select-package">
-                      <SelectValue placeholder="Choose your package" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {pricingTiers.map((tier) => (
-                        <SelectItem key={tier.value} value={tier.value}>
-                          {tier.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message" className="text-foreground text-sm">Project Details</Label>
-                  <Textarea
-                    id="message"
+                  <FormField
+                    control={form.control}
+                    name="packageType"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-foreground text-sm">Select Package</FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger 
+                              className="bg-white/50 dark:bg-white/5 backdrop-blur border-white/30 dark:border-white/10 rounded-xl h-11" 
+                              data-testid="select-package"
+                            >
+                              <SelectValue placeholder="Choose your package" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent data-testid="select-package-content">
+                            {pricingTiers.map((tier) => (
+                              <SelectItem 
+                                key={tier.value} 
+                                value={tier.value}
+                                data-testid={`select-package-${tier.value}`}
+                              >
+                                {tier.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
                     name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Tell me about your channel, content style, and what kind of thumbnails you're looking for..."
-                    required
-                    rows={4}
-                    className="bg-white/50 dark:bg-white/5 backdrop-blur border-white/30 dark:border-white/10 rounded-xl resize-none"
-                    data-testid="input-message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-foreground text-sm">Project Details</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Tell me about your channel, content style, and what kind of thumbnails you're looking for..."
+                            rows={4}
+                            className="bg-white/50 dark:bg-white/5 backdrop-blur border-white/30 dark:border-white/10 rounded-xl resize-none"
+                            data-testid="input-message"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl py-6 text-base font-medium shadow-lg shadow-red-500/25"
-                  data-testid="button-submit-contact"
-                >
-                  {isSubmitting ? (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="flex items-center gap-2"
-                    >
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Sending...
-                    </motion.div>
-                  ) : (
-                    <span className="flex items-center justify-center gap-2">
-                      <Send className="w-4 h-4" />
-                      Get Your Quote
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                  )}
-                </Button>
-                <p className="text-center text-xs text-muted-foreground">
-                  Free consultation included with every inquiry
-                </p>
-              </form>
+                  <Button
+                    type="submit"
+                    disabled={contactMutation.isPending}
+                    className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl py-6 text-base font-medium shadow-lg shadow-red-500/25"
+                    data-testid="button-submit-contact"
+                  >
+                    {contactMutation.isPending ? (
+                      <span className="flex items-center gap-2">
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Sending...
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-2">
+                        <Send className="w-4 h-4" />
+                        Get Your Quote
+                        <ArrowRight className="w-4 h-4" />
+                      </span>
+                    )}
+                  </Button>
+                  <p className="text-center text-xs text-muted-foreground">
+                    Free consultation included with every inquiry
+                  </p>
+                </form>
+              </Form>
             </GlassCard>
           </motion.div>
         </div>
