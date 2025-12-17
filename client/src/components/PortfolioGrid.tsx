@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Eye } from "lucide-react";
+import { ExternalLink, Eye, Play } from "lucide-react";
 import GlassCard from "./GlassCard";
 import ProjectModal from "./ProjectModal";
 
-import websiteImg from "@assets/generated_images/website_design_portfolio_thumbnail.png";
-import mobileImg from "@assets/generated_images/mobile_app_design_mockup.png";
-import brandImg from "@assets/generated_images/brand_identity_design_mockup.png";
-import dashboardImg from "@assets/generated_images/dashboard_ui_design_mockup.png";
-import ecommerceImg from "@assets/generated_images/e-commerce_design_mockup.png";
-import socialImg from "@assets/generated_images/social_media_app_mockup.png";
+import thumbnailBold from "@assets/generated_images/bold_youtube_thumbnail_design.png";
+import thumbnailGaming from "@assets/generated_images/gaming_youtube_thumbnail_design.png";
+import thumbnailTech from "@assets/generated_images/tech_review_thumbnail_design.png";
+import thumbnailFitness from "@assets/generated_images/fitness_youtube_thumbnail_design.png";
+import thumbnailCooking from "@assets/generated_images/cooking_youtube_thumbnail_design.png";
+import thumbnailVlog from "@assets/generated_images/vlog_youtube_thumbnail_design.png";
 
 export interface Project {
   id: number;
@@ -20,72 +20,86 @@ export interface Project {
   technologies: string[];
   role: string;
   year: string;
+  views?: string;
+  ctr?: string;
 }
 
 const projects: Project[] = [
   {
     id: 1,
-    title: "Fintech Dashboard",
-    category: "Web Design",
-    description: "A comprehensive financial analytics dashboard with real-time data visualization, portfolio tracking, and AI-powered insights for modern investors.",
-    image: dashboardImg,
-    technologies: ["React", "TypeScript", "D3.js", "Tailwind CSS"],
-    role: "Lead Designer & Developer",
+    title: "Business & Finance",
+    category: "Business",
+    description: "High-converting thumbnail for a finance YouTuber's viral video about wealth building. Bold text, expressive face cutout, and attention-grabbing colors drove massive engagement.",
+    image: thumbnailBold,
+    technologies: ["Photoshop", "After Effects", "Bold Typography", "Face Cutouts"],
+    role: "Thumbnail Designer",
     year: "2024",
+    views: "2.5M",
+    ctr: "12.8%",
   },
   {
     id: 2,
-    title: "E-Commerce Platform",
-    category: "Web Design",
-    description: "A sleek online shopping experience featuring seamless checkout, personalized recommendations, and stunning product showcases.",
-    image: ecommerceImg,
-    technologies: ["Next.js", "Stripe", "Framer Motion", "PostgreSQL"],
-    role: "UI/UX Designer",
+    title: "Gaming Highlights",
+    category: "Gaming",
+    description: "Epic gaming thumbnail with neon aesthetics and intense action. Designed for a popular esports channel to capture the energy of competitive gameplay.",
+    image: thumbnailGaming,
+    technologies: ["Photoshop", "Neon Effects", "Action Composition", "Glow Effects"],
+    role: "Thumbnail Designer",
     year: "2024",
+    views: "1.8M",
+    ctr: "15.2%",
   },
   {
     id: 3,
-    title: "Mobile Banking App",
-    category: "Mobile App",
-    description: "An intuitive mobile banking application with secure transactions, budget tracking, and seamless account management.",
-    image: mobileImg,
-    technologies: ["React Native", "Node.js", "MongoDB", "Figma"],
-    role: "Product Designer",
-    year: "2023",
+    title: "Tech Reviews",
+    category: "Tech",
+    description: "Clean, professional thumbnail for tech product reviews. Showcases products with sleek gradients and modern typography that tech audiences love.",
+    image: thumbnailTech,
+    technologies: ["Photoshop", "Product Mockups", "Clean Design", "Gradient Backgrounds"],
+    role: "Thumbnail Designer",
+    year: "2024",
+    views: "850K",
+    ctr: "11.5%",
   },
   {
     id: 4,
-    title: "Brand Identity Suite",
-    category: "Branding",
-    description: "Complete brand identity development including logo design, color palette, typography, and comprehensive brand guidelines.",
-    image: brandImg,
-    technologies: ["Illustrator", "Photoshop", "InDesign", "Figma"],
-    role: "Creative Director",
-    year: "2023",
+    title: "Fitness Transformation",
+    category: "Fitness",
+    description: "Motivational before/after style thumbnail for fitness content. High contrast colors and dramatic lighting that inspires action.",
+    image: thumbnailFitness,
+    technologies: ["Photoshop", "Body Composition", "Dramatic Lighting", "Impact Text"],
+    role: "Thumbnail Designer",
+    year: "2024",
+    views: "3.2M",
+    ctr: "14.1%",
   },
   {
     id: 5,
-    title: "Social Connect App",
-    category: "Mobile App",
-    description: "A modern social networking platform with real-time messaging, content sharing, and community features.",
-    image: socialImg,
-    technologies: ["Flutter", "Firebase", "WebSocket", "Redis"],
-    role: "Lead Designer",
+    title: "Cooking & Food",
+    category: "Lifestyle",
+    description: "Mouth-watering food thumbnail that makes viewers hungry and curious. Warm tones and appetizing presentation drive clicks.",
+    image: thumbnailCooking,
+    technologies: ["Photoshop", "Food Photography", "Warm Color Grading", "Steam Effects"],
+    role: "Thumbnail Designer",
     year: "2024",
+    views: "1.1M",
+    ctr: "10.8%",
   },
   {
     id: 6,
-    title: "Corporate Website",
-    category: "Web Design",
-    description: "A professional corporate website with modern animations, responsive design, and seamless CMS integration.",
-    image: websiteImg,
-    technologies: ["React", "GSAP", "Sanity CMS", "Vercel"],
-    role: "Full-Stack Developer",
+    title: "Travel Vlogs",
+    category: "Lifestyle",
+    description: "Cinematic travel thumbnail with stunning sunset vibes. Captures wanderlust and adventure that vlog audiences crave.",
+    image: thumbnailVlog,
+    technologies: ["Photoshop", "Cinematic Grading", "Silhouette Art", "Landscape Composition"],
+    role: "Thumbnail Designer",
     year: "2024",
+    views: "920K",
+    ctr: "9.7%",
   },
 ];
 
-const categories = ["All", "Web Design", "Mobile App", "Branding"];
+const categories = ["All", "Business", "Gaming", "Tech", "Fitness", "Lifestyle"];
 
 export default function PortfolioGrid() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -106,11 +120,10 @@ export default function PortfolioGrid() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-            Selected Work
+            Thumbnail Portfolio
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A curated collection of projects showcasing my passion for creating
-            beautiful, functional digital experiences.
+            Scroll-stopping thumbnails designed to maximize clicks and grow your YouTube channel.
           </p>
         </motion.div>
 
@@ -127,10 +140,10 @@ export default function PortfolioGrid() {
               onClick={() => setSelectedCategory(category)}
               className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 selectedCategory === category
-                  ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg shadow-violet-500/25"
+                  ? "bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-lg shadow-red-500/25"
                   : "bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/30 dark:border-white/10 text-foreground/80 hover:text-foreground hover:bg-white/70 dark:hover:bg-white/10"
               }`}
-              data-testid={`button-filter-${category.toLowerCase().replace(" ", "-")}`}
+              data-testid={`button-filter-${category.toLowerCase()}`}
             >
               {category}
             </button>
@@ -155,7 +168,7 @@ export default function PortfolioGrid() {
                 animate={false}
               >
                 <div
-                  className="relative aspect-[4/3] overflow-hidden"
+                  className="relative aspect-video overflow-hidden"
                   onClick={() => setSelectedProject(project)}
                   data-testid={`card-project-${project.id}`}
                 >
@@ -164,7 +177,15 @@ export default function PortfolioGrid() {
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-black/50 backdrop-blur text-white text-xs">
+                      <Play className="w-3 h-3 fill-current" />
+                      {project.views} views
+                    </div>
+                  </div>
+
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                     <motion.div
                       initial={{ scale: 0.8, opacity: 0 }}
@@ -177,20 +198,21 @@ export default function PortfolioGrid() {
                       >
                         <Eye className="w-5 h-5" />
                       </button>
-                      <button
-                        className="p-3 rounded-full bg-white/20 backdrop-blur-lg border border-white/30 text-white"
-                        data-testid={`button-external-project-${project.id}`}
-                      >
-                        <ExternalLink className="w-5 h-5" />
-                      </button>
                     </motion.div>
                   </div>
                 </div>
                 <div className="p-5">
-                  <span className="text-xs font-medium text-violet-600 dark:text-violet-400 uppercase tracking-wider">
-                    {project.category}
-                  </span>
-                  <h3 className="text-lg font-semibold mt-1 text-foreground group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">
+                      {project.category}
+                    </span>
+                    {project.ctr && (
+                      <span className="text-xs font-medium text-green-500 bg-green-500/10 px-2 py-0.5 rounded-full">
+                        {project.ctr} CTR
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors">
                     {project.title}
                   </h3>
                 </div>

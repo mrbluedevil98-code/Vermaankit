@@ -1,25 +1,27 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, MapPin, Phone, Check } from "lucide-react";
-import { SiLinkedin, SiDribbble, SiGithub, SiX } from "react-icons/si";
+import { Send, Mail, MessageSquare, DollarSign, Youtube } from "lucide-react";
+import { SiLinkedin, SiFiverr, SiX } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import GlassCard from "./GlassCard";
 import { useToast } from "@/hooks/use-toast";
 
-const contactInfo = [
-  { icon: Mail, label: "Email", value: "hello@alexrivera.design" },
-  { icon: MapPin, label: "Location", value: "San Francisco, CA" },
-  { icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
+const pricingTiers = [
+  { value: "basic", label: "Basic - 1 Thumbnail ($25)" },
+  { value: "standard", label: "Standard - 3 Thumbnails ($60)" },
+  { value: "premium", label: "Premium - 5 Thumbnails ($90)" },
+  { value: "monthly", label: "Monthly Package (Contact for price)" },
 ];
 
-const socialLinks = [
-  { icon: SiLinkedin, href: "#", label: "LinkedIn" },
-  { icon: SiDribbble, href: "#", label: "Dribbble" },
-  { icon: SiGithub, href: "#", label: "GitHub" },
+const platforms = [
+  { icon: Youtube, href: "#", label: "YouTube", color: "text-red-500" },
   { icon: SiX, href: "#", label: "X" },
+  { icon: SiFiverr, href: "#", label: "Fiverr", color: "text-green-500" },
+  { icon: SiLinkedin, href: "#", label: "LinkedIn" },
 ];
 
 export default function ContactSection() {
@@ -28,7 +30,8 @@ export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
+    channelUrl: "",
+    package: "",
     message: "",
   });
 
@@ -39,11 +42,11 @@ export default function ContactSection() {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     
     toast({
-      title: "Message sent!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
+      title: "Request sent!",
+      description: "I'll get back to you within 24 hours with a quote.",
     });
     
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setFormData({ name: "", email: "", channelUrl: "", package: "", message: "" });
     setIsSubmitting(false);
   };
 
@@ -67,40 +70,56 @@ export default function ContactSection() {
             Let's Work Together
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind? I'd love to hear about it. Let's create something amazing together.
+            Ready to level up your YouTube thumbnails? Get in touch and let's create something amazing.
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <GlassCard className="p-6" delay={0.1}>
-              <h3 className="text-xl font-semibold mb-6 text-foreground">Get in Touch</h3>
+              <h3 className="text-xl font-semibold mb-6 text-foreground">Quick Info</h3>
               <div className="space-y-5">
-                {contactInfo.map((item) => (
-                  <div key={item.label} className="flex items-start gap-4">
-                    <div className="p-2 rounded-lg bg-violet-100 dark:bg-violet-900/30">
-                      <item.icon className="w-5 h-5 text-violet-600 dark:text-violet-400" />
-                    </div>
-                    <div>
-                      <span className="text-sm text-muted-foreground block">{item.label}</span>
-                      <span className="font-medium text-foreground">{item.value}</span>
-                    </div>
+                <div className="flex items-start gap-4">
+                  <div className="p-2 rounded-lg bg-red-100 dark:bg-red-900/30">
+                    <Mail className="w-5 h-5 text-red-500 dark:text-red-400" />
                   </div>
-                ))}
+                  <div>
+                    <span className="text-sm text-muted-foreground block">Email</span>
+                    <span className="font-medium text-foreground">thumbnails@alexdesigns.com</span>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="p-2 rounded-lg bg-green-100 dark:bg-green-900/30">
+                    <DollarSign className="w-5 h-5 text-green-500 dark:text-green-400" />
+                  </div>
+                  <div>
+                    <span className="text-sm text-muted-foreground block">Starting at</span>
+                    <span className="font-medium text-foreground">$25 per thumbnail</span>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                    <MessageSquare className="w-5 h-5 text-blue-500 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <span className="text-sm text-muted-foreground block">Response Time</span>
+                    <span className="font-medium text-foreground">Within 24 hours</span>
+                  </div>
+                </div>
               </div>
             </GlassCard>
 
             <GlassCard className="p-6" delay={0.2}>
-              <h3 className="text-xl font-semibold mb-4 text-foreground">Follow Me</h3>
+              <h3 className="text-xl font-semibold mb-4 text-foreground">Find Me On</h3>
               <div className="flex gap-3">
-                {socialLinks.map((social) => (
+                {platforms.map((platform) => (
                   <a
-                    key={social.label}
-                    href={social.href}
-                    className="p-3 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10 text-foreground/70 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-white/70 dark:hover:bg-white/10 transition-all"
-                    data-testid={`link-social-${social.label.toLowerCase()}`}
+                    key={platform.label}
+                    href={platform.href}
+                    className={`p-3 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10 text-foreground/70 hover:text-red-500 dark:hover:text-red-400 hover:bg-white/70 dark:hover:bg-white/10 transition-all ${platform.color || ''}`}
+                    data-testid={`link-social-${platform.label.toLowerCase()}`}
                   >
-                    <social.icon className="w-5 h-5" />
+                    <platform.icon className="w-5 h-5" />
                   </a>
                 ))}
               </div>
@@ -139,28 +158,45 @@ export default function ContactSection() {
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="subject" className="text-foreground">Subject</Label>
+                <Label htmlFor="channelUrl" className="text-foreground">YouTube Channel URL</Label>
                 <Input
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
+                  id="channelUrl"
+                  name="channelUrl"
+                  value={formData.channelUrl}
                   onChange={handleChange}
-                  placeholder="What's this about?"
-                  required
+                  placeholder="https://youtube.com/@yourchannel"
                   className="bg-white/50 dark:bg-white/5 backdrop-blur border-white/30 dark:border-white/10 rounded-xl"
-                  data-testid="input-subject"
+                  data-testid="input-channel"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="message" className="text-foreground">Message</Label>
+                <Label htmlFor="package" className="text-foreground">Package</Label>
+                <Select
+                  value={formData.package}
+                  onValueChange={(value) => setFormData((prev) => ({ ...prev, package: value }))}
+                >
+                  <SelectTrigger className="bg-white/50 dark:bg-white/5 backdrop-blur border-white/30 dark:border-white/10 rounded-xl" data-testid="select-package">
+                    <SelectValue placeholder="Select a package" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {pricingTiers.map((tier) => (
+                      <SelectItem key={tier.value} value={tier.value}>
+                        {tier.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="message" className="text-foreground">Tell me about your project</Label>
                 <Textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Tell me about your project..."
+                  placeholder="What kind of thumbnails do you need? Any specific style or examples you like?"
                   required
-                  rows={5}
+                  rows={4}
                   className="bg-white/50 dark:bg-white/5 backdrop-blur border-white/30 dark:border-white/10 rounded-xl resize-none"
                   data-testid="input-message"
                 />
@@ -168,7 +204,7 @@ export default function ContactSection() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white rounded-xl py-6"
+                className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl py-6"
                 data-testid="button-submit-contact"
               >
                 {isSubmitting ? (
@@ -183,7 +219,7 @@ export default function ContactSection() {
                 ) : (
                   <span className="flex items-center gap-2">
                     <Send className="w-4 h-4" />
-                    Send Message
+                    Get a Quote
                   </span>
                 )}
               </Button>

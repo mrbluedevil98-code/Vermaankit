@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ExternalLink, Calendar, User, Code } from "lucide-react";
+import { X, ExternalLink, Calendar, User, Palette, TrendingUp, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { Project } from "./PortfolioGrid";
@@ -34,11 +34,11 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             data-testid="modal-project"
           >
             <div className="h-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl rounded-3xl border border-white/30 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden">
-              <div className="relative h-[40%] md:h-[50%] overflow-hidden">
+              <div className="relative h-[40%] md:h-[50%] overflow-hidden bg-black">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <Button
@@ -51,7 +51,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   <X className="w-5 h-5" />
                 </Button>
                 <div className="absolute bottom-6 left-6 right-6">
-                  <Badge className="mb-3 bg-violet-600/80 backdrop-blur text-white border-none">
+                  <Badge className="mb-3 bg-red-500/80 backdrop-blur text-white border-none">
                     {project.category}
                   </Badge>
                   <h2 className="text-2xl md:text-4xl font-bold text-white">
@@ -66,38 +66,51 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     {project.description}
                   </p>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div className="flex items-start gap-3">
-                      <div className="p-2 rounded-lg bg-violet-100 dark:bg-violet-900/30">
-                        <User className="w-5 h-5 text-violet-600 dark:text-violet-400" />
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    {project.views && (
+                      <div className="flex items-start gap-3 p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10">
+                        <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                          <Eye className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                        </div>
+                        <div>
+                          <span className="text-xs text-muted-foreground block">Views</span>
+                          <span className="font-semibold text-foreground">{project.views}</span>
+                        </div>
+                      </div>
+                    )}
+                    {project.ctr && (
+                      <div className="flex items-start gap-3 p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10">
+                        <div className="p-2 rounded-lg bg-green-100 dark:bg-green-900/30">
+                          <TrendingUp className="w-4 h-4 text-green-600 dark:text-green-400" />
+                        </div>
+                        <div>
+                          <span className="text-xs text-muted-foreground block">CTR</span>
+                          <span className="font-semibold text-foreground">{project.ctr}</span>
+                        </div>
+                      </div>
+                    )}
+                    <div className="flex items-start gap-3 p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10">
+                      <div className="p-2 rounded-lg bg-red-100 dark:bg-red-900/30">
+                        <Calendar className="w-4 h-4 text-red-600 dark:text-red-400" />
                       </div>
                       <div>
-                        <span className="text-sm text-muted-foreground block">Role</span>
-                        <span className="font-medium text-foreground">{project.role}</span>
+                        <span className="text-xs text-muted-foreground block">Year</span>
+                        <span className="font-semibold text-foreground">{project.year}</span>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="p-2 rounded-lg bg-violet-100 dark:bg-violet-900/30">
-                        <Calendar className="w-5 h-5 text-violet-600 dark:text-violet-400" />
+                    <div className="flex items-start gap-3 p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10">
+                      <div className="p-2 rounded-lg bg-orange-100 dark:bg-orange-900/30">
+                        <Palette className="w-4 h-4 text-orange-600 dark:text-orange-400" />
                       </div>
                       <div>
-                        <span className="text-sm text-muted-foreground block">Year</span>
-                        <span className="font-medium text-foreground">{project.year}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="p-2 rounded-lg bg-violet-100 dark:bg-violet-900/30">
-                        <Code className="w-5 h-5 text-violet-600 dark:text-violet-400" />
-                      </div>
-                      <div>
-                        <span className="text-sm text-muted-foreground block">Stack</span>
-                        <span className="font-medium text-foreground">{project.technologies.length} tools</span>
+                        <span className="text-xs text-muted-foreground block">Tools</span>
+                        <span className="font-semibold text-foreground">{project.technologies.length}</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="mb-8">
-                    <h3 className="text-sm font-medium text-muted-foreground mb-3">Technologies</h3>
+                    <h3 className="text-sm font-medium text-muted-foreground mb-3">Design Techniques</h3>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
                         <Badge
@@ -113,18 +126,18 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
                   <div className="flex flex-wrap gap-4">
                     <Button
-                      className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white rounded-xl"
-                      data-testid="button-view-live"
+                      onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+                      className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl"
+                      data-testid="button-order-similar"
                     >
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      View Live Project
+                      Order Similar Thumbnail
                     </Button>
                     <Button
                       variant="outline"
                       className="rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/30 dark:border-white/10"
-                      data-testid="button-case-study"
+                      data-testid="button-view-more"
                     >
-                      Read Case Study
+                      View More Work
                     </Button>
                   </div>
                 </div>

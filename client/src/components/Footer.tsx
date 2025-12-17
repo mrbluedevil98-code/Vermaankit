@@ -1,17 +1,17 @@
 import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
-import { SiLinkedin, SiDribbble, SiGithub, SiX } from "react-icons/si";
+import { Heart, Youtube } from "lucide-react";
+import { SiLinkedin, SiFiverr, SiX } from "react-icons/si";
 
 const socialLinks = [
-  { icon: SiLinkedin, href: "#", label: "LinkedIn" },
-  { icon: SiDribbble, href: "#", label: "Dribbble" },
-  { icon: SiGithub, href: "#", label: "GitHub" },
+  { icon: Youtube, href: "#", label: "YouTube" },
   { icon: SiX, href: "#", label: "X" },
+  { icon: SiFiverr, href: "#", label: "Fiverr" },
+  { icon: SiLinkedin, href: "#", label: "LinkedIn" },
 ];
 
 const footerLinks = [
   { label: "Home", href: "#home" },
-  { label: "Work", href: "#work" },
+  { label: "Portfolio", href: "#work" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -39,13 +39,14 @@ export default function Footer() {
                   e.preventDefault();
                   scrollToSection("#home");
                 }}
-                className="text-2xl font-bold tracking-tight text-foreground"
+                className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2"
                 data-testid="link-footer-logo"
               >
-                Alex<span className="text-primary">.</span>
+                <Youtube className="w-6 h-6 text-red-500" />
+                ThumbnailPro
               </a>
               <p className="text-muted-foreground mt-2 max-w-xs">
-                Creating beautiful digital experiences one pixel at a time.
+                Scroll-stopping thumbnails that get your videos the clicks they deserve.
               </p>
             </div>
 
@@ -67,7 +68,7 @@ export default function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="p-2.5 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10 text-foreground/70 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
+                  className="p-2.5 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10 text-foreground/70 hover:text-red-500 dark:hover:text-red-400 transition-colors"
                   data-testid={`link-footer-social-${social.label.toLowerCase()}`}
                 >
                   <social.icon className="w-4 h-4" />
@@ -80,7 +81,7 @@ export default function Footer() {
             <p className="text-center text-sm text-muted-foreground flex items-center justify-center gap-1 flex-wrap">
               <span>Made with</span>
               <Heart className="w-4 h-4 text-red-500 fill-red-500" />
-              <span>by Alex Rivera</span>
+              <span>for YouTube creators</span>
               <span className="mx-2">|</span>
               <span>{new Date().getFullYear()} All rights reserved.</span>
             </p>

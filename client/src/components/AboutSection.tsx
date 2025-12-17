@@ -1,22 +1,29 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Award, Coffee, Users, Zap } from "lucide-react";
+import { Youtube, TrendingUp, Users, Zap, MousePointer, Image, Clock, Award } from "lucide-react";
 import GlassCard from "./GlassCard";
 
 const skills = [
-  { name: "UI/UX Design", level: 95 },
-  { name: "React / Next.js", level: 90 },
-  { name: "TypeScript", level: 88 },
-  { name: "Figma / Design Tools", level: 92 },
-  { name: "Framer Motion", level: 85 },
-  { name: "Tailwind CSS", level: 93 },
+  { name: "Thumbnail Design", level: 98 },
+  { name: "Adobe Photoshop", level: 95 },
+  { name: "Color Psychology", level: 90 },
+  { name: "Typography", level: 92 },
+  { name: "Photo Manipulation", level: 88 },
+  { name: "CTR Optimization", level: 94 },
 ];
 
 const stats = [
-  { icon: Coffee, value: "150+", label: "Projects Completed" },
-  { icon: Users, value: "80+", label: "Happy Clients" },
-  { icon: Award, value: "12", label: "Awards Won" },
-  { icon: Zap, value: "5+", label: "Years Experience" },
+  { icon: Image, value: "500+", label: "Thumbnails Created" },
+  { icon: Users, value: "120+", label: "Happy Creators" },
+  { icon: TrendingUp, value: "40%", label: "Avg. CTR Boost" },
+  { icon: Youtube, value: "10M+", label: "Views Generated" },
+];
+
+const services = [
+  { icon: MousePointer, title: "High-CTR Thumbnails", desc: "Designed to maximize clicks and watch time" },
+  { icon: Clock, title: "24-48hr Delivery", desc: "Fast turnaround without sacrificing quality" },
+  { icon: Award, title: "Unlimited Revisions", desc: "Until you're 100% satisfied with the result" },
+  { icon: Zap, title: "A/B Testing Ready", desc: "Multiple versions to test what works best" },
 ];
 
 function SkillBar({ name, level, delay }: { name: string; level: number; delay: number }) {
@@ -34,7 +41,7 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
           initial={{ width: 0 }}
           animate={isInView ? { width: `${level}%` } : { width: 0 }}
           transition={{ duration: 1, delay, ease: [0.22, 1, 0.36, 1] }}
-          className="h-full rounded-full bg-gradient-to-r from-violet-600 to-purple-600"
+          className="h-full rounded-full bg-gradient-to-r from-red-500 to-orange-500"
         />
       </div>
     </div>
@@ -53,30 +60,42 @@ export default function AboutSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
-            About Me
+            Why Choose Me?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Passionate about crafting digital experiences that leave a lasting impression.
+            I specialize in creating thumbnails that stand out in the sea of content and get viewers to click.
           </p>
         </motion.div>
 
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+          {services.map((service, index) => (
+            <GlassCard key={service.title} className="p-6" delay={0.1 * index}>
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 mb-4">
+                <service.icon className="w-6 h-6 text-red-500 dark:text-red-400" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">{service.title}</h3>
+              <p className="text-sm text-muted-foreground">{service.desc}</p>
+            </GlassCard>
+          ))}
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
           <GlassCard className="p-8" delay={0.1}>
-            <h3 className="text-2xl font-semibold mb-4 text-foreground">My Story</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-foreground">My Approach</h3>
             <div className="space-y-4 text-muted-foreground">
               <p>
-                With over 5 years of experience in design and development, I've had the privilege
-                of working with startups and established brands alike, helping them create
-                meaningful digital experiences.
+                I understand that your thumbnail is the first impression viewers get of your content. 
+                That's why I focus on creating designs that not only look amazing but are strategically 
+                crafted to maximize your click-through rate.
               </p>
               <p>
-                My approach combines aesthetic sensibility with technical expertise, ensuring
-                every project not only looks stunning but performs flawlessly. I believe in
-                the power of design to solve problems and create connections.
+                Every thumbnail I create is built on proven psychological principles - from color 
+                psychology to facial expressions, text placement to visual hierarchy. I study what 
+                works in your niche and apply those insights to make your videos stand out.
               </p>
               <p>
-                When I'm not designing, you'll find me exploring new technologies, contributing
-                to open-source projects, or enjoying a good cup of coffee while sketching new ideas.
+                Whether you're a gaming channel, tech reviewer, lifestyle vlogger, or business educator, 
+                I tailor each design to your brand and audience for maximum impact.
               </p>
             </div>
           </GlassCard>
@@ -103,8 +122,8 @@ export default function AboutSection() {
               className="p-6 text-center"
               delay={0.1 * index}
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500/20 to-purple-500/20 mb-4">
-                <stat.icon className="w-6 h-6 text-violet-600 dark:text-violet-400" />
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 mb-4">
+                <stat.icon className="w-6 h-6 text-red-500 dark:text-red-400" />
               </div>
               <div className="text-2xl md:text-3xl font-bold text-foreground mb-1">
                 {stat.value}

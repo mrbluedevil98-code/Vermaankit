@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { ArrowDown, Sparkles, Youtube, TrendingUp, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import GlassCard from "./GlassCard";
 import profileImage from "@assets/generated_images/professional_freelancer_headshot_portrait.png";
@@ -19,11 +19,11 @@ export default function HeroSection() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-purple-500 rounded-full blur-2xl opacity-30 animate-pulse-glow" />
+            <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-full blur-2xl opacity-30 animate-pulse-glow" />
             <GlassCard className="p-2" variant="strong" animate={false}>
               <img
                 src={profileImage}
-                alt="Alex Rivera - Creative Freelancer"
+                alt="YouTube Thumbnail Designer"
                 className="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover"
                 data-testid="img-profile"
               />
@@ -37,6 +37,18 @@ export default function HeroSection() {
                 <div className="flex items-center gap-1.5">
                   <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                   <span className="text-xs font-medium text-foreground">Available</span>
+                </div>
+              </GlassCard>
+            </motion.div>
+            <motion.div
+              className="absolute -bottom-4 -left-4"
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            >
+              <GlassCard className="px-3 py-1.5" variant="strong" animate={false}>
+                <div className="flex items-center gap-1.5">
+                  <Youtube className="w-4 h-4 text-red-500" />
+                  <span className="text-xs font-medium text-foreground">500+ Thumbnails</span>
                 </div>
               </GlassCard>
             </motion.div>
@@ -56,32 +68,43 @@ export default function HeroSection() {
             >
               <GlassCard className="px-4 py-2" animate={false}>
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-violet-500" />
-                  <span className="text-sm font-medium text-foreground/80">UI/UX Designer & Developer</span>
+                  <Sparkles className="w-4 h-4 text-red-500" />
+                  <span className="text-sm font-medium text-foreground/80">YouTube Thumbnail Designer</span>
                 </div>
               </GlassCard>
             </motion.div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-foreground">
-              <span className="block">Hi, I'm</span>
-              <span className="block bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 dark:from-violet-400 dark:via-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
-                Alex Rivera
+              <span className="block">Thumbnails that</span>
+              <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 dark:from-red-400 dark:via-orange-400 dark:to-yellow-400 bg-clip-text text-transparent">
+                Get Clicks
               </span>
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-lg mb-8 mx-auto lg:mx-0">
-              I craft beautiful digital experiences that combine stunning visuals with intuitive functionality. 
-              Let's bring your vision to life.
+              I design scroll-stopping YouTube thumbnails that boost your CTR and grow your channel. 
+              Let's make your videos impossible to ignore.
             </p>
+
+            <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-start mb-8">
+              <div className="flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-green-500" />
+                <span className="text-sm text-muted-foreground">Avg. 40% CTR increase</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Eye className="w-5 h-5 text-blue-500" />
+                <span className="text-sm text-muted-foreground">10M+ Views generated</span>
+              </div>
+            </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
               <Button
                 size="lg"
                 onClick={scrollToWork}
-                className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-8 rounded-xl shadow-lg shadow-violet-500/25"
+                className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white px-8 rounded-xl shadow-lg shadow-red-500/25"
                 data-testid="button-view-work"
               >
-                View My Work
+                View My Thumbnails
               </Button>
               <Button
                 variant="outline"
@@ -90,7 +113,7 @@ export default function HeroSection() {
                 className="rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/30 dark:border-white/10"
                 data-testid="button-get-in-touch"
               >
-                Get in Touch
+                Hire Me
               </Button>
             </div>
           </motion.div>
@@ -109,7 +132,7 @@ export default function HeroSection() {
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             data-testid="button-scroll-down"
           >
-            <span className="text-sm font-medium">Scroll to explore</span>
+            <span className="text-sm font-medium">See my work</span>
             <ArrowDown className="w-5 h-5" />
           </motion.button>
         </motion.div>
