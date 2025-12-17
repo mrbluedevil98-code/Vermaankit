@@ -3,15 +3,43 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/not-found";
+import { ThemeProvider } from "@/hooks/use-theme";
+import AnimatedBackground from "@/components/AnimatedBackground";
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import PortfolioGrid from "@/components/PortfolioGrid";
+import AboutSection from "@/components/AboutSection";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
+
+function Portfolio() {
+  return (
+    <>
+      <AnimatedBackground />
+      <Navbar />
+      <main className="relative">
+        <HeroSection />
+        <PortfolioGrid />
+        <AboutSection />
+        <ContactSection />
+        <Footer />
+      </main>
+    </>
+  );
+}
 
 function Router() {
   return (
     <Switch>
-      {/* Add pages below */}
-      {/* <Route path="/" component={Home}/> */}
-      {/* Fallback to 404 */}
-      <Route component={NotFound} />
+      <Route path="/" component={Portfolio} />
+      <Route>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold mb-4">404</h1>
+            <p className="text-muted-foreground">Page not found</p>
+          </div>
+        </div>
+      </Route>
     </Switch>
   );
 }
@@ -19,10 +47,14 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-      </TooltipProvider>
+      <ThemeProvider>
+        <TooltipProvider>
+          <div className="min-h-screen">
+            <Router />
+          </div>
+          <Toaster />
+        </TooltipProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
