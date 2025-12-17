@@ -1,18 +1,19 @@
 import { motion } from "framer-motion";
-import { Heart, Youtube } from "lucide-react";
-import { SiLinkedin, SiFiverr, SiX } from "react-icons/si";
+import { Heart, Youtube, ArrowUp, Sparkles } from "lucide-react";
+import { SiLinkedin, SiFiverr, SiX, SiInstagram } from "react-icons/si";
+import { Button } from "@/components/ui/button";
 import logoImage from "@assets/logo_1766005991563.jpeg";
 
 const socialLinks = [
-  { icon: Youtube, href: "#", label: "YouTube" },
-  { icon: SiX, href: "#", label: "X" },
-  { icon: SiFiverr, href: "#", label: "Fiverr" },
-  { icon: SiLinkedin, href: "#", label: "LinkedIn" },
+  { icon: Youtube, href: "#", label: "YouTube", color: "hover:text-red-500" },
+  { icon: SiInstagram, href: "#", label: "Instagram", color: "hover:text-pink-500" },
+  { icon: SiFiverr, href: "#", label: "Fiverr", color: "hover:text-green-500" },
+  { icon: SiLinkedin, href: "#", label: "LinkedIn", color: "hover:text-blue-500" },
 ];
 
 const footerLinks = [
   { label: "Home", href: "#home" },
-  { label: "Portfolio", href: "#work" },
+  { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -22,70 +23,115 @@ export default function Footer() {
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <footer className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 relative">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-red-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="max-w-7xl mx-auto"
+        className="max-w-7xl mx-auto relative"
       >
-        <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/20 dark:border-white/10 p-6 sm:p-8 md:p-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
-            <div className="text-center md:text-left">
+        <div className="bg-white/60 dark:bg-white/5 backdrop-blur-xl rounded-3xl border border-white/30 dark:border-white/10 p-6 sm:p-8 md:p-12">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12 mb-8">
+            <div className="md:col-span-1">
               <a
                 href="#home"
                 onClick={(e) => {
                   e.preventDefault();
                   scrollToSection("#home");
                 }}
-                className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-3"
+                className="flex items-center gap-3 mb-4 group"
                 data-testid="link-footer-logo"
               >
-                <img src={logoImage} alt="Ankit Rikrevo" className="w-10 h-10 rounded-full object-cover" />
-                Ankit Rikrevo
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
+                  <img src={logoImage} alt="Ankit Rikrevo" className="relative w-12 h-12 rounded-full object-cover ring-2 ring-white/50 dark:ring-white/20" />
+                </div>
+                <div>
+                  <span className="text-xl font-bold tracking-tight text-foreground block">
+                    Ankit<span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">.</span>
+                  </span>
+                  <span className="text-xs text-muted-foreground">Thumbnail Designer</span>
+                </div>
               </a>
-              <p className="text-muted-foreground mt-2 max-w-xs">
-                Scroll-stopping thumbnails that get your videos the clicks they deserve.
+              <p className="text-sm text-muted-foreground max-w-xs mb-4">
+                Creating scroll-stopping thumbnails that get your videos the clicks they deserve.
               </p>
+              <Button
+                size="sm"
+                onClick={() => scrollToSection("#contact")}
+                className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl shadow-lg shadow-red-500/20"
+              >
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                Work With Me
+              </Button>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-              {footerLinks.map((link) => (
-                <button
-                  key={link.label}
-                  onClick={() => scrollToSection(link.href)}
-                  className="text-xs sm:text-sm text-muted-foreground hover:text-red-500 dark:hover:text-red-400 transition-colors"
-                  data-testid={`link-footer-${link.label.toLowerCase()}`}
-                >
-                  {link.label}
-                </button>
-              ))}
+            <div className="md:col-span-1">
+              <h4 className="font-semibold text-foreground mb-4">Quick Links</h4>
+              <div className="grid grid-cols-2 gap-2">
+                {footerLinks.map((link) => (
+                  <button
+                    key={link.label}
+                    onClick={() => scrollToSection(link.href)}
+                    className="text-sm text-muted-foreground hover:text-red-500 transition-colors text-left py-1"
+                    data-testid={`link-footer-${link.label.toLowerCase()}`}
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  className="p-2.5 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10 text-foreground/70 hover:text-red-500 dark:hover:text-red-400 transition-colors"
-                  data-testid={`link-footer-social-${social.label.toLowerCase()}`}
-                >
-                  <social.icon className="w-4 h-4" />
-                </a>
-              ))}
+            <div className="md:col-span-1">
+              <h4 className="font-semibold text-foreground mb-4">Connect</h4>
+              <div className="flex gap-2 mb-4">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className={`p-2.5 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10 text-foreground/70 ${link.color} transition-all hover-elevate`}
+                    data-testid={`link-footer-social-${link.label.toLowerCase()}`}
+                  >
+                    <link.icon className="w-4 h-4" />
+                  </a>
+                ))}
+              </div>
+              <p className="text-sm text-muted-foreground">
+                ankitrikrevo@gmail.com
+              </p>
             </div>
           </div>
 
-          <div className="mt-8 pt-8 border-t border-white/10 dark:border-white/5">
-            <p className="text-center text-sm text-muted-foreground flex items-center justify-center gap-1 flex-wrap">
+          <div className="pt-6 border-t border-white/20 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-xs sm:text-sm text-muted-foreground flex flex-wrap items-center justify-center gap-1">
               <span>Made with</span>
-              <Heart className="w-4 h-4 text-red-500 fill-red-500" />
+              <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" />
               <span>for YouTube creators</span>
-              <span className="mx-2">|</span>
-              <span>{new Date().getFullYear()} All rights reserved.</span>
+              <span className="mx-2 hidden sm:inline">|</span>
+              <span className="w-full sm:w-auto text-center">{new Date().getFullYear()} Ankit Rikrevo. All rights reserved.</span>
             </p>
+            
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={scrollToTop}
+              className="rounded-xl bg-white/30 dark:bg-white/5 hover:bg-white/50 dark:hover:bg-white/10"
+              data-testid="button-scroll-top"
+            >
+              <ArrowUp className="w-4 h-4 mr-1.5" />
+              Back to top
+            </Button>
           </div>
         </div>
       </motion.div>

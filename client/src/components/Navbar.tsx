@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./ThemeToggle";
 import logoImage from "@assets/logo_1766005991563.jpeg";
@@ -15,10 +15,23 @@ const navItems = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      
+      const sections = navItems.map(item => item.href.slice(1));
+      for (const section of sections.reverse()) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 150) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -38,54 +51,77 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
           isScrolled ? "w-[95%] max-w-4xl" : "w-[90%] max-w-5xl"
         }`}
       >
         <div
-          className={`px-6 py-3 rounded-2xl backdrop-blur-xl transition-all duration-300 ${
+          className={`px-4 sm:px-6 py-3 rounded-2xl backdrop-blur-xl transition-all duration-500 ${
             isScrolled
-              ? "bg-white/70 dark:bg-slate-900/70 shadow-lg border border-white/30 dark:border-white/10"
-              : "bg-white/50 dark:bg-slate-900/50 border border-white/20 dark:border-white/5"
+              ? "bg-white/80 dark:bg-slate-900/80 shadow-xl shadow-black/5 dark:shadow-black/20 border border-white/50 dark:border-white/10"
+              : "bg-white/60 dark:bg-slate-900/60 border border-white/30 dark:border-white/5"
           }`}
         >
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
             <motion.a
               href="#home"
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection("#home");
               }}
-              className="flex items-center gap-2 text-xl font-bold tracking-tight text-foreground"
+              className="flex items-center gap-2 sm:gap-3 group"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               data-testid="link-logo"
             >
-              <img src={logoImage} alt="Ankit Rikrevo" className="w-8 h-8 rounded-full object-cover" />
-              <span>Ankit<span className="text-primary">.</span></span>
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
+                <img 
+                  src={logoImage} 
+                  alt="Ankit Rikrevo" 
+                  className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover ring-2 ring-white/50 dark:ring-white/20" 
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg sm:text-xl font-bold tracking-tight text-foreground leading-tight">
+                  Ankit<span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">.</span>
+                </span>
+                <span className="text-[10px] text-muted-foreground hidden sm:block leading-none">Thumbnail Designer</span>
+              </div>
             </motion.a>
 
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden md:flex items-center gap-1 bg-white/30 dark:bg-white/5 rounded-xl p-1">
               {navItems.map((item) => (
-                <Button
+                <button
                   key={item.label}
-                  variant="ghost"
-                  size="sm"
                   onClick={() => scrollToSection(item.href)}
-                  className="text-sm font-medium text-foreground/80 hover:text-foreground"
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                    activeSection === item.href.slice(1)
+                      ? "bg-white dark:bg-white/10 text-foreground shadow-sm"
+                      : "text-foreground/70 hover:text-foreground hover:bg-white/50 dark:hover:bg-white/5"
+                  }`}
                   data-testid={`link-nav-${item.label.toLowerCase()}`}
                 >
                   {item.label}
-                </Button>
+                </button>
               ))}
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 sm:gap-3">
               <ThemeToggle />
+              <Button
+                size="sm"
+                onClick={() => scrollToSection("#contact")}
+                className="hidden sm:flex bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl shadow-lg shadow-red-500/20 text-xs sm:text-sm"
+                data-testid="button-hire-me-nav"
+              >
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                Hire Me
+              </Button>
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden bg-white/10 dark:bg-white/5 backdrop-blur-lg border border-white/20 dark:border-white/10 rounded-full"
+                className="md:hidden bg-white/30 dark:bg-white/5 backdrop-blur-lg border border-white/30 dark:border-white/10 rounded-xl"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 data-testid="button-mobile-menu"
               >
@@ -98,32 +134,60 @@ export default function Navbar() {
 
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed top-24 left-4 right-4 z-40 md:hidden"
-          >
-            <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-white/30 dark:border-white/10 shadow-xl p-4">
-              {navItems.map((item, index) => (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="fixed top-24 left-4 right-4 z-50 md:hidden"
+            >
+              <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-white/50 dark:border-white/10 shadow-2xl p-3 space-y-1">
+                {navItems.map((item, index) => (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <button
+                      onClick={() => scrollToSection(item.href)}
+                      className={`w-full text-left px-4 py-3 rounded-xl text-base font-medium transition-all ${
+                        activeSection === item.href.slice(1)
+                          ? "bg-gradient-to-r from-red-500/10 to-orange-500/10 text-red-500"
+                          : "text-foreground hover:bg-white/50 dark:hover:bg-white/5"
+                      }`}
+                      data-testid={`link-mobile-nav-${item.label.toLowerCase()}`}
+                    >
+                      {item.label}
+                    </button>
+                  </motion.div>
+                ))}
                 <motion.div
-                  key={item.label}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: navItems.length * 0.05 }}
+                  className="pt-2"
                 >
                   <Button
-                    variant="ghost"
-                    className="w-full justify-start text-base font-medium py-3"
-                    onClick={() => scrollToSection(item.href)}
-                    data-testid={`link-mobile-nav-${item.label.toLowerCase()}`}
+                    onClick={() => scrollToSection("#contact")}
+                    className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl"
+                    data-testid="button-hire-me-mobile"
                   >
-                    {item.label}
+                    <Sparkles className="w-4 h-4 mr-2" />
+                    Hire Me
                   </Button>
                 </motion.div>
-              ))}
-            </div>
-          </motion.div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
