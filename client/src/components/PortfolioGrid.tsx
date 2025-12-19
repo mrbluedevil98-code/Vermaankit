@@ -185,13 +185,6 @@ const ProjectCard = memo(({ project, index, onClick }: { project: Project; index
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
-        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-          <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-black/50 backdrop-blur text-white text-xs">
-            <Play className="w-3 h-3 fill-current" aria-hidden="true" />
-            {project.views} views
-          </div>
-        </div>
-
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
