@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowDown, Sparkles, Youtube, TrendingUp, Eye, Play, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import GlassCard from "./GlassCard";
-import profileImage from "@assets/logo_1766005991563.jpeg";
+import profileImage from "@assets/LOGO_1766171581846.png";
 
 const floatingVariants = {
   animate: {

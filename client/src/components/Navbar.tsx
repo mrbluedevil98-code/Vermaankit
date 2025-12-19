@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./ThemeToggle";
-import logoImage from "@assets/logo_1766005991563.jpeg";
+import logoImage from "@assets/LOGO_1766171581846.png";
 
 const navItems = [
   { label: "Home", href: "#home" },

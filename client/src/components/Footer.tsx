@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Heart, Youtube, ArrowUp, Sparkles } from "lucide-react";
 import { SiLinkedin, SiFiverr, SiInstagram } from "react-icons/si";
 import { Button } from "@/components/ui/button";
-import logoImage from "@assets/logo_1766005991563.jpeg";
+import logoImage from "@assets/LOGO_1766171581846.png";
 
 const socialLinks = [
   { icon: Youtube, href: "https://youtube.com/@ankitrikrevo", label: "YouTube", color: "hover:text-red-500" },
