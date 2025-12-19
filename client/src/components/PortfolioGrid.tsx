@@ -172,7 +172,7 @@ const ProjectCard = memo(({ project, index, onClick }: { project: Project; index
   return (
     <div>
       <GlassCard
-        className="group cursor-pointer overflow-hidden hover-elevate transition-transform duration-300"
+        className="group cursor-pointer overflow-hidden hover-elevate"
         animate={false}
       >
         <div
@@ -187,16 +187,16 @@ const ProjectCard = memo(({ project, index, onClick }: { project: Project; index
           <img
             src={project.image}
             alt={`${project.title} - ${project.category} thumbnail design`}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 will-change-transform"
             loading="lazy"
             decoding="async"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
           
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             <div className="flex gap-3">
               <span
-                className="p-3 rounded-full bg-white/20 backdrop-blur-lg border border-white/30 text-white transform group-hover:scale-100 transition-transform duration-300"
+                className="p-3 rounded-full bg-white/20 border border-white/30 text-white"
                 aria-hidden="true"
               >
                 <Eye className="w-5 h-5" />

@@ -138,17 +138,14 @@ export default function HeroSection() {
 
             <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
               {stats.map((stat) => (
-                <motion.div
+                <div
                   key={stat.label}
-                  whileHover={{ y: -2 }}
-                  transition={{ type: "spring", damping: 15, stiffness: 300 }}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10 cursor-default"
-                  style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10 cursor-default hover:bg-white/60 dark:hover:bg-white/10 transition-colors duration-200"
                 >
                   <stat.icon className={`w-4 h-4 ${stat.color}`} />
                   <span className="font-bold text-foreground">{stat.value}</span>
                   <span className="text-xs text-muted-foreground hidden sm:inline">{stat.label}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
 

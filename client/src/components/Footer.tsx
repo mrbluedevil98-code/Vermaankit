@@ -42,7 +42,7 @@ export default function Footer() {
         transition={{ duration: 0.6 }}
         className="max-w-7xl mx-auto relative"
       >
-        <div className="bg-white/60 dark:bg-white/5 backdrop-blur-xl rounded-3xl border border-white/30 dark:border-white/10 p-6 sm:p-8 md:p-12">
+        <div className="bg-white/60 dark:bg-white/5 backdrop-blur-md rounded-3xl border border-white/30 dark:border-white/10 p-6 sm:p-8 md:p-12">
           <div className="grid md:grid-cols-3 gap-8 md:gap-12 mb-8">
             <div className="md:col-span-1">
               <a

@@ -131,17 +131,13 @@ export default function ContactSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.4 }}
           className="grid grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16 max-w-3xl mx-auto"
         >
           {stats.map((stat, index) => (
-            <motion.div
+            <div
               key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
               className="text-center"
             >
               <GlassCard className="p-4 sm:p-6" animate={false}>
@@ -150,7 +146,7 @@ export default function ContactSection() {
                 </div>
                 <div className="text-xs sm:text-sm text-muted-foreground">{stat.label}</div>
               </GlassCard>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
 

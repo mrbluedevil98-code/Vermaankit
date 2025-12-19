@@ -299,7 +299,16 @@
 
   /* Optimize backdrop-filter performance */
   [class*="backdrop-blur"] {
-    will-change: backdrop-filter;
+    -webkit-backdrop-filter: blur(10px);
+    will-change: auto;
+  }
+  
+  /* Disable heavy backdrop effects on desktop when not needed */
+  @media (min-width: 768px) {
+    .backdrop-blur-xl {
+      -webkit-backdrop-filter: blur(15px) !important;
+      backdrop-filter: blur(15px) !important;
+    }
   }
 
   /* Smooth transitions - only for non-transform properties */
