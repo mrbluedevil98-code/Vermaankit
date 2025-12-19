@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Heart, Youtube, ArrowUp, Sparkles } from "lucide-react";
-import { SiLinkedin, SiFiverr, SiInstagram } from "react-icons/si";
+import { SiLinkedin, SiFiverr, SiInstagram, SiDiscord } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import logoImage from "@assets/LOGO_1766171581846.png";
 
@@ -9,6 +9,7 @@ const socialLinks = [
   { icon: SiInstagram, href: "https://instagram.com/ankitrikrevo", label: "Instagram", color: "hover:text-pink-500" },
   { icon: SiFiverr, href: "https://fiverr.com/ankitrikrevo", label: "Fiverr", color: "hover:text-green-500" },
   { icon: SiLinkedin, href: "https://www.linkedin.com/in/ankitrikrevoo/", label: "LinkedIn", color: "hover:text-blue-500" },
+  { icon: SiDiscord, href: "https://discord.com/users/ankitrikrevo", label: "Discord", color: "hover:text-indigo-500" },
 ];
 
 const footerLinks = [
