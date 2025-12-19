@@ -155,10 +155,10 @@ export default function ContactSection() {
 
         <div className="grid lg:grid-cols-5 gap-6 sm:gap-8">
           <div className="lg:col-span-2 space-y-4 sm:space-y-6">
-            <GlassCard className="p-6" delay={0.1}>
+            <GlassCard className="p-6 hover-elevate" delay={0.1} data-testid="card-contact-info">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 rounded-xl bg-gradient-to-r from-red-500 to-orange-500">
-                  <Mail className="w-5 h-5 text-white" />
+                  <Mail className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-semibold text-foreground">Get In Touch</h3>
               </div>
@@ -200,7 +200,7 @@ export default function ContactSection() {
               </div>
             </GlassCard>
 
-            <GlassCard className="p-6" delay={0.2}>
+            <GlassCard className="p-6 hover-elevate" delay={0.2} data-testid="card-why-work">
               <h3 className="text-lg font-semibold mb-4 text-foreground">Why Work With Me?</h3>
               <div className="space-y-3">
                 {features.map((feature, index) => (
@@ -224,7 +224,7 @@ export default function ContactSection() {
               </div>
             </GlassCard>
 
-            <GlassCard className="p-6" delay={0.3}>
+            <GlassCard className="p-6 hover-elevate" delay={0.3} data-testid="card-social-connect">
               <h3 className="text-lg font-semibold mb-4 text-foreground">Connect With Me</h3>
               <div className="grid grid-cols-4 gap-3">
                 {platforms.map((platform, index) => (
@@ -255,10 +255,10 @@ export default function ContactSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="lg:col-span-3"
           >
-            <GlassCard className="p-6 md:p-8" animate={false}>
+            <GlassCard className="p-6 md:p-8 hover-elevate" animate={false} data-testid="card-contact-form">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 rounded-xl bg-gradient-to-r from-red-500 to-orange-500">
-                  <MessageSquare className="w-5 h-5 text-white" />
+                  <MessageSquare className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-foreground">Send a Message</h3>

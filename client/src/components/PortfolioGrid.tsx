@@ -162,7 +162,7 @@ const ProjectCard = memo(({ project, index, onClick }: { project: Project; index
     transition={{ duration: 0.5, delay: Math.min(index * 0.1, 0.3) }}
   >
     <GlassCard
-      className="group cursor-pointer overflow-hidden"
+      className="group cursor-pointer overflow-hidden hover-elevate"
       animate={false}
     >
       <div

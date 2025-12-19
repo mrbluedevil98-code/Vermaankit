@@ -69,9 +69,9 @@ export default function AboutSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 sm:mb-16">
           {services.map((service, index) => (
-            <GlassCard key={service.title} className="p-6" delay={0.1 * index}>
+            <GlassCard key={service.title} className="p-6 hover-elevate" delay={0.1 * index} data-testid={`card-service-${service.title.toLowerCase().replace(/\s+/g, '-')}`}>
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 mb-4">
-                <service.icon className="w-6 h-6 text-red-500 dark:text-red-400" />
+                <service.icon className="w-6 h-6 text-red-500 dark:text-red-400" aria-hidden="true" />
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-2">{service.title}</h3>
               <p className="text-sm text-muted-foreground">{service.desc}</p>
@@ -80,7 +80,7 @@ export default function AboutSection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-12 sm:mb-16">
-          <GlassCard className="p-8" delay={0.1}>
+          <GlassCard className="p-8 hover-elevate" delay={0.1} data-testid="card-approach">
             <h3 className="text-2xl font-semibold mb-4 text-foreground">My Approach</h3>
             <div className="space-y-4 text-muted-foreground">
               <p>
@@ -100,7 +100,7 @@ export default function AboutSection() {
             </div>
           </GlassCard>
 
-          <GlassCard className="p-8" delay={0.2}>
+          <GlassCard className="p-8 hover-elevate" delay={0.2} data-testid="card-skills">
             <h3 className="text-2xl font-semibold mb-6 text-foreground">Skills & Expertise</h3>
             <div className="space-y-5">
               {skills.map((skill, index) => (
@@ -119,11 +119,12 @@ export default function AboutSection() {
           {stats.map((stat, index) => (
             <GlassCard
               key={stat.label}
-              className="p-6 text-center"
+              className="p-6 text-center hover-elevate"
               delay={0.1 * index}
+              data-testid={`card-stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}
             >
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 mb-4">
-                <stat.icon className="w-6 h-6 text-red-500 dark:text-red-400" />
+                <stat.icon className="w-6 h-6 text-red-500 dark:text-red-400" aria-hidden="true" />
               </div>
               <div className="text-2xl md:text-3xl font-bold text-foreground mb-1">
                 {stat.value}
