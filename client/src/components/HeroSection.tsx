@@ -164,25 +164,63 @@ export default function HeroSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start w-full sm:w-auto">
-              <Button
-                size="lg"
-                onClick={scrollToWork}
-                className="w-full sm:w-auto bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white px-8 rounded-xl shadow-xl shadow-red-500/25 text-base"
-                data-testid="button-view-work"
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                className="w-full sm:w-auto"
               >
-                <Play className="w-4 h-4 mr-2 fill-current" />
-                View My Work
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={scrollToContact}
-                className="w-full sm:w-auto rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/50 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/10 text-base"
-                data-testid="button-get-in-touch"
+                <Button
+                  size="lg"
+                  onClick={scrollToWork}
+                  className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white px-8 rounded-xl shadow-xl shadow-red-500/25 hover:shadow-red-500/40 text-base font-semibold transition-all duration-300 relative overflow-hidden group"
+                  data-testid="button-view-work"
+                >
+                  <motion.div
+                    whileHover={{ rotate: -20, scale: 1.2 }}
+                    whileTap={{ scale: 0.8 }}
+                    transition={{ type: "spring", stiffness: 600, damping: 15 }}
+                    className="inline-block"
+                  >
+                    <Play className="w-4 h-4 mr-2 fill-current" />
+                  </motion.div>
+                  <motion.span
+                    whileHover={{ letterSpacing: "0.05em" }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    View My Work
+                  </motion.span>
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                className="w-full sm:w-auto"
               >
-                <Sparkles className="w-4 h-4 mr-2" />
-                Get a Quote
-              </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={scrollToContact}
+                  className="w-full rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/50 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/10 text-base font-semibold transition-all duration-300 relative overflow-hidden group"
+                  data-testid="button-get-in-touch"
+                >
+                  <motion.div
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ type: "spring", stiffness: 600, damping: 15, duration: 0.5 }}
+                    className="inline-block"
+                  >
+                    <Sparkles className="w-4 h-4 mr-2" />
+                  </motion.div>
+                  <motion.span
+                    whileHover={{ letterSpacing: "0.05em" }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    Get a Quote
+                  </motion.span>
+                </Button>
+              </motion.div>
             </div>
           </motion.div>
         </div>

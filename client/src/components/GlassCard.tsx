@@ -24,10 +24,10 @@ export default function GlassCard({
 
   const content = (
     <motion.div
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
+      whileHover={{ y: -6, transition: { duration: 0.3, type: "spring", stiffness: 400, damping: 10 } }}
+      whileTap={{ y: -2 }}
       className={cn(
-        "rounded-2xl shadow-xl",
+        "rounded-2xl shadow-xl transition-all duration-300",
         variants[variant],
         className
       )}

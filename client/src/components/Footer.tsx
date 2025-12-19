@@ -104,7 +104,7 @@ export default function Footer() {
               <h4 className="font-semibold text-foreground mb-4">Connect</h4>
               <div className="flex gap-2 mb-4">
                 {socialLinks.map((link) => (
-                  <a
+                  <motion.a
                     key={link.label}
                     href={link.href}
                     target="_blank"
@@ -112,9 +112,12 @@ export default function Footer() {
                     className={`p-2.5 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10 text-foreground/70 ${link.color} transition-all hover-elevate focus:outline-none focus:ring-2 focus:ring-red-500/50`}
                     data-testid={`link-footer-social-${link.label.toLowerCase()}`}
                     aria-label={`Follow on ${link.label}`}
+                    whileHover={{ scale: 1.15, y: -3, rotate: 10 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 15 }}
                   >
                     <link.icon className="w-4 h-4" />
-                  </a>
+                  </motion.a>
                 ))}
               </div>
               <a 

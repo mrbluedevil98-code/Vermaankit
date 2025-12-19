@@ -125,20 +125,32 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   </div>
 
                   <div className="flex flex-wrap gap-4">
-                    <Button
-                      onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-                      className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl"
-                      data-testid="button-order-similar"
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 500, damping: 15 }}
                     >
-                      Order Similar Thumbnail
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/30 dark:border-white/10"
-                      data-testid="button-view-more"
+                      <Button
+                        onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+                        className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl shadow-lg shadow-red-500/25 hover:shadow-red-500/40 transition-all duration-300"
+                        data-testid="button-order-similar"
+                      >
+                        Order Similar Thumbnail
+                      </Button>
+                    </motion.div>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 500, damping: 15 }}
                     >
-                      View More Work
-                    </Button>
+                      <Button
+                        variant="outline"
+                        className="rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/30 dark:border-white/10 transition-all duration-300"
+                        data-testid="button-view-more"
+                      >
+                        View More Work
+                      </Button>
+                    </motion.div>
                   </div>
                 </div>
               </div>

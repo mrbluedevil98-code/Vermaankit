@@ -272,21 +272,30 @@ export default function PortfolioGrid() {
           aria-label="Filter thumbnails by category"
         >
           {categories.map((category) => (
-            <button
+            <motion.button
               key={category}
               onClick={() => setSelectedCategory(category)}
               role="tab"
               aria-selected={selectedCategory === category}
               aria-controls="portfolio-grid"
-              className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500/50 ${
+              className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500/50 relative overflow-hidden group ${
                 selectedCategory === category
                   ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25"
                   : "bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/30 dark:border-white/10 text-foreground/80 hover:text-foreground hover:bg-white/70 dark:hover:bg-white/10"
               }`}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 500, damping: 15 }}
               data-testid={`button-filter-${category.toLowerCase()}`}
             >
-              {category}
-            </button>
+              <motion.span
+                whileHover={{ letterSpacing: "0.05em" }}
+                transition={{ duration: 0.3 }}
+                className="relative z-10"
+              >
+                {category}
+              </motion.span>
+            </motion.button>
           ))}
         </motion.div>
 
