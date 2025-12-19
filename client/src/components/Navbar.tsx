@@ -56,10 +56,10 @@ export default function Navbar() {
         }`}
       >
         <div
-          className={`px-4 sm:px-6 py-3 rounded-2xl backdrop-blur-xl transition-all duration-500 ${
+          className={`px-4 sm:px-6 py-3 rounded-2xl backdrop-blur-2xl transition-all duration-500 ${
             isScrolled
-              ? "bg-white/80 dark:bg-slate-900/80 shadow-xl shadow-black/5 dark:shadow-black/20 border border-white/50 dark:border-white/10"
-              : "bg-white/60 dark:bg-slate-900/60 border border-white/30 dark:border-white/5"
+              ? "bg-gradient-to-br from-white/85 to-white/75 dark:from-slate-900/85 dark:to-slate-900/75 shadow-2xl shadow-black/10 dark:shadow-black/30 border border-white/60 dark:border-white/15"
+              : "bg-gradient-to-br from-white/65 to-white/55 dark:from-slate-900/65 dark:to-slate-900/55 border border-white/40 dark:border-white/10"
           }`}
         >
           <div className="flex items-center justify-between gap-2 sm:gap-4">
@@ -99,30 +99,37 @@ export default function Navbar() {
               </div>
             </motion.a>
 
-            <div className="hidden md:flex items-center gap-1 bg-white/30 dark:bg-white/5 rounded-xl p-1 backdrop-blur-sm">
+            <div className="hidden md:flex items-center gap-0.5 bg-gradient-to-r from-white/20 to-white/10 dark:from-white/5 dark:to-white/3 rounded-xl p-1 backdrop-blur-md border border-white/20 dark:border-white/10">
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 relative overflow-hidden group ${
                     activeSection === item.href.slice(1)
-                      ? "bg-white dark:bg-white/10 text-foreground shadow-md"
+                      ? "bg-white/40 dark:bg-white/15 text-foreground shadow-lg shadow-red-500/20 dark:shadow-red-600/10 border border-white/40 dark:border-white/20"
                       : "text-foreground/70 hover:text-foreground"
                   }`}
-                  whileHover={{ scale: 1.08, y: -3 }}
-                  whileTap={{ scale: 0.92 }}
+                  whileHover={{ scale: 1.08, y: -2 }}
+                  whileTap={{ scale: 0.93 }}
                   transition={{ type: "spring", stiffness: 500, damping: 15 }}
                   data-testid={`link-nav-${item.label.toLowerCase()}`}
                 >
                   {activeSection !== item.href.slice(1) && (
                     <motion.div 
-                      className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-orange-500/10 rounded-lg"
+                      className="absolute inset-0 bg-gradient-to-r from-red-500/15 to-orange-500/15 rounded-lg"
                       initial={{ opacity: 0, x: -100 }}
                       whileHover={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
                     />
                   )}
-                  <span className="relative z-10">{item.label}</span>
+                  {activeSection === item.href.slice(1) && (
+                    <motion.div
+                      layoutId="active-tab"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-red-500 to-orange-500 rounded-full"
+                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                    />
+                  )}
+                  <span className="relative z-10 block">{item.label}</span>
                 </motion.button>
               ))}
             </div>
@@ -161,15 +168,27 @@ export default function Navbar() {
                   />
                 </Button>
               </motion.div>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden bg-white/30 dark:bg-white/5 backdrop-blur-lg border border-white/30 dark:border-white/10 rounded-xl"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                data-testid="button-mobile-menu"
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 500, damping: 15 }}
               >
-                {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-              </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="md:hidden bg-white/40 dark:bg-white/10 backdrop-blur-lg border border-white/30 dark:border-white/15 rounded-xl hover:bg-white/50 dark:hover:bg-white/15 transition-all duration-300"
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  data-testid="button-mobile-menu"
+                >
+                  <motion.div
+                    initial={false}
+                    animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                  >
+                    {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+                  </motion.div>
+                </Button>
+              </motion.div>
             </div>
           </div>
         </div>
