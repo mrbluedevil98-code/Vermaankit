@@ -24,14 +24,15 @@ export default function GlassCard({
 
   const content = (
     <motion.div
-      whileHover={{ y: -4, transition: { duration: 0.2, ease: "easeOut" } }}
-      whileTap={{ y: -1, transition: { duration: 0.15 } }}
+      whileHover={{ y: -3 }}
+      whileTap={{ y: 0 }}
+      transition={{ type: "tween", duration: 0.15 }}
       className={cn(
-        "rounded-2xl shadow-xl transition-colors duration-300 will-change-transform",
+        "rounded-2xl shadow-xl transition-all duration-150 will-change-transform",
         variants[variant],
         className
       )}
-      style={{ backfaceVisibility: "hidden" }}
+      style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
     >
       {children}
     </motion.div>

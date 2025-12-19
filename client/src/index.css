@@ -304,13 +304,48 @@
 
   /* Smooth transitions for all elements */
   button, a, [role="button"] {
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Optimize hover states */
   @media (hover: hover) {
     button:hover, a:hover, [role="button"]:hover {
-      will-change: transform;
+      will-change: transform, box-shadow;
     }
+  }
+
+  /* GPU acceleration */
+  motion.div, [style*="transform"] {
+    transform: translateZ(0);
+    will-change: auto;
+  }
+
+  /* Reduce repaints on hover */
+  button, a {
+    contain: layout style paint;
+  }
+
+  /* Optimize images loading */
+  img {
+    contain: layout style paint;
+  }
+
+  /* Smooth scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.3);
+    border-radius: 4px;
+    transition: background 0.15s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.5);
   }
 }

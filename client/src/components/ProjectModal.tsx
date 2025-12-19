@@ -69,19 +69,20 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.15 }}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
             onClick={onClose}
             data-testid="modal-backdrop"
+            style={{ transform: "translateZ(0)" }}
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.97, y: 15 }}
+            initial={{ opacity: 0, scale: 0.98, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.97, y: 15 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
+            exit={{ opacity: 0, scale: 0.98, y: 10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className="fixed inset-4 md:inset-[10%] z-50 overflow-hidden"
             data-testid="modal-project"
-            style={{ backfaceVisibility: "hidden" }}
+            style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
           >
             <div className="h-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl rounded-3xl border border-white/30 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden">
               <div className="relative h-[40%] md:h-[50%] overflow-hidden bg-black">
