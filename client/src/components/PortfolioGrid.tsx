@@ -174,10 +174,12 @@ const ProjectCard = memo(({ project, index, onClick }: { project: Project; index
         aria-label={`View ${project.title} project details`}
         data-testid={`card-project-${project.id}`}
       >
-        <img
+        <motion.img
           src={project.image}
           alt={`${project.title} - ${project.category} thumbnail design`}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-full object-cover"
+          whileHover={{ scale: 1.15 }}
+          transition={{ duration: 0.6, type: "spring", stiffness: 300, damping: 20 }}
           loading="lazy"
           decoding="async"
         />

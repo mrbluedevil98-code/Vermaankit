@@ -70,8 +70,9 @@ export default function Navbar() {
                 scrollToSection("#home");
               }}
               className="flex items-center gap-2 sm:gap-3 group"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
               data-testid="link-logo"
             >
               <div className="relative">
@@ -91,19 +92,22 @@ export default function Navbar() {
             </motion.a>
 
             <div className="hidden md:flex items-center gap-1 bg-white/30 dark:bg-white/5 rounded-xl p-1">
-              {navItems.map((item) => (
-                <button
+              {navItems.map((item, index) => (
+                <motion.button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                     activeSection === item.href.slice(1)
-                      ? "bg-white dark:bg-white/10 text-foreground shadow-sm"
+                      ? "bg-white dark:bg-white/10 text-foreground shadow-md"
                       : "text-foreground/70 hover:text-foreground hover:bg-white/50 dark:hover:bg-white/5"
                   }`}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   data-testid={`link-nav-${item.label.toLowerCase()}`}
                 >
                   {item.label}
-                </button>
+                </motion.button>
               ))}
             </div>
 

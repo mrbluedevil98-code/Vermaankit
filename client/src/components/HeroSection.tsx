@@ -48,8 +48,8 @@ export default function HeroSection() {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-3xl blur-2xl opacity-40 animate-pulse" />
             <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
+              whileHover={{ scale: 1.05, y: -8 }}
+              transition={{ duration: 0.4, type: "spring", stiffness: 300, damping: 10 }}
             >
               <GlassCard className="p-3" variant="strong" animate={false}>
                 <div className="relative">

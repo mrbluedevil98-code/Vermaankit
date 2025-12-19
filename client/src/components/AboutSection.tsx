@@ -31,19 +31,23 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <div ref={ref} className="space-y-2">
+    <div ref={ref} className="space-y-2 group">
       <div className="flex justify-between text-sm">
-        <span className="font-medium text-foreground">{name}</span>
+        <span className="font-medium text-foreground group-hover:text-red-500 transition-colors">{name}</span>
         <span className="text-muted-foreground">{level}%</span>
       </div>
-      <div className="h-2 rounded-full bg-white/20 dark:bg-white/10 overflow-hidden">
+      <motion.div 
+        className="h-2 rounded-full bg-white/20 dark:bg-white/10 overflow-hidden"
+        whileHover={{ height: 8 }}
+        transition={{ duration: 0.3 }}
+      >
         <motion.div
           initial={{ width: 0 }}
           animate={isInView ? { width: `${level}%` } : { width: 0 }}
-          transition={{ duration: 1, delay, ease: [0.22, 1, 0.36, 1] }}
-          className="h-full rounded-full bg-gradient-to-r from-red-500 to-orange-500"
+          transition={{ duration: 1.2, delay: 0.2 + delay, ease: [0.22, 1, 0.36, 1] }}
+          className="h-full rounded-full bg-gradient-to-r from-red-500 to-orange-500 shadow-lg shadow-red-500/50"
         />
-      </div>
+      </motion.div>
     </div>
   );
 }
