@@ -5,16 +5,35 @@ import { insertContactMessageSchema, type InsertContactMessage } from "@shared/s
 import { fromError } from "zod-validation-error";
 import nodemailer from "nodemailer";
 
-// Initialize email transporter
+const GMAIL_USER = 'ankitrikrevo@gmail.com';
+const GMAIL_PASSWORD = process.env.GMAIL_APP_PASSWORD;
+
+// Initialize email transporter with explicit Gmail SMTP configuration
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,
   auth: {
-    user: 'ankitrikrevo@gmail.com',
-    pass: process.env.GMAIL_APP_PASSWORD,
+    user: GMAIL_USER,
+    pass: GMAIL_PASSWORD,
   },
 });
 
+// Verify connection when server starts
+transporter.verify((error: Error | null, success: boolean) => {
+  if (error) {
+    console.error('Email transporter error:', error);
+  } else if (success) {
+    console.log('Email transporter is ready to send messages');
+  }
+});
+
 async function sendContactEmailNotification(data: InsertContactMessage) {
+  if (!GMAIL_PASSWORD) {
+    console.error('GMAIL_APP_PASSWORD environment variable is not set');
+    return;
+  }
+
   try {
     const emailBody = `
 New Contact Form Submission
@@ -32,8 +51,8 @@ This is an automated notification from your portfolio website.
 `;
 
     await transporter.sendMail({
-      from: 'ankitrikrevo@gmail.com',
-      to: 'ankitrikrevo@gmail.com',
+      from: GMAIL_USER,
+      to: GMAIL_USER,
       subject: `New Contact Form Submission from ${data.name}`,
       text: emailBody,
       html: `
@@ -47,7 +66,7 @@ This is an automated notification from your portfolio website.
       `,
     });
     
-    console.log('Email sent successfully to ankitrikrevo@gmail.com');
+    console.log(`Email sent successfully to ${GMAIL_USER}`);
   } catch (error) {
     console.error('Failed to send email notification:', error);
     // Don't throw - let the contact form still succeed even if email fails
