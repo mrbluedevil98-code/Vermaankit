@@ -8,7 +8,7 @@ const socialLinks = [
   { icon: Youtube, href: "https://youtube.com/@ankitrikrevo", label: "YouTube", color: "hover:text-red-500" },
   { icon: SiInstagram, href: "https://instagram.com/ankitrikrevo", label: "Instagram", color: "hover:text-pink-500" },
   { icon: SiFiverr, href: "https://fiverr.com/ankitrikrevo", label: "Fiverr", color: "hover:text-green-500" },
-  { icon: SiLinkedin, href: "https://linkedin.com/in/ankitrikrevo", label: "LinkedIn", color: "hover:text-blue-500" },
+  { icon: SiLinkedin, href: "https://www.linkedin.com/in/ankitrikrevoo/", label: "LinkedIn", color: "hover:text-blue-500" },
 ];
 
 const footerLinks = [
