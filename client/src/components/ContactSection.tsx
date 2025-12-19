@@ -26,7 +26,7 @@ const contactFormSchema = z.object({
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
 const pricingTiers = [
-  { value: "basic", label: "Basic - 1 Thumbnail ($25)" },
+  { value: "basic", label: "Basic - 1 Thumbnail ($15-20)" },
   { value: "standard", label: "Standard - 3 Thumbnails ($60)" },
   { value: "premium", label: "Premium - 5 Thumbnails ($90)" },
   { value: "monthly", label: "Monthly Package (Contact for price)" },
@@ -183,7 +183,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <span className="text-sm text-muted-foreground block">Starting at</span>
-                    <span className="font-medium text-foreground">$25 per thumbnail</span>
+                    <span className="font-medium text-foreground">$15 per thumbnail</span>
                   </div>
                 </div>
                 
