@@ -138,41 +138,54 @@ export default function HeroSection() {
 
             <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
               {stats.map((stat) => (
-                <div
+                <motion.div
                   key={stat.label}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10"
+                  whileHover={{ y: -2 }}
+                  transition={{ type: "spring", damping: 15, stiffness: 300 }}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10 cursor-default"
+                  style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
                 >
                   <stat.icon className={`w-4 h-4 ${stat.color}`} />
                   <span className="font-bold text-foreground">{stat.value}</span>
                   <span className="text-xs text-muted-foreground hidden sm:inline">{stat.label}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start w-full sm:w-auto">
-              <div className="w-full sm:w-auto">
+              <motion.div 
+                className="w-full sm:w-auto"
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 0 }}
+                transition={{ type: "spring", damping: 15, stiffness: 300 }}
+              >
                 <Button
                   size="lg"
                   onClick={scrollToWork}
-                  className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white px-8 rounded-xl shadow-xl shadow-red-500/25 hover:shadow-red-500/40 text-base font-semibold transition-all duration-300"
+                  className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white px-8 rounded-xl shadow-xl shadow-red-500/25 hover:shadow-red-500/40 text-base font-semibold"
                   data-testid="button-view-work"
                 >
                   <Play className="w-4 h-4 mr-2 fill-current" />
                   View My Work
                 </Button>
-              </div>
-              <div className="w-full sm:w-auto">
+              </motion.div>
+              <motion.div 
+                className="w-full sm:w-auto"
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 0 }}
+                transition={{ type: "spring", damping: 15, stiffness: 300 }}
+              >
                 <Button
                   variant="outline"
                   size="lg"
                   onClick={scrollToContact}
-                  className="w-full rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/50 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/10 text-base font-semibold transition-all duration-300"
+                  className="w-full rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/50 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/10 text-base font-semibold"
                   data-testid="button-get-in-touch"
                 >
                   <Sparkles className="w-4 h-4 mr-2" />
                   Get a Quote
                 </Button>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>

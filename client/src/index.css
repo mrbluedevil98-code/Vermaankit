@@ -302,27 +302,35 @@
     will-change: backdrop-filter;
   }
 
-  /* Smooth transitions for all elements */
+  /* Smooth transitions - only for non-transform properties */
   button, a, [role="button"] {
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Optimize hover states */
   @media (hover: hover) {
     button:hover, a:hover, [role="button"]:hover {
-      will-change: transform, box-shadow;
+      will-change: background-color, box-shadow, border-color;
     }
   }
 
-  /* GPU acceleration */
-  motion.div, [style*="transform"] {
+  /* GPU acceleration for Framer Motion elements */
+  [style*="transform"]:not(button):not(a) {
     transform: translateZ(0);
-    will-change: auto;
+    will-change: transform;
+  }
+  
+  motion.div {
+    will-change: transform;
   }
 
   /* Reduce repaints on hover */
   button, a {
-    contain: layout style paint;
+    contain: layout style;
   }
 
   /* Optimize images loading */
