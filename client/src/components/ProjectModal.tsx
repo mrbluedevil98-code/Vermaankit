@@ -224,17 +224,32 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                           />
                         </div>
                         <div>
-                          <label className="text-sm font-medium text-foreground block mb-2">Rating</label>
-                          <select
-                            value={newReview.rating}
-                            onChange={(e) => setNewReview({ ...newReview, rating: parseInt(e.target.value) })}
-                            className="w-full px-3 py-2 rounded-lg bg-white/70 dark:bg-white/10 border border-white/30 dark:border-white/10 text-foreground focus:outline-none focus:ring-2 focus:ring-red-500/50"
-                            data-testid="select-review-rating"
-                          >
-                            {[5, 4, 3, 2, 1].map((num) => (
-                              <option key={num} value={num}>{num} Stars</option>
+                          <label className="text-sm font-medium text-foreground block mb-3">Rating</label>
+                          <div className="flex gap-2">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <motion.button
+                                key={star}
+                                type="button"
+                                onClick={() => setNewReview({ ...newReview, rating: star })}
+                                whileHover={{ scale: 1.15 }}
+                                whileTap={{ scale: 0.95 }}
+                                transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                                className="p-1 transition-all"
+                                data-testid={`button-star-rating-${star}`}
+                              >
+                                <Star
+                                  className={`w-8 h-8 transition-all ${
+                                    star <= newReview.rating
+                                      ? "fill-yellow-400 text-yellow-400"
+                                      : "text-gray-300 dark:text-gray-600 hover:text-yellow-400"
+                                  }`}
+                                />
+                              </motion.button>
                             ))}
-                          </select>
+                            <span className="ml-2 text-sm font-medium text-foreground self-center">
+                              {newReview.rating} {newReview.rating === 1 ? 'Star' : 'Stars'}
+                            </span>
+                          </div>
                         </div>
                         <div>
                           <label className="text-sm font-medium text-foreground block mb-2">Review</label>
