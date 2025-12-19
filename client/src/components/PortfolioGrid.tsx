@@ -292,8 +292,7 @@ export default function PortfolioGrid() {
           ))}
         </motion.div>
 
-        <motion.div
-          layout
+        <div
           id="portfolio-grid"
           role="tabpanel"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
@@ -306,7 +305,7 @@ export default function PortfolioGrid() {
               onClick={() => handleProjectClick(project)}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
 
       <ProjectModal

@@ -356,4 +356,23 @@
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(128, 128, 128, 0.5);
   }
+
+  /* Respect user's animation preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Optimize will-change usage - only apply when needed */
+  @media (prefers-reduced-motion: no-preference) {
+    [class*="hover"]:hover {
+      will-change: transform;
+    }
+  }
 }

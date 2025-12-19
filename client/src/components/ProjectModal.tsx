@@ -76,10 +76,10 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
             style={{ transform: "translateZ(0)" }}
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.98, y: 10 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: 10 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+            exit={{ opacity: 0, scale: 0.95, y: 15 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
             className="fixed inset-4 md:inset-[10%] z-50 overflow-hidden"
             data-testid="modal-project"
             style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}

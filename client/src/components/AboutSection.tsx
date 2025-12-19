@@ -36,17 +36,14 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
         <span className="font-medium text-foreground group-hover:text-red-500 transition-colors">{name}</span>
         <span className="text-muted-foreground">{level}%</span>
       </div>
-      <motion.div 
-        className="h-2 rounded-full bg-white/20 dark:bg-white/10 overflow-hidden cursor-pointer relative group"
-        whileHover={{ height: 8, transition: { duration: 0.3, type: "spring", stiffness: 300, damping: 10 } }}
-      >
+      <div className="h-2 rounded-full bg-white/20 dark:bg-white/10 overflow-hidden cursor-pointer relative group hover:h-3 transition-all duration-300">
         <motion.div
           initial={{ width: 0 }}
           animate={isInView ? { width: `${level}%` } : { width: 0 }}
-          transition={{ duration: 1.2, delay: 0.2 + delay, ease: [0.22, 1, 0.36, 1] }}
-          className="h-full rounded-full bg-gradient-to-r from-red-500 to-orange-500 shadow-lg shadow-red-500/50 group-hover:shadow-red-500/80 transition-all duration-300"
+          transition={{ duration: 1, delay: 0.1 + delay, ease: [0.22, 1, 0.36, 1] }}
+          className="h-full rounded-full bg-gradient-to-r from-red-500 to-orange-500 shadow-lg shadow-red-500/50"
         />
-      </motion.div>
+      </div>
     </div>
   );
 }
