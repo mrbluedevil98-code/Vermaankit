@@ -170,13 +170,7 @@ const ProjectCard = memo(({ project, index, onClick }: { project: Project; index
   };
 
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: Math.min(index * 0.08, 0.2) }}
-    >
+    <div>
       <GlassCard
         className="group cursor-pointer overflow-hidden hover-elevate transition-transform duration-300"
         animate={false}
@@ -226,7 +220,7 @@ const ProjectCard = memo(({ project, index, onClick }: { project: Project; index
           </h3>
         </div>
       </GlassCard>
-    </motion.div>
+    </div>
   );
 });
 

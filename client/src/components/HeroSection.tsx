@@ -33,9 +33,9 @@ export default function HeroSection() {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 sm:pt-20 pb-12 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-red-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-red-500/5 to-orange-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-red-500/10 rounded-full blur-2xl" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-orange-500/10 rounded-full blur-2xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-red-500/5 to-orange-500/5 rounded-full blur-2xl" />
       </div>
 
       <div className="max-w-7xl mx-auto w-full relative">
@@ -46,11 +46,8 @@ export default function HeroSection() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-3xl blur-2xl opacity-40 animate-pulse" />
-            <motion.div
-              whileHover={{ scale: 1.05, y: -8 }}
-              transition={{ duration: 0.4, type: "spring", stiffness: 300, damping: 10 }}
-            >
+            <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-3xl blur-2xl opacity-20" />
+            <div>
               <GlassCard className="p-3" variant="strong" animate={false}>
                 <div className="relative">
                   <img
@@ -62,7 +59,7 @@ export default function HeroSection() {
                   <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/20" />
                 </div>
               </GlassCard>
-            </motion.div>
+            </div>
             
             <motion.div
               className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4"
@@ -72,7 +69,6 @@ export default function HeroSection() {
               <GlassCard className="px-3 py-2" variant="strong" animate={false}>
                 <div className="flex items-center gap-2">
                   <span className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
                   </span>
                   <span className="text-xs sm:text-sm font-semibold text-foreground">Available Now</span>
@@ -119,27 +115,18 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="flex-1 text-center lg:text-left"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="inline-flex items-center gap-2 mb-4 sm:mb-6"
-            >
+            <div className="inline-flex items-center gap-2 mb-4 sm:mb-6">
               <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/20">
                 <Sparkles className="w-4 h-4 text-red-500" />
                 <span className="text-sm font-medium text-foreground">YouTube Thumbnail Expert</span>
               </div>
-            </motion.div>
+            </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 text-foreground leading-[1.1]">
               <span className="block">Thumbnails that</span>
-              <motion.span 
-                className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-500 bg-clip-text text-transparent bg-[length:200%_auto]"
-                animate={{ backgroundPosition: ["0% center", "200% center"] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              >
+              <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-500 bg-clip-text text-transparent">
                 Get Clicks
-              </motion.span>
+              </span>
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mb-6 sm:mb-8 mx-auto lg:mx-0 leading-relaxed">
@@ -148,102 +135,58 @@ export default function HeroSection() {
             </p>
 
             <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
-              {stats.map((stat, index) => (
-                <motion.div
+              {stats.map((stat) => (
+                <div
                   key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 + index * 0.1 }}
                   className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10"
                 >
                   <stat.icon className={`w-4 h-4 ${stat.color}`} />
                   <span className="font-bold text-foreground">{stat.value}</span>
                   <span className="text-xs text-muted-foreground hidden sm:inline">{stat.label}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start w-full sm:w-auto">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 500, damping: 15 }}
-                className="w-full sm:w-auto"
-              >
+              <div className="w-full sm:w-auto">
                 <Button
                   size="lg"
                   onClick={scrollToWork}
-                  className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white px-8 rounded-xl shadow-xl shadow-red-500/25 hover:shadow-red-500/40 text-base font-semibold transition-all duration-300 relative overflow-hidden group"
+                  className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white px-8 rounded-xl shadow-xl shadow-red-500/25 hover:shadow-red-500/40 text-base font-semibold transition-all duration-300"
                   data-testid="button-view-work"
                 >
-                  <motion.div
-                    whileHover={{ rotate: -20, scale: 1.2 }}
-                    whileTap={{ scale: 0.8 }}
-                    transition={{ type: "spring", stiffness: 600, damping: 15 }}
-                    className="inline-block"
-                  >
-                    <Play className="w-4 h-4 mr-2 fill-current" />
-                  </motion.div>
-                  <motion.span
-                    whileHover={{ letterSpacing: "0.05em" }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    View My Work
-                  </motion.span>
+                  <Play className="w-4 h-4 mr-2 fill-current" />
+                  View My Work
                 </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 500, damping: 15 }}
-                className="w-full sm:w-auto"
-              >
+              </div>
+              <div className="w-full sm:w-auto">
                 <Button
                   variant="outline"
                   size="lg"
                   onClick={scrollToContact}
-                  className="w-full rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/50 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/10 text-base font-semibold transition-all duration-300 relative overflow-hidden group"
+                  className="w-full rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/50 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/10 text-base font-semibold transition-all duration-300"
                   data-testid="button-get-in-touch"
                 >
-                  <motion.div
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    transition={{ type: "spring", stiffness: 600, damping: 15, duration: 0.5 }}
-                    className="inline-block"
-                  >
-                    <Sparkles className="w-4 h-4 mr-2" />
-                  </motion.div>
-                  <motion.span
-                    whileHover={{ letterSpacing: "0.05em" }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    Get a Quote
-                  </motion.span>
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Get a Quote
                 </Button>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="flex justify-center mt-12 lg:mt-20"
-        >
-          <motion.button
+        <div className="flex justify-center mt-12 lg:mt-20">
+          <button
             onClick={scrollToWork}
             className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             data-testid="button-scroll-down"
           >
             <span className="text-sm font-medium group-hover:text-red-500 transition-colors">Scroll to explore</span>
             <div className="p-2 rounded-full bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10 group-hover:border-red-500/30 transition-colors">
               <ArrowDown className="w-4 h-4" />
             </div>
-          </motion.button>
-        </motion.div>
+          </button>
+        </div>
       </div>
     </section>
   );

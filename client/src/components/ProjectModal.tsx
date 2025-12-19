@@ -74,10 +74,10 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
             data-testid="modal-backdrop"
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 40 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 40 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], type: "spring", stiffness: 300, damping: 25 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ duration: 0.3 }}
             className="fixed inset-4 md:inset-[10%] z-50 overflow-hidden"
             data-testid="modal-project"
           >
