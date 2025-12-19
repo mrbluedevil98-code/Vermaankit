@@ -1,9 +1,11 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ExternalLink, Calendar, User, Palette, TrendingUp, Eye } from "lucide-react";
+import { X, ExternalLink, Calendar, User, Palette, TrendingUp, Eye, MessageCircle, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import type { Project } from "./PortfolioGrid";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import type { Project, Review } from "./PortfolioGrid";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -12,7 +14,41 @@ interface ProjectModalProps {
 }
 
 const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onClose }: ProjectModalProps) {
+  const [reviews, setReviews] = useState<Review[]>(project?.reviews || [
+    {
+      id: 1,
+      author: "Sarah Anderson",
+      rating: 5,
+      comment: "Amazing thumbnail design! Increased my CTR by 20%. Highly recommend!",
+      date: "2024-12-10"
+    },
+    {
+      id: 2,
+      author: "Mike Johnson",
+      rating: 5,
+      comment: "Professional quality work. Great attention to detail.",
+      date: "2024-12-05"
+    }
+  ]);
+  const [newReview, setNewReview] = useState({ author: "", rating: 5, comment: "" });
+
   if (!project) return null;
+
+  const handleAddReview = () => {
+    if (newReview.author.trim() && newReview.comment.trim()) {
+      setReviews([
+        {
+          id: reviews.length + 1,
+          author: newReview.author,
+          rating: newReview.rating,
+          comment: newReview.comment,
+          date: new Date().toISOString().split('T')[0]
+        },
+        ...reviews
+      ]);
+      setNewReview({ author: "", rating: 5, comment: "" });
+    }
+  };
 
   const handleOrderSimilar = () => {
     onClose();
@@ -136,7 +172,7 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-4">
+                  <div className="flex flex-wrap gap-4 mb-8">
                     <motion.div
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -164,6 +200,88 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                         View More Work
                       </Button>
                     </motion.div>
+                  </div>
+
+                  <div className="border-t border-white/20 dark:border-white/10 pt-8">
+                    <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
+                      <MessageCircle className="w-5 h-5 text-red-500" />
+                      Client Reviews
+                    </h3>
+
+                    <div className="mb-8 p-5 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10">
+                      <div className="space-y-4">
+                        <div>
+                          <label className="text-sm font-medium text-foreground block mb-2">Your Name</label>
+                          <Input
+                            placeholder="Enter your name"
+                            value={newReview.author}
+                            onChange={(e) => setNewReview({ ...newReview, author: e.target.value })}
+                            className="bg-white/70 dark:bg-white/10 border-white/30 dark:border-white/10 rounded-lg"
+                            data-testid="input-review-name"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium text-foreground block mb-2">Rating</label>
+                          <select
+                            value={newReview.rating}
+                            onChange={(e) => setNewReview({ ...newReview, rating: parseInt(e.target.value) })}
+                            className="w-full px-3 py-2 rounded-lg bg-white/70 dark:bg-white/10 border border-white/30 dark:border-white/10 text-foreground focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                            data-testid="select-review-rating"
+                          >
+                            {[5, 4, 3, 2, 1].map((num) => (
+                              <option key={num} value={num}>{num} Stars</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium text-foreground block mb-2">Review</label>
+                          <Textarea
+                            placeholder="Share your experience with this thumbnail design..."
+                            value={newReview.comment}
+                            onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
+                            className="bg-white/70 dark:bg-white/10 border-white/30 dark:border-white/10 rounded-lg min-h-[100px]"
+                            data-testid="textarea-review-comment"
+                          />
+                        </div>
+                        <Button
+                          onClick={handleAddReview}
+                          className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white"
+                          data-testid="button-submit-review"
+                        >
+                          Post Review
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      {reviews.map((review) => (
+                        <div
+                          key={review.id}
+                          className="p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10"
+                          data-testid={`review-item-${review.id}`}
+                        >
+                          <div className="flex items-start justify-between mb-2">
+                            <div className="flex-1">
+                              <p className="font-semibold text-foreground">{review.author}</p>
+                              <p className="text-xs text-muted-foreground">{review.date}</p>
+                            </div>
+                            <div className="flex gap-0.5">
+                              {[...Array(5)].map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className={`w-4 h-4 ${
+                                    i < review.rating
+                                      ? "fill-yellow-400 text-yellow-400"
+                                      : "text-gray-300 dark:text-gray-600"
+                                  }`}
+                                />
+                              ))}
+                            </div>
+                          </div>
+                          <p className="text-sm text-foreground/90">{review.comment}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

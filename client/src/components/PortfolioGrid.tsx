@@ -26,6 +26,15 @@ export interface Project {
   year: string;
   views?: string;
   ctr?: string;
+  reviews?: Review[];
+}
+
+export interface Review {
+  id: number;
+  author: string;
+  rating: number;
+  comment: string;
+  date: string;
 }
 
 const projects: Project[] = [
@@ -153,71 +162,73 @@ const projects: Project[] = [
 
 const categories = ["All", "Gaming", "Tech", "Entertainment", "Business", "Lifestyle"];
 
-const ProjectCard = memo(({ project, index, onClick }: { project: Project; index: number; onClick: () => void }) => (
-  <motion.div
-    layout
-    initial={{ opacity: 0, scale: 0.9 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay: Math.min(index * 0.1, 0.3) }}
-  >
-    <GlassCard
-      className="group cursor-pointer overflow-hidden hover-elevate"
-      animate={false}
+const ProjectCard = memo(({ project, index, onClick }: { project: Project; index: number; onClick: () => void }) => {
+  const handleClick = () => {
+    const card = document.querySelector(`[data-testid="card-project-${project.id}"]`);
+    card?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(onClick, 100);
+  };
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: Math.min(index * 0.08, 0.2) }}
     >
-      <div
-        className="relative aspect-video overflow-hidden"
-        onClick={onClick}
-        onKeyDown={(e) => e.key === 'Enter' && onClick()}
-        tabIndex={0}
-        role="button"
-        aria-label={`View ${project.title} project details`}
-        data-testid={`card-project-${project.id}`}
+      <GlassCard
+        className="group cursor-pointer overflow-hidden hover-elevate transition-transform duration-300"
+        animate={false}
       >
-        <motion.img
-          src={project.image}
-          alt={`${project.title} - ${project.category} thumbnail design`}
-          className="w-full h-full object-cover"
-          whileHover={{ scale: 1.15 }}
-          transition={{ duration: 0.6, type: "spring", stiffness: 300, damping: 20 }}
-          loading="lazy"
-          decoding="async"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileHover={{ scale: 1.1 }}
-            className="flex gap-3"
-          >
-            <span
-              className="p-3 rounded-full bg-white/20 backdrop-blur-lg border border-white/30 text-white"
-              aria-hidden="true"
-            >
-              <Eye className="w-5 h-5" />
-            </span>
-          </motion.div>
+        <div
+          className="relative aspect-video overflow-hidden"
+          onClick={handleClick}
+          onKeyDown={(e) => e.key === 'Enter' && handleClick()}
+          tabIndex={0}
+          role="button"
+          aria-label={`View ${project.title} project details`}
+          data-testid={`card-project-${project.id}`}
+        >
+          <img
+            src={project.image}
+            alt={`${project.title} - ${project.category} thumbnail design`}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="flex gap-3">
+              <span
+                className="p-3 rounded-full bg-white/20 backdrop-blur-lg border border-white/30 text-white transform group-hover:scale-100 transition-transform duration-300"
+                aria-hidden="true"
+              >
+                <Eye className="w-5 h-5" />
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="p-5">
-        <div className="flex items-center justify-between gap-2 mb-2">
-          <span className="text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">
-            {project.category}
-          </span>
-          {project.ctr && (
-            <span className="text-xs font-medium text-green-500 bg-green-500/10 px-2 py-0.5 rounded-full">
-              {project.ctr} CTR
+        <div className="p-5">
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <span className="text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">
+              {project.category}
             </span>
-          )}
+            {project.ctr && (
+              <span className="text-xs font-medium text-green-500 bg-green-500/10 px-2 py-0.5 rounded-full">
+                {project.ctr} CTR
+              </span>
+            )}
+          </div>
+          <h3 className="text-lg font-semibold text-foreground group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors">
+            {project.title}
+          </h3>
         </div>
-        <h3 className="text-lg font-semibold text-foreground group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors">
-          {project.title}
-        </h3>
-      </div>
-    </GlassCard>
-  </motion.div>
-));
+      </GlassCard>
+    </motion.div>
+  );
+});
 
 ProjectCard.displayName = "ProjectCard";
 
@@ -259,36 +270,29 @@ export default function PortfolioGrid() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
           className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 px-2"
           role="tablist"
           aria-label="Filter thumbnails by category"
         >
           {categories.map((category) => (
-            <motion.button
+            <button
               key={category}
               onClick={() => setSelectedCategory(category)}
               role="tab"
               aria-selected={selectedCategory === category}
               aria-controls="portfolio-grid"
-              className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500/50 relative overflow-hidden group ${
+              className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 relative overflow-hidden group ${
                 selectedCategory === category
                   ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25"
-                  : "bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/30 dark:border-white/10 text-foreground/80 hover:text-foreground hover:bg-white/70 dark:hover:bg-white/10"
+                  : "bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/30 dark:border-white/10 text-foreground/80 hover:text-foreground hover:bg-white/70 dark:hover:bg-white/10 hover:scale-105"
               }`}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 500, damping: 15 }}
               data-testid={`button-filter-${category.toLowerCase()}`}
             >
-              <motion.span
-                whileHover={{ letterSpacing: "0.05em" }}
-                transition={{ duration: 0.3 }}
-                className="relative z-10"
-              >
+              <span className="relative z-10">
                 {category}
-              </motion.span>
-            </motion.button>
+              </span>
+            </button>
           ))}
         </motion.div>
 
