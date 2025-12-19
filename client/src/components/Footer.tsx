@@ -9,7 +9,7 @@ const socialLinks = [
   { icon: SiInstagram, href: "https://instagram.com/ankitrikrevo", label: "Instagram", color: "hover:text-pink-500" },
   { icon: SiFiverr, href: "https://fiverr.com/ankitrikrevo", label: "Fiverr", color: "hover:text-green-500" },
   { icon: SiLinkedin, href: "https://www.linkedin.com/in/ankitrikrevoo/", label: "LinkedIn", color: "hover:text-blue-500" },
-  { icon: SiDiscord, href: "https://discord.com/users/ankitrikrevo", label: "Discord", color: "hover:text-indigo-500" },
+  { icon: SiDiscord, href: "https://discord.gg/zvWQJkKHvJ", label: "Discord", color: "hover:text-indigo-500" },
 ];
 
 const footerLinks = [
