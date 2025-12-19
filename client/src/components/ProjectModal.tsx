@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink, Calendar, User, Palette, TrendingUp, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,8 +11,19 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
-export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onClose }: ProjectModalProps) {
   if (!project) return null;
+
+  const handleOrderSimilar = () => {
+    onClose();
+    setTimeout(() => {
+      document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+    }, 300);
+  };
+
+  const handleViewMore = () => {
+    onClose();
+  };
 
   return (
     <AnimatePresence>
@@ -26,10 +38,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             data-testid="modal-backdrop"
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.9, y: 40 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, scale: 0.9, y: 40 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], type: "spring", stiffness: 300, damping: 25 }}
             className="fixed inset-4 md:inset-[10%] z-50 overflow-hidden"
             data-testid="modal-project"
           >
@@ -131,7 +143,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                       transition={{ type: "spring", stiffness: 500, damping: 15 }}
                     >
                       <Button
-                        onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+                        onClick={handleOrderSimilar}
                         className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl shadow-lg shadow-red-500/25 hover:shadow-red-500/40 transition-all duration-300"
                         data-testid="button-order-similar"
                       >
@@ -144,6 +156,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                       transition={{ type: "spring", stiffness: 500, damping: 15 }}
                     >
                       <Button
+                        onClick={handleViewMore}
                         variant="outline"
                         className="rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/30 dark:border-white/10 transition-all duration-300"
                         data-testid="button-view-more"
@@ -160,4 +173,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
       )}
     </AnimatePresence>
   );
-}
+});
+
+ProjectModal.displayName = "ProjectModal";
+
+export default ProjectModal;
