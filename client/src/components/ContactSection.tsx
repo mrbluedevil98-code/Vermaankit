@@ -30,6 +30,7 @@ const pricingTiers = [
   { value: "standard", label: "Standard - 3 Thumbnails ($60)" },
   { value: "premium", label: "Premium - 5 Thumbnails ($90)" },
   { value: "monthly", label: "Monthly Package (Contact for price)" },
+  { value: "none", label: "None of these" },
 ];
 
 const platforms = [
