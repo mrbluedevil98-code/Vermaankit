@@ -1,8 +1,58 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactMessageSchema } from "@shared/schema";
+import { insertContactMessageSchema, type InsertContactMessage } from "@shared/schema";
 import { fromError } from "zod-validation-error";
+import nodemailer from "nodemailer";
+
+// Initialize email transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'ankitrikrevo@gmail.com',
+    pass: process.env.GMAIL_APP_PASSWORD,
+  },
+});
+
+async function sendContactEmailNotification(data: InsertContactMessage) {
+  try {
+    const emailBody = `
+New Contact Form Submission
+
+Name: ${data.name}
+Email: ${data.email}
+Package Type: ${data.packageType || 'Not specified'}
+YouTube Channel: ${data.channelUrl || 'Not provided'}
+
+Message:
+${data.message}
+
+---
+This is an automated notification from your portfolio website.
+`;
+
+    await transporter.sendMail({
+      from: 'ankitrikrevo@gmail.com',
+      to: 'ankitrikrevo@gmail.com',
+      subject: `New Contact Form Submission from ${data.name}`,
+      text: emailBody,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${data.name}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>Package Type:</strong> ${data.packageType || 'Not specified'}</p>
+        <p><strong>YouTube Channel:</strong> ${data.channelUrl || 'Not provided'}</p>
+        <h3>Message:</h3>
+        <p>${data.message.replace(/\n/g, '<br>')}</p>
+      `,
+    });
+    
+    console.log('Email sent successfully to ankitrikrevo@gmail.com');
+  } catch (error) {
+    console.error('Failed to send email notification:', error);
+    // Don't throw - let the contact form still succeed even if email fails
+  }
+}
 
 export async function registerRoutes(
   httpServer: Server,
@@ -22,6 +72,11 @@ export async function registerRoutes(
       }
 
       const message = await storage.createContactMessage(validationResult.data);
+      
+      // Send email notification asynchronously (don't wait for it)
+      sendContactEmailNotification(validationResult.data).catch(err => 
+        console.error('Email send error:', err)
+      );
       
       return res.status(201).json({ 
         success: true, 
