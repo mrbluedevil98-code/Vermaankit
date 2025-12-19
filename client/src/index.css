@@ -285,4 +285,32 @@
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
     inset: -1px;
   }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* GPU acceleration for smooth animations */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Optimize backdrop-filter performance */
+  [class*="backdrop-blur"] {
+    will-change: backdrop-filter;
+  }
+
+  /* Smooth transitions for all elements */
+  button, a, [role="button"] {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Optimize hover states */
+  @media (hover: hover) {
+    button:hover, a:hover, [role="button"]:hover {
+      will-change: transform;
+    }
+  }
 }

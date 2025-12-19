@@ -48,16 +48,18 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-200 will-change-[width] ${
           isScrolled ? "w-[95%] max-w-4xl" : "w-[90%] max-w-5xl"
         }`}
+        style={{ backfaceVisibility: "hidden" }}
       >
         <div
-          className={`px-4 sm:px-6 py-3 rounded-2xl backdrop-blur-2xl transition-all duration-300 ${
+          className={`px-4 sm:px-6 py-3 rounded-2xl backdrop-blur-2xl transition-all duration-200 will-change-colors ${
             isScrolled
               ? "bg-gradient-to-br from-white/85 to-white/75 dark:from-slate-900/85 dark:to-slate-900/75 shadow-lg shadow-black/5 dark:shadow-black/20 border border-white/60 dark:border-white/15"
               : "bg-gradient-to-br from-white/65 to-white/55 dark:from-slate-900/65 dark:to-slate-900/55 border border-white/40 dark:border-white/10"
           }`}
+          style={{ backfaceVisibility: "hidden" }}
         >
           <div className="flex items-center justify-between gap-2 sm:gap-4">
             <a

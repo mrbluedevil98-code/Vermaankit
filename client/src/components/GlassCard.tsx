@@ -24,13 +24,14 @@ export default function GlassCard({
 
   const content = (
     <motion.div
-      whileHover={{ y: -6, transition: { duration: 0.3, type: "spring", stiffness: 400, damping: 10 } }}
-      whileTap={{ y: -2 }}
+      whileHover={{ y: -4, transition: { duration: 0.2, ease: "easeOut" } }}
+      whileTap={{ y: -1, transition: { duration: 0.15 } }}
       className={cn(
-        "rounded-2xl shadow-xl transition-all duration-300",
+        "rounded-2xl shadow-xl transition-colors duration-300 will-change-transform",
         variants[variant],
         className
       )}
+      style={{ backfaceVisibility: "hidden" }}
     >
       {children}
     </motion.div>
@@ -40,10 +41,11 @@ export default function GlassCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      initial={{ opacity: 0, y: 20, scale: 0.98 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, delay, ease: "easeOut" }}
+      style={{ backfaceVisibility: "hidden" }}
     >
       {content}
     </motion.div>
