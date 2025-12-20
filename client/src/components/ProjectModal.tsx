@@ -69,51 +69,58 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed inset-0 bg-black/40 backdrop-blur-md z-40"
             onClick={onClose}
             data-testid="modal-backdrop"
             style={{ transform: "translateZ(0)" }}
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 15 }}
+            initial={{ opacity: 0, scale: 0.92, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 15 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
-            className="fixed inset-4 md:inset-[10%] z-50 overflow-hidden"
+            exit={{ opacity: 0, scale: 0.92, y: 20 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6"
             data-testid="modal-project"
             style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
           >
-            <div className="h-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl rounded-3xl border border-white/30 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden">
-              <div className="relative h-[40%] md:h-[50%] overflow-hidden bg-gradient-to-b from-white/40 to-white/20 dark:from-white/5 dark:to-white/2">
+            <div className="w-full h-full max-w-4xl max-h-[95vh] bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden">
+              {/* Image Section - Preserves Aspect Ratio */}
+              <div className="relative flex-1 min-h-0 overflow-hidden bg-gradient-to-br from-white/30 to-white/10 dark:from-white/5 dark:to-transparent flex items-center justify-center">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain p-4 sm:p-6"
+                  loading="eager"
+                  decoding="async"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/10 dark:from-black/20 to-transparent" />
+                
+                {/* Close Button */}
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={onClose}
-                  className="absolute top-4 right-4 bg-white/20 backdrop-blur-lg border border-white/30 text-white rounded-full"
+                  className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/20 hover:bg-white/30 dark:bg-white/10 dark:hover:bg-white/20 backdrop-blur-lg border border-white/30 dark:border-white/20 text-foreground dark:text-white rounded-full transition-colors"
                   data-testid="button-close-modal"
                 >
                   <X className="w-5 h-5" />
                 </Button>
-                <div className="absolute bottom-6 left-6 right-6">
-                  <Badge className="mb-3 bg-red-500/80 backdrop-blur text-white border-none">
+
+                {/* Category & Title Overlay - Clean & Subtle */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent pt-12 pb-4 px-4 sm:px-6">
+                  <Badge className="mb-2 sm:mb-3 bg-red-500 text-white border-none">
                     {project.category}
                   </Badge>
-                  <h2 className="text-2xl md:text-4xl font-bold text-white">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
                     {project.title}
                   </h2>
                 </div>
               </div>
 
-              <div className="flex-1 overflow-auto p-6 md:p-8">
+              {/* Content Section */}
+              <div className="flex-1 overflow-auto p-4 sm:p-6 md:p-8">
                 <div className="max-w-3xl">
-                  <p className="text-lg text-muted-foreground mb-8">
+                  <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
                     {project.description}
                   </p>
 
