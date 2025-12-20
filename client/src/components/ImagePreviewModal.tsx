@@ -1,7 +1,5 @@
 import { memo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 interface ImagePreviewModalProps {
   imageUrl: string | null;
@@ -79,18 +77,6 @@ const ImagePreviewModal = memo(function ImagePreviewModalComponent({
                 onClick={(e) => e.stopPropagation()}
                 data-testid="image-preview"
               />
-
-              {/* Mobile Only Close Button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={onClose}
-                className="md:hidden absolute top-4 right-4 bg-black/40 hover:bg-black/60 backdrop-blur-lg border border-white/30 text-white rounded-full transition-colors"
-                data-testid="button-close-image-preview"
-                aria-label="Close image preview"
-              >
-                <X className="w-5 h-5" />
-              </Button>
             </div>
           </motion.div>
         </>
