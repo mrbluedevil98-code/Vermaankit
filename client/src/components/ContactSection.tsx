@@ -111,6 +111,7 @@ export default function ContactSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/20 mb-6"
           >
             <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
@@ -132,13 +133,17 @@ export default function ContactSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
           className="grid grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16 max-w-3xl mx-auto"
         >
           {stats.map((stat, index) => (
-            <div
+            <motion.div
               key={stat.label}
               className="text-center"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.4, delay: index * 0.08, ease: [0.23, 1, 0.32, 1] }}
             >
               <GlassCard className="p-4 sm:p-6" animate={false}>
                 <div className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent mb-1">
@@ -146,19 +151,24 @@ export default function ContactSection() {
                 </div>
                 <div className="text-xs sm:text-sm text-muted-foreground">{stat.label}</div>
               </GlassCard>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-6 sm:gap-8">
           <div className="lg:col-span-2 space-y-4 sm:space-y-6">
-            <GlassCard className="p-6 hover-elevate" delay={0.1} data-testid="card-contact-info">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-xl bg-gradient-to-r from-red-500 to-orange-500">
-                  <Mail className="w-5 h-5 text-white" aria-hidden="true" />
+            <motion.div whileHover={{ y: -4 }} transition={{ type: "spring", damping: 20, stiffness: 300 }}>
+              <GlassCard className="p-6" delay={0.1} data-testid="card-contact-info">
+                <div className="flex items-center gap-3 mb-6">
+                  <motion.div 
+                    className="p-2 rounded-xl bg-gradient-to-r from-red-500 to-orange-500"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", damping: 18, stiffness: 300 }}
+                  >
+                    <Mail className="w-5 h-5 text-white" aria-hidden="true" />
+                  </motion.div>
+                  <h3 className="text-xl font-semibold text-foreground">Get In Touch</h3>
                 </div>
-                <h3 className="text-xl font-semibold text-foreground">Get In Touch</h3>
-              </div>
               <div className="space-y-4">
                 <a 
                   href="mailto:ankitrikrevo@gmail.com"
@@ -196,6 +206,7 @@ export default function ContactSection() {
                 </div>
               </div>
             </GlassCard>
+            </motion.div>
 
             <GlassCard className="p-6 hover-elevate" delay={0.2} data-testid="card-why-work">
               <h3 className="text-lg font-semibold mb-4 text-foreground">Why Work With Me?</h3>

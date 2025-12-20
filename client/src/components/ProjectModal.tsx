@@ -177,9 +177,9 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
 
                   <div className="flex flex-wrap gap-4 mb-8">
                     <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                      whileHover={{ scale: 1.08, y: -2 }}
+                      whileTap={{ scale: 0.96 }}
+                      transition={{ type: "spring", damping: 18, stiffness: 300 }}
                     >
                       <Button
                         onClick={handleOrderSimilar}
@@ -190,9 +190,9 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                       </Button>
                     </motion.div>
                     <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                      whileHover={{ scale: 1.08, y: -2 }}
+                      whileTap={{ scale: 0.96 }}
+                      transition={{ type: "spring", damping: 18, stiffness: 300 }}
                     >
                       <Button
                         onClick={handleViewMore}
@@ -231,9 +231,9 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                                 key={star}
                                 type="button"
                                 onClick={() => setNewReview({ ...newReview, rating: star })}
-                                whileHover={{ scale: 1.15 }}
-                                whileTap={{ scale: 0.95 }}
-                                transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                                whileHover={{ scale: 1.25, rotate: 10 }}
+                                whileTap={{ scale: 0.9 }}
+                                transition={{ type: "spring", damping: 18, stiffness: 300 }}
                                 className="p-1 transition-all"
                                 data-testid={`button-star-rating-${star}`}
                               >

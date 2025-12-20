@@ -71,13 +71,16 @@ export default function Navbar() {
           style={{ backfaceVisibility: "hidden" }}
         >
           <div className="flex items-center justify-between gap-2 sm:gap-4">
-            <a
+            <motion.a
               href="#home"
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection("#home");
               }}
-              className="flex items-center gap-2 sm:gap-3 group hover:scale-105 transition-transform duration-200"
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", damping: 20, stiffness: 300 }}
+              className="flex items-center gap-2 sm:gap-3 group"
               data-testid="link-logo"
             >
               <div className="relative">
@@ -94,17 +97,20 @@ export default function Navbar() {
                 </span>
                 <span className="text-[10px] text-muted-foreground hidden sm:block leading-none opacity-75 group-hover:opacity-100 transition-opacity duration-300">Thumbnail Designer</span>
               </div>
-            </a>
+            </motion.a>
 
             <div className="hidden md:flex items-center gap-0.5 bg-gradient-to-r from-white/20 to-white/10 dark:from-white/5 dark:to-white/3 rounded-xl p-1 backdrop-blur-md border border-white/20 dark:border-white/10">
               {navItems.map((item, index) => (
-                <button
+                <motion.button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 relative overflow-hidden group ${
+                  whileHover={{ backgroundColor: activeSection === item.href.slice(1) ? undefined : "rgba(255,255,255,0.15)" }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", damping: 20, stiffness: 300 }}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 relative overflow-hidden group ${
                     activeSection === item.href.slice(1)
                       ? "bg-white/40 dark:bg-white/15 text-foreground shadow-md shadow-red-500/10 dark:shadow-red-600/5 border border-white/40 dark:border-white/20"
-                      : "text-foreground/70 hover:text-foreground hover:bg-white/20 dark:hover:bg-white/5"
+                      : "text-foreground/70 hover:text-foreground dark:hover:bg-white/5"
                   }`}
                   data-testid={`link-nav-${item.label.toLowerCase()}`}
                 >
@@ -112,7 +118,7 @@ export default function Navbar() {
                     <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-red-500 to-orange-500 rounded-full" />
                   )}
                   <span className="relative z-10 block">{item.label}</span>
-                </button>
+                </motion.button>
               ))}
             </div>
 

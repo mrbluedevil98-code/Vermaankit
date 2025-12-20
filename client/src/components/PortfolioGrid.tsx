@@ -187,21 +187,27 @@ const ProjectCard = memo(({ project, index, onClick }: { project: Project; index
           <img
             src={project.image}
             alt={`${project.title} - ${project.category} thumbnail design`}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 will-change-transform"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 cubic-ease will-change-transform"
             loading="lazy"
             decoding="async"
+            style={{ transformOrigin: 'center' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 cubic-ease" />
           
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            <div className="flex gap-3">
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400 cubic-ease">
+            <motion.div
+              className="flex gap-3"
+              initial={{ scale: 0.8 }}
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", damping: 18, stiffness: 300 }}
+            >
               <span
-                className="p-3 rounded-full bg-white/20 border border-white/30 text-white"
+                className="p-3 rounded-full bg-white/25 backdrop-blur-sm border border-white/40 text-white hover:bg-white/35 transition-colors duration-300"
                 aria-hidden="true"
               >
                 <Eye className="w-5 h-5" />
               </span>
-            </div>
+            </motion.div>
           </div>
         </div>
         <div className="p-5">
@@ -215,7 +221,7 @@ const ProjectCard = memo(({ project, index, onClick }: { project: Project; index
               </span>
             )}
           </div>
-          <h3 className="text-lg font-semibold text-foreground group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors">
+          <h3 className="text-lg font-semibold text-foreground group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-300">
             {project.title}
           </h3>
         </div>

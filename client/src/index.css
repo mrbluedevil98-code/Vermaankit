@@ -325,11 +325,22 @@
 
   /* Smooth transitions with spring easing for premium feel */
   button, a, [role="button"] {
-    transition: background-color 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-                border-color 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-                box-shadow 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-                color 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-                opacity 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: background-color 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                border-color 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                color 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  /* Cubic easing for smooth transitions */
+  .cubic-ease {
+    transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  }
+  
+  /* Ultra-smooth hover and transition effects */
+  img {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   /* Optimize hover states only on devices that support it */
