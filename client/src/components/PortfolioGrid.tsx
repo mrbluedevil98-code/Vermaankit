@@ -205,7 +205,14 @@ const ProjectCard = memo(({ project, index, onClick, onImageClick }: { project: 
             </motion.div>
           </div>
         </div>
-        <div className="p-5">
+        <div 
+          className="p-5 cursor-pointer"
+          onClick={onClick}
+          onKeyDown={(e) => e.key === 'Enter' && onClick()}
+          tabIndex={0}
+          role="button"
+          aria-label={`View ${project.title} details`}
+        >
           <div className="flex items-center justify-between gap-2 mb-2">
             <span className="text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">
               {project.category}
