@@ -110,7 +110,7 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-contain p-4 sm:p-6"
+                  className="w-full h-full object-contain p-3 sm:p-4 md:p-5 rounded-xl"
                   loading="eager"
                   decoding="async"
                 />
