@@ -104,9 +104,9 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
             data-testid="modal-project"
             style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
           >
-            <div className="w-full h-full max-w-4xl max-h-[95vh] bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden">
+            <div className="w-full h-full md:h-auto md:max-w-2xl md:max-h-[90vh] max-w-4xl max-h-[95vh] bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden">
               {/* Image Section - Preserves Aspect Ratio */}
-              <div className="relative flex-1 min-h-0 overflow-hidden bg-gradient-to-br from-white/30 to-white/10 dark:from-white/5 dark:to-transparent flex items-center justify-center">
+              <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden bg-gradient-to-br from-white/30 to-white/10 dark:from-white/5 dark:to-transparent flex items-center justify-center">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -139,8 +139,8 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
               </div>
 
               {/* Content Section */}
-              <div className="flex-1 overflow-auto p-4 sm:p-6 md:p-8">
-                <div className="max-w-3xl">
+              <div className="flex-shrink-0 md:flex-1 overflow-auto md:max-h-[calc(90vh-24rem)] p-4 sm:p-6 md:p-6">
+                <div className="max-w-2xl md:max-w-none">
                   <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
                     {project.description}
                   </p>
