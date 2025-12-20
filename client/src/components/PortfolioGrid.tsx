@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Eye, Play } from "lucide-react";
 import GlassCard from "./GlassCard";
 import ProjectModal from "./ProjectModal";
+import ImagePreviewModal from "./ImagePreviewModal";
 
 import thumbnail1 from "@assets/16_LIVE_1766006303121.jpg";
 import thumbnail2 from "@assets/champion_2_1766006303121.jpg";
@@ -162,13 +163,7 @@ const projects: Project[] = [
 
 const categories = ["All", "Gaming", "Tech", "Entertainment", "Business", "Lifestyle"];
 
-const ProjectCard = memo(({ project, index, onClick }: { project: Project; index: number; onClick: () => void }) => {
-  const handleClick = () => {
-    const card = document.querySelector(`[data-testid="card-project-${project.id}"]`);
-    card?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setTimeout(onClick, 100);
-  };
-
+const ProjectCard = memo(({ project, index, onClick, onImageClick }: { project: Project; index: number; onClick: () => void; onImageClick: () => void }) => {
   return (
     <div>
       <GlassCard
@@ -177,11 +172,11 @@ const ProjectCard = memo(({ project, index, onClick }: { project: Project; index
       >
         <div
           className="relative aspect-video overflow-hidden"
-          onClick={handleClick}
-          onKeyDown={(e) => e.key === 'Enter' && handleClick()}
+          onClick={onImageClick}
+          onKeyDown={(e) => e.key === 'Enter' && onImageClick()}
           tabIndex={0}
           role="button"
-          aria-label={`View ${project.title} project details`}
+          aria-label={`View ${project.title} preview`}
           data-testid={`card-project-${project.id}`}
         >
           <img
@@ -235,6 +230,7 @@ ProjectCard.displayName = "ProjectCard";
 export default function PortfolioGrid() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [previewImage, setPreviewImage] = useState<{ url: string; title: string } | null>(null);
 
   const filteredProjects = selectedCategory === "All"
     ? projects
@@ -244,8 +240,16 @@ export default function PortfolioGrid() {
     setSelectedProject(project);
   }, []);
 
+  const handleImagePreviewClick = useCallback((project: Project) => {
+    setPreviewImage({ url: project.image, title: project.title });
+  }, []);
+
   const handleCloseModal = useCallback(() => {
     setSelectedProject(null);
+  }, []);
+
+  const handleClosePreview = useCallback(() => {
+    setPreviewImage(null);
   }, []);
 
   return (
@@ -309,10 +313,18 @@ export default function PortfolioGrid() {
               project={project}
               index={index}
               onClick={() => handleProjectClick(project)}
+              onImageClick={() => handleImagePreviewClick(project)}
             />
           ))}
         </div>
       </div>
+
+      <ImagePreviewModal
+        imageUrl={previewImage?.url || null}
+        title={previewImage?.title || ""}
+        isOpen={!!previewImage}
+        onClose={handleClosePreview}
+      />
 
       <ProjectModal
         project={selectedProject}
