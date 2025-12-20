@@ -85,13 +85,13 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
             style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
           >
             <div className="h-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl rounded-3xl border border-white/30 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden">
-              <div className="relative h-[40%] md:h-[50%] overflow-hidden bg-black">
+              <div className="relative h-[40%] md:h-[50%] overflow-hidden bg-gradient-to-b from-white/40 to-white/20 dark:from-white/5 dark:to-white/2">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white/10 dark:from-black/20 to-transparent" />
                 <Button
                   variant="ghost"
                   size="icon"
