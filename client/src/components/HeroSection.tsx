@@ -6,11 +6,12 @@ import profileImage from "@assets/LOGO_1766171581846.png";
 
 const floatingVariants = {
   animate: {
-    y: [0, -10, 0],
+    y: [0, -8, 0],
     transition: {
-      duration: 3,
+      duration: 4,
       repeat: Infinity,
       ease: "easeInOut",
+      repeatType: "loop" as const,
     },
   },
 };
