@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink, Calendar, User, Palette, TrendingUp, Eye, MessageCircle, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -31,6 +31,26 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
     }
   ]);
   const [newReview, setNewReview] = useState({ author: "", rating: 5, comment: "" });
+
+  // Handle escape key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("keydown", handleEscape);
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "";
+    };
+  }, [isOpen, onClose]);
 
   if (!project) return null;
 
@@ -95,13 +115,14 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                   decoding="async"
                 />
                 
-                {/* Close Button */}
+                {/* Close Button - Mobile Only */}
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={onClose}
-                  className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/20 hover:bg-white/30 dark:bg-white/10 dark:hover:bg-white/20 backdrop-blur-lg border border-white/30 dark:border-white/20 text-foreground dark:text-white rounded-full transition-colors"
+                  className="block md:hidden absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/20 hover:bg-white/30 dark:bg-white/10 dark:hover:bg-white/20 backdrop-blur-lg border border-white/30 dark:border-white/20 text-foreground dark:text-white rounded-full transition-colors"
                   data-testid="button-close-modal"
+                  aria-label="Close modal"
                 >
                   <X className="w-5 h-5" />
                 </Button>
