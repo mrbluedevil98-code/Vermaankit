@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import { Youtube, TrendingUp, Users, Zap, MousePointer, Image, Clock, Award } from "lucide-react";
 import GlassCard from "./GlassCard";
 
@@ -26,7 +26,7 @@ const services = [
   { icon: Zap, title: "A/B Testing Ready", desc: "Multiple versions to test what works best" },
 ];
 
-function SkillBar({ name, level, delay }: { name: string; level: number; delay: number }) {
+const SkillBar = memo(function SkillBar({ name, level, delay }: { name: string; level: number; delay: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
@@ -36,7 +36,7 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
         <span className="font-medium text-foreground group-hover:text-red-500 transition-colors">{name}</span>
         <span className="text-muted-foreground">{level}%</span>
       </div>
-      <div className="h-2 rounded-full bg-white/20 dark:bg-white/10 overflow-hidden cursor-pointer relative group hover:h-3 transition-all duration-300">
+      <div className="h-2 rounded-full bg-white/20 dark:bg-white/10 overflow-hidden cursor-pointer relative">
         <motion.div
           initial={{ width: 0 }}
           animate={isInView ? { width: `${level}%` } : { width: 0 }}
@@ -46,7 +46,7 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
       </div>
     </div>
   );
-}
+});
 
 export default function AboutSection() {
   return (

@@ -87,7 +87,7 @@ export default function HeroSection() {
               <GlassCard className="px-3 py-2" variant="strong" animate={false}>
                 <div className="flex items-center gap-2">
                   <div className="flex -space-x-1">
-                    {[...Array(5)].map((_, i) => (
+                    {[0, 1, 2, 3, 4].map((i) => (
                       <Star key={i} className="w-3 h-3 text-yellow-500 fill-yellow-500" />
                     ))}
                   </div>

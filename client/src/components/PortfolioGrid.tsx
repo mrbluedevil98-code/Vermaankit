@@ -1,9 +1,10 @@
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, memo, Suspense, lazy } from "react";
 import { motion } from "framer-motion";
-import { Eye, Play } from "lucide-react";
+import { Eye } from "lucide-react";
 import GlassCard from "./GlassCard";
-import ProjectModal from "./ProjectModal";
-import ImagePreviewModal from "./ImagePreviewModal";
+
+const ProjectModal = lazy(() => import("./ProjectModal"));
+const ImagePreviewModal = lazy(() => import("./ImagePreviewModal"));
 
 import thumbnail1 from "@assets/16_LIVE_1766006303121.jpg";
 import thumbnail2 from "@assets/champion_2_1766006303121.jpg";
@@ -163,7 +164,7 @@ const projects: Project[] = [
 
 const categories = ["All", "Gaming", "Tech", "Entertainment", "Business", "Lifestyle"];
 
-const ProjectCard = memo(({ project, index, onClick, onImageClick }: { project: Project; index: number; onClick: () => void; onImageClick: () => void }) => {
+const ProjectCard = memo(({ project, onClick, onImageClick }: { project: Project; index: number; onClick: () => void; onImageClick: () => void }) => {
   return (
     <div>
       <GlassCard
@@ -320,18 +321,20 @@ export default function PortfolioGrid() {
         </div>
       </div>
 
-      <ImagePreviewModal
-        imageUrl={previewImage?.url || null}
-        title={previewImage?.title || ""}
-        isOpen={!!previewImage}
-        onClose={handleClosePreview}
-      />
+      <Suspense fallback={null}>
+        <ImagePreviewModal
+          imageUrl={previewImage?.url || null}
+          title={previewImage?.title || ""}
+          isOpen={!!previewImage}
+          onClose={handleClosePreview}
+        />
 
-      <ProjectModal
-        project={selectedProject}
-        isOpen={!!selectedProject}
-        onClose={handleCloseModal}
-      />
+        <ProjectModal
+          project={selectedProject}
+          isOpen={!!selectedProject}
+          onClose={handleCloseModal}
+        />
+      </Suspense>
     </section>
   );
 }

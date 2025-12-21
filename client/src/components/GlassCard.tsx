@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { memo } from "react";
 import { cn } from "@/lib/utils";
 
 interface GlassCardProps {
@@ -9,7 +10,7 @@ interface GlassCardProps {
   delay?: number;
 }
 
-export default function GlassCard({
+const GlassCard = memo(function GlassCard({
   children,
   className,
   variant = "default",
@@ -48,4 +49,6 @@ export default function GlassCard({
       {content}
     </motion.div>
   );
-}
+});
+
+export default GlassCard;

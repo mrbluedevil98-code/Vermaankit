@@ -19,11 +19,12 @@ export default function Navbar() {
 
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout;
+    let ticking = false;
     
     const handleScroll = () => {
-      clearTimeout(scrollTimeout);
       setIsScrolled(window.scrollY > 50);
       
+      clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         const sections = navItems.map(item => item.href.slice(1));
         for (const section of sections.reverse()) {
@@ -36,12 +37,20 @@ export default function Navbar() {
             }
           }
         }
-      }, 50);
+      }, 100);
     };
     
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    const rafHandler = () => {
+      if (!ticking) {
+        handleScroll();
+        ticking = true;
+        setTimeout(() => { ticking = false; }, 200);
+      }
+    };
+    
+    window.addEventListener("scroll", rafHandler, { passive: true });
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", rafHandler);
       clearTimeout(scrollTimeout);
     };
   }, []);
