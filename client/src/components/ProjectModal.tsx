@@ -287,7 +287,7 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                                 />
                               </motion.button>
                             ))}
-                            <span className="ml-2 text-sm font-medium text-foreground self-center">
+                            <span className="hidden md:inline ml-2 text-sm font-medium text-foreground self-center">
                               {newReview.rating} {newReview.rating === 1 ? 'Star' : 'Stars'}
                             </span>
                           </div>
