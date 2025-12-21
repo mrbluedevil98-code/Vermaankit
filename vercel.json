@@ -2,17 +2,15 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "env": {
-    "NODE_ENV": "production"
+  "functions": {
+    "api/index.ts": {
+      "runtime": "nodejs20.x"
+    }
   },
   "routes": [
     {
-      "src": "^/api/.*",
-      "dest": "/index.cjs"
-    },
-    {
-      "src": "^/.*",
-      "dest": "/index.cjs"
+      "src": "/(.*)",
+      "dest": "/api?url=$1"
     }
   ]
 }
