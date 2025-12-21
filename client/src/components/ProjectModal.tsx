@@ -14,22 +14,7 @@ interface ProjectModalProps {
 }
 
 const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onClose }: ProjectModalProps) {
-  const [reviews, setReviews] = useState<Review[]>(project?.reviews || [
-    {
-      id: 1,
-      author: "Sarah Anderson",
-      rating: 5,
-      comment: "Amazing thumbnail design! Increased my CTR by 20%. Highly recommend!",
-      date: "2024-12-10"
-    },
-    {
-      id: 2,
-      author: "Mike Johnson",
-      rating: 5,
-      comment: "Professional quality work. Great attention to detail.",
-      date: "2024-12-05"
-    }
-  ]);
+  const [reviews, setReviews] = useState<Review[]>(project?.reviews || []);
   const [newReview, setNewReview] = useState({ author: "", rating: 5, comment: "" });
 
   // Handle escape key to close modal
