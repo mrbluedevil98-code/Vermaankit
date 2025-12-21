@@ -11,6 +11,7 @@ import PortfolioGrid from "@/components/PortfolioGrid";
 import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import PageReloadIndicator from "@/components/PageReloadIndicator";
 
 function Portfolio() {
   return (
@@ -49,6 +50,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <TooltipProvider>
+          <PageReloadIndicator />
           <div className="min-h-screen">
             <Router />
           </div>
