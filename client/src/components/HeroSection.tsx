@@ -160,7 +160,7 @@ export default function HeroSection() {
                 <Button
                   size="lg"
                   onClick={scrollToWork}
-                  className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white px-8 rounded-xl shadow-xl shadow-red-500/25 hover:shadow-red-500/40 text-base font-semibold"
+                  className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white px-8 rounded-xl shadow-xl shadow-red-500/25 text-base font-semibold"
                   data-testid="button-view-work"
                 >
                   <Play className="w-4 h-4 mr-2 fill-current" />

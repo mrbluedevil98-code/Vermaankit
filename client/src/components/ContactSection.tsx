@@ -393,7 +393,7 @@ export default function ContactSection() {
                   <Button
                     type="submit"
                     disabled={contactMutation.isPending}
-                    className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl py-6 text-base font-medium shadow-lg shadow-red-500/25"
+                    className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl py-6 text-base font-medium shadow-lg shadow-red-500/25"
                     data-testid="button-submit-contact"
                   >
                     {contactMutation.isPending ? (

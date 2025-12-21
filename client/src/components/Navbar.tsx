@@ -127,7 +127,7 @@ export default function Navbar() {
               <Button
                 size="sm"
                 onClick={() => scrollToSection("#contact")}
-                className="hidden sm:flex bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl shadow-lg shadow-red-500/20 hover:shadow-red-500/40 text-xs sm:text-sm font-semibold transition-all duration-200"
+                className="hidden sm:flex bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl shadow-lg shadow-red-500/20 text-xs sm:text-sm font-semibold"
                 data-testid="button-hire-me-nav"
               >
                 <Sparkles className="w-3.5 h-3.5 mr-1.5" />
@@ -177,7 +177,7 @@ export default function Navbar() {
                 <div className="pt-2">
                   <Button
                     onClick={() => scrollToSection("#contact")}
-                    className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl font-semibold shadow-lg shadow-red-500/20 hover:shadow-red-500/40 transition-all duration-200"
+                    className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-semibold shadow-lg shadow-red-500/20"
                     data-testid="button-hire-me-mobile"
                   >
                     <Sparkles className="w-4 h-4 mr-2 inline" />

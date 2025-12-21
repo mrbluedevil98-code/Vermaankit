@@ -77,7 +77,7 @@ export default function Footer() {
               <Button
                 size="sm"
                 onClick={() => scrollToSection("#contact")}
-                className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl shadow-lg shadow-red-500/20"
+                className="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl shadow-lg shadow-red-500/20"
                 data-testid="button-footer-cta"
               >
                 <Sparkles className="w-3.5 h-3.5 mr-1.5" />
