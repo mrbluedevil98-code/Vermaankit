@@ -19,14 +19,16 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Verify connection when server starts
-transporter.verify((error: Error | null, success: boolean) => {
-  if (error) {
-    console.error('Email transporter error:', error);
-  } else if (success) {
-    console.log('Email transporter is ready to send messages');
-  }
-});
+// Verify connection when server starts (only if credentials are set)
+if (GMAIL_PASSWORD) {
+  transporter.verify((error: Error | null, success: boolean) => {
+    if (error) {
+      console.error('Email transporter error:', error);
+    } else if (success) {
+      console.log('Email transporter is ready to send messages');
+    }
+  });
+}
 
 async function sendContactEmailNotification(data: InsertContactMessage) {
   if (!GMAIL_PASSWORD) {

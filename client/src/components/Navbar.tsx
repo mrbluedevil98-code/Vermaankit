@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./ThemeToggle";
+import RefreshButton from "./RefreshButton";
 import logoImage from "@assets/LOGO_1766171581846.png";
 
 const navItems = [
@@ -122,6 +123,10 @@ export default function Navbar() {
               ))}
             </div>
 
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <RefreshButton />
+            </div>
+            
             <div className="flex items-center gap-2 sm:gap-3">
               <ThemeToggle />
               <Button
