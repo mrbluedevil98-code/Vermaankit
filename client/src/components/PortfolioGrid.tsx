@@ -191,19 +191,12 @@ const ProjectCard = memo(({ project, index, onClick, onImageClick }: { project: 
           <div className="absolute inset-0 bg-gradient-to-br from-red-500/0 via-transparent to-orange-500/0 group-hover:from-red-500/20 group-hover:to-orange-500/20 transition-all duration-500" />
           
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400 cubic-ease">
-            <motion.div
-              className="flex gap-3"
-              initial={{ scale: 0.8, y: 10 }}
-              whileInView={{ scale: 1.1, y: 0 }}
-              transition={{ type: "spring", damping: 18, stiffness: 300 }}
+            <span
+              className="p-3 rounded-full bg-white/25 backdrop-blur-sm border border-white/40 text-white hover:bg-white/35 transition-all duration-300 hover:shadow-lg hover:shadow-white/40"
+              aria-hidden="true"
             >
-              <span
-                className="p-3 rounded-full bg-white/25 backdrop-blur-sm border border-white/40 text-white hover:bg-white/35 transition-all duration-300 hover:shadow-lg hover:shadow-white/40"
-                aria-hidden="true"
-              >
-                <Eye className="w-5 h-5" />
-              </span>
-            </motion.div>
+              <Eye className="w-5 h-5" />
+            </span>
           </div>
         </div>
         <div 
