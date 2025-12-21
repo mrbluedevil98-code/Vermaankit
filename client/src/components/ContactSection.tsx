@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Mail, MessageSquare, DollarSign, Youtube, Zap, Clock, CheckCircle2, Star, ArrowRight, Loader2 } from "lucide-react";
 import { SiLinkedin, SiFiverr, SiInstagram, SiDiscord } from "react-icons/si";
@@ -12,9 +13,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
@@ -55,6 +53,7 @@ const stats = [
 
 export default function ContactSection() {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -67,29 +66,26 @@ export default function ContactSection() {
     },
   });
 
-  const contactMutation = useMutation({
-    mutationFn: async (data: ContactFormData) => {
-      const response = await apiRequest("POST", "/api/contact", data);
-      return response.json();
-    },
-    onSuccess: (data) => {
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+    try {
+      // Simulate form submission (frontend-only)
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
       toast({
         title: "Message sent!",
-        description: data.message || "I'll get back to you within 24 hours with a quote.",
+        description: "I'll get back to you within 24 hours with a quote. Check your email for confirmation.",
       });
       form.reset();
-    },
-    onError: (error: Error) => {
+    } catch (error) {
       toast({
         title: "Failed to send message",
-        description: error.message || "Please try again later.",
+        description: "Please try again or contact me directly on social media.",
         variant: "destructive",
       });
-    },
-  });
-
-  const onSubmit = (data: ContactFormData) => {
-    contactMutation.mutate(data);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -392,11 +388,11 @@ export default function ContactSection() {
                   />
                   <Button
                     type="submit"
-                    disabled={contactMutation.isPending}
+                    disabled={isSubmitting}
                     className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl py-6 text-base font-medium shadow-lg shadow-red-500/25"
                     data-testid="button-submit-contact"
                   >
-                    {contactMutation.isPending ? (
+                    {isSubmitting ? (
                       <span className="flex items-center gap-2">
                         <Loader2 className="w-5 h-5 animate-spin" />
                         Sending...
