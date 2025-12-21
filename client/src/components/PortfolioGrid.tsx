@@ -188,16 +188,17 @@ const ProjectCard = memo(({ project, index, onClick, onImageClick }: { project: 
             style={{ transformOrigin: 'center' }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 cubic-ease" />
+          <div className="absolute inset-0 bg-gradient-to-br from-red-500/0 via-transparent to-orange-500/0 group-hover:from-red-500/20 group-hover:to-orange-500/20 transition-all duration-500" />
           
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400 cubic-ease">
             <motion.div
               className="flex gap-3"
-              initial={{ scale: 0.8 }}
-              whileHover={{ scale: 1.1 }}
+              initial={{ scale: 0.8, y: 10 }}
+              whileInView={{ scale: 1.1, y: 0 }}
               transition={{ type: "spring", damping: 18, stiffness: 300 }}
             >
               <span
-                className="p-3 rounded-full bg-white/25 backdrop-blur-sm border border-white/40 text-white hover:bg-white/35 transition-colors duration-300"
+                className="p-3 rounded-full bg-white/25 backdrop-blur-sm border border-white/40 text-white hover:bg-white/35 transition-all duration-300 hover:shadow-lg hover:shadow-white/40"
                 aria-hidden="true"
               >
                 <Eye className="w-5 h-5" />
@@ -223,7 +224,7 @@ const ProjectCard = memo(({ project, index, onClick, onImageClick }: { project: 
               </span>
             )}
           </div>
-          <h3 className="text-lg font-semibold text-foreground group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-300">
+          <h3 className="text-lg font-semibold text-foreground group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-red-500 group-hover:to-orange-500 group-hover:bg-clip-text transition-all duration-300">
             {project.title}
           </h3>
         </div>

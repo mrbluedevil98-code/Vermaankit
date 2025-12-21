@@ -17,9 +17,9 @@ export default function GlassCard({
   delay = 0,
 }: GlassCardProps) {
   const variants = {
-    default: "bg-white/15 dark:bg-white/5 backdrop-blur-lg border border-white/25 dark:border-white/10 hover:bg-white/20 dark:hover:bg-white/8 hover:border-white/35 dark:hover:border-white/15 transition-all duration-200",
-    subtle: "bg-white/8 dark:bg-white/3 backdrop-blur-md border border-white/15 dark:border-white/5 hover:bg-white/12 dark:hover:bg-white/5 hover:border-white/20 dark:hover:border-white/10 transition-all duration-200",
-    strong: "bg-white/25 dark:bg-white/10 backdrop-blur-xl border border-white/35 dark:border-white/15 hover:bg-white/30 dark:hover:bg-white/15 hover:border-white/45 dark:hover:border-white/20 transition-all duration-200",
+    default: "bg-white/15 dark:bg-white/5 backdrop-blur-lg border border-white/25 dark:border-white/10 hover:bg-white/20 dark:hover:bg-white/8 hover:border-white/35 dark:hover:border-white/15 transition-all duration-300 hover:shadow-lg hover:shadow-red-500/20",
+    subtle: "bg-white/8 dark:bg-white/3 backdrop-blur-md border border-white/15 dark:border-white/5 hover:bg-white/12 dark:hover:bg-white/5 hover:border-white/20 dark:hover:border-white/10 transition-all duration-300 hover:shadow-md hover:shadow-red-500/10",
+    strong: "bg-white/25 dark:bg-white/10 backdrop-blur-xl border border-white/35 dark:border-white/15 hover:bg-white/30 dark:hover:bg-white/15 hover:border-white/45 dark:hover:border-white/20 transition-all duration-300 hover:shadow-xl hover:shadow-red-500/30",
   };
 
   const content = (
