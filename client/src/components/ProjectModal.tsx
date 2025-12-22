@@ -112,96 +112,96 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                 onClick={(e) => e.stopPropagation()}
               >
               {/* Image Section - Preserves Aspect Ratio */}
-              <div className="relative flex-1 md:flex-none md:h-96 min-h-0 overflow-hidden bg-gradient-to-br from-white/30 to-white/10 dark:from-white/5 dark:to-transparent flex items-center justify-center">
+              <div className="relative flex-1 md:flex-none md:h-[450px] min-h-0 overflow-hidden bg-[#0a0c14] flex items-center justify-center">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-contain p-3 sm:p-4 md:p-5 rounded-xl"
+                  className="w-full h-full object-cover"
                   loading="eager"
                   decoding="async"
                 />
                 
-                {/* Close Button - Mobile Only */}
+                {/* Close Button - Desktop & Mobile */}
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={onClose}
-                  className="block md:hidden absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/20 hover:bg-white/30 dark:bg-white/10 dark:hover:bg-white/20 backdrop-blur-lg border border-white/30 dark:border-white/20 text-foreground dark:text-white rounded-full transition-colors"
+                  className="absolute top-4 right-4 z-10 bg-black/40 hover:bg-black/60 backdrop-blur-md border border-white/10 text-white rounded-md transition-colors"
                   data-testid="button-close-modal"
                   aria-label="Close modal"
                 >
                   <X className="w-5 h-5" />
                 </Button>
 
-                {/* Category & Title Overlay - Clean & Subtle */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent pt-12 pb-4 px-4 sm:px-6">
-                  <Badge className="mb-2 sm:mb-3 bg-red-500 text-white border-none">
+                {/* Category & Title Overlay */}
+                <div className="absolute top-0 left-0 right-0 pt-6 px-6 z-10">
+                  <Badge className="mb-2 bg-red-500 hover:bg-red-600 text-white border-none rounded-md px-3 py-1 text-xs font-semibold uppercase tracking-wider">
                     {project.category}
                   </Badge>
-                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                     {project.title}
                   </h2>
                 </div>
               </div>
 
               {/* Content Section */}
-              <div className="flex-1 md:flex-none overflow-auto p-4 sm:p-6 md:p-6">
-                <div className="max-w-3xl md:max-w-none">
-                  <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
+              <div className="flex-1 overflow-auto p-6 bg-[#0a0c14] text-white">
+                <div className="max-w-3xl">
+                  <p className="text-base text-gray-400 mb-8 leading-relaxed">
                     {project.description}
                   </p>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                  <div className="grid grid-cols-2 gap-4 mb-10">
                     {project.views && (
-                      <div className="flex items-start gap-3 p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10">
-                        <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
-                          <Eye className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      <div className="flex items-center gap-4 p-4 rounded-xl bg-[#111420] border border-white/5">
+                        <div className="p-3 rounded-lg bg-blue-500/10">
+                          <Eye className="w-5 h-5 text-blue-500" />
                         </div>
                         <div>
-                          <span className="text-xs text-muted-foreground block">Views</span>
-                          <span className="font-semibold text-foreground">{project.views}</span>
+                          <span className="text-xs text-gray-500 block uppercase tracking-wider font-medium">Views</span>
+                          <span className="text-xl font-bold text-white">{project.views}</span>
                         </div>
                       </div>
                     )}
                     {project.ctr && (
-                      <div className="flex items-start gap-3 p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10">
-                        <div className="p-2 rounded-lg bg-green-100 dark:bg-green-900/30">
-                          <TrendingUp className="w-4 h-4 text-green-600 dark:text-green-400" />
+                      <div className="flex items-center gap-4 p-4 rounded-xl bg-[#111420] border border-white/5">
+                        <div className="p-3 rounded-lg bg-green-500/10">
+                          <TrendingUp className="w-5 h-5 text-green-500" />
                         </div>
                         <div>
-                          <span className="text-xs text-muted-foreground block">CTR</span>
-                          <span className="font-semibold text-foreground">{project.ctr}</span>
+                          <span className="text-xs text-gray-500 block uppercase tracking-wider font-medium">CTR</span>
+                          <span className="text-xl font-bold text-white">{project.ctr}</span>
                         </div>
                       </div>
                     )}
-                    <div className="flex items-start gap-3 p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10">
-                      <div className="p-2 rounded-lg bg-red-100 dark:bg-red-900/30">
-                        <Calendar className="w-4 h-4 text-red-600 dark:text-red-400" />
+                    <div className="flex items-center gap-4 p-4 rounded-xl bg-[#111420] border border-white/5">
+                      <div className="p-3 rounded-lg bg-red-500/10">
+                        <Calendar className="w-5 h-5 text-red-500" />
                       </div>
                       <div>
-                        <span className="text-xs text-muted-foreground block">Year</span>
-                        <span className="font-semibold text-foreground">{project.year}</span>
+                        <span className="text-xs text-gray-500 block uppercase tracking-wider font-medium">Year</span>
+                        <span className="text-xl font-bold text-white">{project.year}</span>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3 p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10">
-                      <div className="p-2 rounded-lg bg-orange-100 dark:bg-orange-900/30">
-                        <Palette className="w-4 h-4 text-orange-600 dark:text-orange-400" />
+                    <div className="flex items-center gap-4 p-4 rounded-xl bg-[#111420] border border-white/5">
+                      <div className="p-3 rounded-lg bg-orange-500/10">
+                        <Palette className="w-5 h-5 text-orange-500" />
                       </div>
                       <div>
-                        <span className="text-xs text-muted-foreground block">Tools</span>
-                        <span className="font-semibold text-foreground">{project.technologies.length}</span>
+                        <span className="text-xs text-gray-500 block uppercase tracking-wider font-medium">Tools</span>
+                        <span className="text-xl font-bold text-white">{project.technologies.length}</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mb-8">
-                    <h3 className="text-sm font-medium text-muted-foreground mb-3">Design Techniques</h3>
+                  <div className="mb-10">
+                    <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-4">Design Techniques</h3>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
                         <Badge
                           key={tech}
                           variant="secondary"
-                          className="bg-white/50 dark:bg-white/10 backdrop-blur border border-white/30 dark:border-white/10"
+                          className="bg-[#111420] text-gray-300 border border-white/10 rounded-md px-3 py-1"
                         >
                           {tech}
                         </Badge>
@@ -209,135 +209,19 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-4 mb-8">
+                  <div className="mb-4">
                     <motion.div
-                      whileHover={{ scale: 1.08, y: -2 }}
-                      whileTap={{ scale: 0.96 }}
-                      transition={{ type: "spring", damping: 18, stiffness: 300 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
                       <Button
                         onClick={handleOrderSimilar}
-                        className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl shadow-lg shadow-red-500/25 hover:shadow-red-500/40 transition-all duration-300"
+                        className="w-full h-12 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-bold text-lg shadow-lg shadow-red-500/20"
                         data-testid="button-order-similar"
                       >
                         Order Similar Thumbnail
                       </Button>
                     </motion.div>
-                    <motion.div
-                      whileHover={{ scale: 1.08, y: -2 }}
-                      whileTap={{ scale: 0.96 }}
-                      transition={{ type: "spring", damping: 18, stiffness: 300 }}
-                    >
-                      <Button
-                        onClick={handleViewMore}
-                        variant="outline"
-                        className="rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-lg border-white/30 dark:border-white/10 transition-all duration-300"
-                        data-testid="button-view-more"
-                      >
-                        View More Work
-                      </Button>
-                    </motion.div>
-                  </div>
-
-                  <div className="border-t border-white/20 dark:border-white/10 pt-8">
-                    <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
-                      <MessageCircle className="w-5 h-5 text-red-500" />
-                      Client Reviews
-                    </h3>
-
-                    <div className="mb-8 p-5 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10">
-                      <div className="space-y-4">
-                        <div>
-                          <label className="text-sm font-medium text-foreground block mb-2">Your Name</label>
-                          <Input
-                            placeholder="Enter your name"
-                            value={newReview.author}
-                            onChange={(e) => setNewReview({ ...newReview, author: e.target.value })}
-                            className="bg-white/70 dark:bg-white/10 border-white/30 dark:border-white/10 rounded-lg"
-                            data-testid="input-review-name"
-                          />
-                        </div>
-                        <div>
-                          <label className="text-sm font-medium text-foreground block mb-3">Rating</label>
-                          <div className="flex gap-2">
-                            {[1, 2, 3, 4, 5].map((star) => (
-                              <motion.button
-                                key={star}
-                                type="button"
-                                onClick={() => setNewReview({ ...newReview, rating: star })}
-                                whileHover={{ scale: 1.25, rotate: 10 }}
-                                whileTap={{ scale: 0.9 }}
-                                transition={{ type: "spring", damping: 18, stiffness: 300 }}
-                                className="p-1 transition-all"
-                                data-testid={`button-star-rating-${star}`}
-                              >
-                                <Star
-                                  className={`w-8 h-8 transition-all ${
-                                    star <= newReview.rating
-                                      ? "fill-yellow-400 text-yellow-400"
-                                      : "text-gray-300 dark:text-gray-600 hover:text-yellow-400"
-                                  }`}
-                                />
-                              </motion.button>
-                            ))}
-                            <span className="hidden md:inline ml-2 text-sm font-medium text-foreground self-center">
-                              {newReview.rating} {newReview.rating === 1 ? 'Star' : 'Stars'}
-                            </span>
-                          </div>
-                        </div>
-                        <div>
-                          <label className="text-sm font-medium text-foreground block mb-2">Review</label>
-                          <Textarea
-                            placeholder="Share your experience with this thumbnail design..."
-                            value={newReview.comment}
-                            onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
-                            className="bg-white/70 dark:bg-white/10 border-white/30 dark:border-white/10 rounded-lg min-h-[100px]"
-                            data-testid="textarea-review-comment"
-                          />
-                        </div>
-                        <Button
-                          onClick={handleAddReview}
-                          className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white"
-                          data-testid="button-submit-review"
-                        >
-                          Post Review
-                        </Button>
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      {reviews.length > 0 ? (
-                        reviews.map((review) => (
-                          <div
-                            key={review.id}
-                            className="p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10"
-                            data-testid={`review-item-${review.id}`}
-                          >
-                            <div className="flex items-start justify-between mb-2">
-                              <div className="flex-1 min-w-0 mr-2">
-                                <p className="font-semibold text-foreground truncate">{review.author}</p>
-                                <p className="text-xs text-muted-foreground">{review.date}</p>
-                              </div>
-                              <div className="flex gap-0.5 shrink-0">
-                                {[...Array(5)].map((_, i) => (
-                                  <Star
-                                    key={i}
-                                    className={`w-4 h-4 ${
-                                      i < review.rating
-                                        ? "fill-yellow-400 text-yellow-400"
-                                        : "text-gray-300 dark:text-gray-600"
-                                    }`}
-                                  />
-                                ))}
-                              </div>
-                            </div>
-                            <p className="text-sm text-foreground/90 whitespace-pre-wrap break-words">{review.comment}</p>
-                          </div>
-                        ))
-                      ) : (
-                        <p className="text-center text-muted-foreground py-4 italic">No reviews yet for this project. Be the first to leave one!</p>
-                      )}
-                    </div>
                   </div>
                 </div>
               </div>
