@@ -351,7 +351,7 @@ export default function ContactSection() {
                               <SelectValue placeholder="Choose your package" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent data-testid="select-package-content">
+                          <SelectContent position="popper" sideOffset={4} className="z-[100] bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-white/30 dark:border-white/10" data-testid="select-package-content">
                             {pricingTiers.map((tier) => (
                               <SelectItem 
                                 key={tier.value} 
