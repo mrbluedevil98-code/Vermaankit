@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import logoImage from "@assets/LOGO_1766171581846.png";
 
-export default function LoadingAnimation() {
+export default function LoadingAnimation({ onFinish }: { onFinish?: () => void }) {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
+      onFinish?.();
     }, 2500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [onFinish]);
 
   if (!isVisible) return null;
 

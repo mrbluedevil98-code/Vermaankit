@@ -4,6 +4,8 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/hooks/use-theme";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -40,18 +42,26 @@ function RatingSection() {
 }
 
 function Portfolio() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   return (
     <>
+      <LoadingAnimation onFinish={() => setIsLoaded(true)} />
       <AnimatedBackground />
       <Navbar />
-      <main className="relative">
+      <motion.main 
+        className="relative"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      >
         <HeroSection />
         <PortfolioGrid />
         <AboutSection />
         <ContactSection />
         <RatingSection />
         <Footer />
-      </main>
+      </motion.main>
     </>
   );
 }
@@ -77,7 +87,6 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <TooltipProvider>
-          <LoadingAnimation />
           <PageReloadIndicator />
           <div className="min-h-screen">
             <Router />

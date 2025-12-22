@@ -22,6 +22,19 @@ const stats = [
   { icon: Eye, value: "10M+", label: "Views Generated", color: "text-blue-500" },
 ];
 
+const statsVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.8 + i * 0.1,
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  })
+};
+
 export default function HeroSection() {
   const scrollToWork = () => {
     document.querySelector("#work")?.scrollIntoView({ behavior: "smooth" });
@@ -42,9 +55,9 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto w-full relative">
         <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-16">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
             style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
           >
@@ -66,7 +79,11 @@ export default function HeroSection() {
             <motion.div
               className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4"
               variants={floatingVariants}
+              initial={{ opacity: 0, scale: 0.8 }}
               animate="animate"
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 }}
             >
               <GlassCard className="px-3 py-2" variant="strong" animate={false}>
                 <div className="flex items-center gap-2">
@@ -81,8 +98,11 @@ export default function HeroSection() {
             <motion.div
               className="absolute -bottom-3 -left-3 sm:-bottom-4 sm:-left-4"
               variants={floatingVariants}
+              initial={{ opacity: 0, scale: 0.8 }}
               animate="animate"
-              transition={{ delay: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.7 }}
             >
               <GlassCard className="px-3 py-2" variant="strong" animate={false}>
                 <div className="flex items-center gap-2">
@@ -117,46 +137,67 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+          <div
             className="flex-1 text-center lg:text-left"
             style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
           >
-            <div className="inline-flex items-center gap-2 mb-4 sm:mb-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="inline-flex items-center gap-2 mb-4 sm:mb-6"
+            >
               <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/20">
                 <Sparkles className="w-4 h-4 text-red-500" />
                 <span className="text-sm font-medium text-foreground">YouTube Thumbnail Expert</span>
               </div>
-            </div>
+            </motion.div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 text-foreground leading-[1.1]">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 text-foreground leading-[1.1]"
+            >
               <span className="block">Thumbnails that</span>
               <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-500 bg-clip-text text-transparent">
                 Get Clicks
               </span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mb-6 sm:mb-8 mx-auto lg:mx-0 leading-relaxed">
+            <motion.p 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mb-6 sm:mb-8 mx-auto lg:mx-0 leading-relaxed"
+            >
               I design scroll-stopping YouTube thumbnails that boost your CTR and grow your channel. 
               Let's make your videos <span className="text-foreground font-medium">impossible to ignore</span>.
-            </p>
+            </motion.p>
 
             <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
-              {stats.map((stat) => (
-                <div
+              {stats.map((stat, i) => (
+                <motion.div
                   key={stat.label}
+                  custom={i}
+                  initial="hidden"
+                  animate="visible"
+                  variants={statsVariants}
                   className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10 cursor-default hover:bg-white/60 dark:hover:bg-white/10 transition-colors duration-200"
                 >
                   <stat.icon className={`w-4 h-4 ${stat.color}`} />
                   <span className="font-bold text-foreground">{stat.value}</span>
                   <span className="text-xs text-muted-foreground hidden sm:inline">{stat.label}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start w-full sm:w-auto">
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.1 }}
+              className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start w-full sm:w-auto"
+            >
               <motion.div 
                 className="w-full sm:w-auto"
                 whileHover={{ y: -2 }}
@@ -190,11 +231,16 @@ export default function HeroSection() {
                   Get a Quote
                 </Button>
               </motion.div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
 
-        <div className="flex justify-center mt-12 lg:mt-20">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.5 }}
+          className="flex justify-center mt-12 lg:mt-20"
+        >
           <button
             onClick={scrollToWork}
             className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group"
@@ -205,7 +251,7 @@ export default function HeroSection() {
               <ArrowDown className="w-4 h-4" />
             </div>
           </button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
