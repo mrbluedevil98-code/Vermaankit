@@ -84,33 +84,33 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
     <AnimatePresence mode="wait">
       {isOpen && (
         <>
-          <motion.div
-            key="backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed inset-0 bg-black/40 backdrop-blur-md z-40"
-            onClick={onClose}
-            data-testid="modal-backdrop"
-            style={{ transform: "translateZ(0)" }}
-            aria-hidden="true"
-          />
-          <motion.div
-            key="modal-container"
-            initial={{ opacity: 0, scale: 0.92, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 20 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6"
-            onClick={handleContainerClick}
-            data-testid="modal-project"
-            style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
-          >
-            <div 
-              className="w-full h-full md:h-auto md:max-w-2xl md:max-h-[90vh] max-w-4xl max-h-[95vh] bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="fixed inset-0 bg-black/80 backdrop-blur-xl z-[9999]"
+              onClick={onClose}
+              data-testid="modal-backdrop"
+              style={{ transform: "translateZ(0)" }}
+              aria-hidden="true"
+            />
+            <motion.div
+              key="modal-container"
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed inset-0 z-[10000] flex items-center justify-center p-2 sm:p-4 md:p-6 pointer-events-none"
+              onClick={handleContainerClick}
+              data-testid="modal-project"
+              style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
             >
+              <div 
+                className="w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] bg-white dark:bg-slate-950 rounded-2xl shadow-2xl flex flex-col overflow-hidden pointer-events-auto relative"
+                onClick={(e) => e.stopPropagation()}
+              >
               {/* Image Section - Preserves Aspect Ratio */}
               <div className="relative flex-1 md:flex-none md:h-96 min-h-0 overflow-hidden bg-gradient-to-br from-white/30 to-white/10 dark:from-white/5 dark:to-transparent flex items-center justify-center">
                 <img

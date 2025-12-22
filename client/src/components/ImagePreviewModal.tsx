@@ -51,7 +51,7 @@ const ImagePreviewModal = memo(function ImagePreviewModalComponent({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+            className="fixed inset-0 bg-black/80 backdrop-blur-xl z-[9999]"
             onClick={handleBackdropClick}
             data-testid="modal-image-backdrop"
             style={{ transform: "translateZ(0)" }}
@@ -62,12 +62,15 @@ const ImagePreviewModal = memo(function ImagePreviewModalComponent({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 z-[10000] flex items-center justify-center p-4 pointer-events-none"
             data-testid="modal-image-preview"
             onClick={handleBackdropClick}
             style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
           >
-            <div className="relative w-full max-w-4xl max-h-[90vh] flex items-center justify-center">
+            <div 
+              className="relative w-full max-w-4xl max-h-[90vh] flex items-center justify-center pointer-events-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
               <img
                 src={imageUrl}
                 alt={title}
