@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Star, MessageCircle, Send } from "lucide-react";
+import { Star, MessageCircle, Send, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -40,8 +40,14 @@ export default function AddReviewSection() {
   };
 
   return (
-    <section id="add-review" className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#05070a] to-[#0a0c14]">
-      <div className="max-w-3xl mx-auto">
+    <section id="add-review" className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Dynamic Background Elements */}
+      <div className="absolute inset-0 bg-transparent pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-500/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-orange-500/5 blur-[100px] rounded-full" />
+      </div>
+
+      <div className="max-w-3xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +55,11 @@ export default function AddReviewSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-red-500 text-[10px] font-bold uppercase tracking-widest mb-4">
+            <Sparkles className="w-3 h-3" />
+            Testimonials
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
             Share Your Experience
           </h2>
           <p className="text-gray-400 text-lg">
@@ -63,8 +73,10 @@ export default function AddReviewSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <GlassCard className="p-8 sm:p-10 border-white/5 bg-white/[0.02] backdrop-blur-3xl shadow-2xl">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <GlassCard className="p-8 sm:p-10 border-white/10 bg-white/[0.01] backdrop-blur-3xl shadow-2xl relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
+            
+            <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label className="text-sm font-semibold text-gray-300 block mb-2 uppercase tracking-wider">Your Name</label>
