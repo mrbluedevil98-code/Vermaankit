@@ -202,26 +202,24 @@ const ProjectCard = memo(({ project, onClick, onImageClick }: { project: Project
           </div>
         </div>
         <div 
-          className="p-5 cursor-pointer"
+          className="p-5 cursor-pointer flex flex-col gap-1"
           onClick={onClick}
           onKeyDown={(e) => e.key === 'Enter' && onClick()}
           tabIndex={0}
           role="button"
           aria-label={`View ${project.title} details`}
         >
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <span className="text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">
-              {project.category}
-            </span>
-            {project.ctr && (
-              <span className="text-xs font-medium text-green-500 bg-green-500/10 px-2 py-0.5 rounded-full">
-                {project.ctr} CTR
-              </span>
-            )}
-          </div>
-          <h3 className="text-lg font-semibold text-foreground group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-red-500 group-hover:to-orange-500 group-hover:bg-clip-text transition-all duration-300">
+          <span className="text-xs font-medium text-red-500/80 dark:text-red-400/80 uppercase tracking-wider">
+            {project.category}
+          </span>
+          <h3 className="text-lg font-semibold text-foreground group-hover:text-red-500 transition-colors duration-300">
             {project.title}
           </h3>
+          {project.ctr && (
+            <span className="text-xs font-medium text-green-500/80 mt-1">
+              {project.ctr} CTR
+            </span>
+          )}
         </div>
       </GlassCard>
     </div>
