@@ -272,7 +272,10 @@ export default function ContactSection() {
                   <MessageSquare className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-foreground">Send a Message</h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-semibold text-foreground">Send a Message</h3>
+                    <Badge variant="secondary" className="bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20 text-[10px] px-1.5 py-0">Coming Soon</Badge>
+                  </div>
                   <p className="text-sm text-muted-foreground">I'll respond within 24 hours</p>
                 </div>
               </div>
