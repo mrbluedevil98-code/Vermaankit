@@ -68,7 +68,7 @@ const ImagePreviewModal = memo(function ImagePreviewModalComponent({
             style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
           >
             <div 
-              className="relative w-full max-w-4xl max-h-[90vh] flex items-center justify-center pointer-events-auto"
+              className="relative w-full max-w-4xl max-h-[90vh] flex items-center justify-center pointer-events-auto z-[10001]"
               onClick={(e) => e.stopPropagation()}
             >
               <img

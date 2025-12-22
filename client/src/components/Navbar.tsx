@@ -65,10 +65,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-200 will-change-[width] ${
-          isScrolled ? "w-[95%] max-w-4xl" : "w-[90%] max-w-5xl"
-        }`}
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-[50] transition-all duration-200 will-change-[width] pointer-events-auto shadow-xl"
         style={{ backfaceVisibility: "hidden" }}
       >
         <div

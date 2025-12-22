@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import { useState, useCallback, memo, Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { Eye } from "lucide-react";
@@ -321,24 +322,27 @@ export default function PortfolioGrid() {
         </div>
       </div>
 
-      <Suspense fallback={null}>
-        {previewImage && (
-          <ImagePreviewModal
-            imageUrl={previewImage.url}
-            title={previewImage.title}
-            isOpen={true}
-            onClose={handleClosePreview}
-          />
-        )}
+      {createPortal(
+        <Suspense fallback={null}>
+          {previewImage && (
+            <ImagePreviewModal
+              imageUrl={previewImage.url}
+              title={previewImage.title}
+              isOpen={true}
+              onClose={handleClosePreview}
+            />
+          )}
 
-        {selectedProject && (
-          <ProjectModal
-            project={selectedProject}
-            isOpen={true}
-            onClose={handleCloseModal}
-          />
-        )}
-      </Suspense>
+          {selectedProject && (
+            <ProjectModal
+              project={selectedProject}
+              isOpen={true}
+              onClose={handleCloseModal}
+            />
+          )}
+        </Suspense>,
+        document.body
+      )}
     </section>
   );
 }

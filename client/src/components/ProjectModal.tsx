@@ -108,7 +108,7 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
               style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
             >
               <div 
-                className="w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] bg-white dark:bg-slate-950 rounded-2xl shadow-2xl flex flex-col overflow-hidden pointer-events-auto relative"
+                className="w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] bg-white dark:bg-slate-950 rounded-2xl shadow-2xl flex flex-col overflow-hidden pointer-events-auto relative z-[10001]"
                 onClick={(e) => e.stopPropagation()}
               >
               {/* Image Section - Preserves Aspect Ratio */}
