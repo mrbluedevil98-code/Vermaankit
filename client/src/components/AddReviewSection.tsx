@@ -59,7 +59,7 @@ export default function AddReviewSection() {
             <Sparkles className="w-3 h-3" />
             Testimonials
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
             Share Your Experience
           </h2>
           <p className="text-gray-400 text-lg">
