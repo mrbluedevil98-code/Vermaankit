@@ -223,6 +223,105 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                       </Button>
                     </motion.div>
                   </div>
+
+                  <div className="border-t border-white/10 pt-8 mt-8">
+                    <h3 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                      <MessageCircle className="w-5 h-5 text-red-500" />
+                      Client Reviews
+                    </h3>
+
+                    <div className="mb-8 p-5 rounded-xl bg-[#111420] border border-white/5">
+                      <div className="space-y-4">
+                        <div>
+                          <label className="text-sm font-medium text-gray-400 block mb-2">Your Name</label>
+                          <Input
+                            placeholder="Enter your name"
+                            value={newReview.author}
+                            onChange={(e) => setNewReview({ ...newReview, author: e.target.value })}
+                            className="bg-[#0a0c14] border-white/10 text-white placeholder:text-gray-600 rounded-lg focus:ring-red-500/50"
+                            data-testid="input-review-name"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium text-gray-400 block mb-3">Rating</label>
+                          <div className="flex gap-2">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <motion.button
+                                key={star}
+                                type="button"
+                                onClick={() => setNewReview({ ...newReview, rating: star })}
+                                whileHover={{ scale: 1.25, rotate: 10 }}
+                                whileTap={{ scale: 0.9 }}
+                                className="p-1 transition-all"
+                                data-testid={`button-star-rating-${star}`}
+                              >
+                                <Star
+                                  className={`w-8 h-8 transition-all ${
+                                    star <= newReview.rating
+                                      ? "fill-yellow-400 text-yellow-400"
+                                      : "text-gray-700 hover:text-yellow-400"
+                                  }`}
+                                />
+                              </motion.button>
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium text-gray-400 block mb-2">Review</label>
+                          <Textarea
+                            placeholder="Share your experience with this thumbnail design..."
+                            value={newReview.comment}
+                            onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
+                            className="bg-[#0a0c14] border-white/10 text-white placeholder:text-gray-600 rounded-lg min-h-[100px] focus:ring-red-500/50"
+                            data-testid="textarea-review-comment"
+                          />
+                        </div>
+                        <Button
+                          onClick={handleAddReview}
+                          className="w-full h-12 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-bold rounded-xl"
+                          data-testid="button-submit-review"
+                        >
+                          Post Review
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      {reviews.length > 0 ? (
+                        reviews.map((review) => (
+                          <div
+                            key={review.id}
+                            className="p-5 rounded-xl bg-[#111420] border border-white/5"
+                            data-testid={`review-item-${review.id}`}
+                          >
+                            <div className="flex items-start justify-between mb-3">
+                              <div>
+                                <p className="font-bold text-white">{review.author}</p>
+                                <p className="text-xs text-gray-500">{review.date}</p>
+                              </div>
+                              <div className="flex gap-0.5">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star
+                                    key={i}
+                                    className={`w-4 h-4 ${
+                                      i < review.rating
+                                        ? "fill-yellow-400 text-yellow-400"
+                                        : "text-gray-800"
+                                    }`}
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                            <p className="text-sm text-gray-300 leading-relaxed">{review.comment}</p>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-center text-gray-500 py-6 italic border border-dashed border-white/5 rounded-xl">
+                          No reviews yet. Be the first to share your experience!
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
