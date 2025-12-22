@@ -112,7 +112,7 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                 onClick={(e) => e.stopPropagation()}
               >
               {/* Image Section - Preserves Aspect Ratio */}
-              <div className="relative flex-shrink-0 w-full h-[300px] sm:h-[400px] md:h-[450px] overflow-hidden bg-[#0a0c14] flex items-center justify-center">
+              <div className="relative flex-shrink-0 w-full h-[300px] sm:h-[400px] md:h-[450px] overflow-hidden bg-[#0a0c14] flex items-center justify-center border-b border-white/5">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -122,13 +122,13 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                 />
                 
                 {/* Overlay Content Wrapper */}
-                <div className="absolute inset-0 z-10 p-4 sm:p-6 flex flex-col justify-between pointer-events-none">
+                <div className="absolute inset-0 z-10 p-6 flex flex-col justify-between pointer-events-none">
                   <div className="flex justify-between items-start">
                     <div className="pointer-events-auto">
-                      <Badge className="mb-2 bg-red-500 hover:bg-red-600 text-white border-none rounded-md px-3 py-1 text-[10px] sm:text-xs font-semibold uppercase tracking-wider shadow-lg">
+                      <Badge className="mb-3 bg-red-500 hover:bg-red-600 text-white border-none rounded-md px-3 py-1 text-[10px] sm:text-xs font-semibold uppercase tracking-wider shadow-lg">
                         {project.category}
                       </Badge>
-                      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight drop-shadow-md">
+                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight drop-shadow-xl">
                         {project.title}
                       </h2>
                     </div>
@@ -137,7 +137,7 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                       variant="ghost"
                       size="icon"
                       onClick={onClose}
-                      className="pointer-events-auto bg-black/40 hover:bg-black/60 backdrop-blur-md border border-white/10 text-white rounded-md transition-colors"
+                      className="pointer-events-auto bg-black/40 hover:bg-black/60 backdrop-blur-md border border-white/10 text-white rounded-md transition-colors w-10 h-10"
                       data-testid="button-close-modal"
                       aria-label="Close modal"
                     >
@@ -148,63 +148,63 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
               </div>
 
               {/* Content Section */}
-              <div className="flex-1 overflow-auto p-6 bg-[#0a0c14] text-white">
-                <div className="max-w-3xl">
-                  <p className="text-base text-gray-400 mb-8 leading-relaxed">
+              <div className="flex-1 overflow-auto p-6 sm:p-8 bg-[#0a0c14] text-white">
+                <div className="max-w-4xl mx-auto">
+                  <p className="text-base sm:text-lg text-gray-400 mb-8 leading-relaxed max-w-3xl">
                     {project.description}
                   </p>
 
-                  <div className="grid grid-cols-2 gap-4 mb-10">
+                  <div className="grid grid-cols-2 md:grid-cols-2 gap-4 mb-10">
                     {project.views && (
-                      <div className="flex items-center gap-4 p-4 rounded-xl bg-[#111420] border border-white/5">
-                        <div className="p-3 rounded-lg bg-blue-500/10">
+                      <div className="flex items-center gap-4 p-5 rounded-xl bg-[#111420] border border-white/5 shadow-inner">
+                        <div className="p-3 rounded-lg bg-blue-500/10 shrink-0">
                           <Eye className="w-5 h-5 text-blue-500" />
                         </div>
                         <div>
-                          <span className="text-xs text-gray-500 block uppercase tracking-wider font-medium">Views</span>
-                          <span className="text-xl font-bold text-white">{project.views}</span>
+                          <span className="text-[10px] text-gray-500 block uppercase tracking-widest font-bold mb-1">Views</span>
+                          <span className="text-xl sm:text-2xl font-bold text-white leading-none">{project.views}</span>
                         </div>
                       </div>
                     )}
                     {project.ctr && (
-                      <div className="flex items-center gap-4 p-4 rounded-xl bg-[#111420] border border-white/5">
-                        <div className="p-3 rounded-lg bg-green-500/10">
+                      <div className="flex items-center gap-4 p-5 rounded-xl bg-[#111420] border border-white/5 shadow-inner">
+                        <div className="p-3 rounded-lg bg-green-500/10 shrink-0">
                           <TrendingUp className="w-5 h-5 text-green-500" />
                         </div>
                         <div>
-                          <span className="text-xs text-gray-500 block uppercase tracking-wider font-medium">CTR</span>
-                          <span className="text-xl font-bold text-white">{project.ctr}</span>
+                          <span className="text-[10px] text-gray-500 block uppercase tracking-widest font-bold mb-1">CTR</span>
+                          <span className="text-xl sm:text-2xl font-bold text-white leading-none">{project.ctr}</span>
                         </div>
                       </div>
                     )}
-                    <div className="flex items-center gap-4 p-4 rounded-xl bg-[#111420] border border-white/5">
-                      <div className="p-3 rounded-lg bg-red-500/10">
+                    <div className="flex items-center gap-4 p-5 rounded-xl bg-[#111420] border border-white/5 shadow-inner">
+                      <div className="p-3 rounded-lg bg-red-500/10 shrink-0">
                         <Calendar className="w-5 h-5 text-red-500" />
                       </div>
                       <div>
-                        <span className="text-xs text-gray-500 block uppercase tracking-wider font-medium">Year</span>
-                        <span className="text-xl font-bold text-white">{project.year}</span>
+                        <span className="text-[10px] text-gray-500 block uppercase tracking-widest font-bold mb-1">Year</span>
+                        <span className="text-xl sm:text-2xl font-bold text-white leading-none">{project.year}</span>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4 p-4 rounded-xl bg-[#111420] border border-white/5">
-                      <div className="p-3 rounded-lg bg-orange-500/10">
+                    <div className="flex items-center gap-4 p-5 rounded-xl bg-[#111420] border border-white/5 shadow-inner">
+                      <div className="p-3 rounded-lg bg-orange-500/10 shrink-0">
                         <Palette className="w-5 h-5 text-orange-500" />
                       </div>
                       <div>
-                        <span className="text-xs text-gray-500 block uppercase tracking-wider font-medium">Tools</span>
-                        <span className="text-xl font-bold text-white">{project.technologies.length}</span>
+                        <span className="text-[10px] text-gray-500 block uppercase tracking-widest font-bold mb-1">Tools</span>
+                        <span className="text-xl sm:text-2xl font-bold text-white leading-none">{project.technologies.length}</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="mb-10">
-                    <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-4">Design Techniques</h3>
+                    <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em] mb-4">Design Techniques</h3>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
                         <Badge
                           key={tech}
                           variant="secondary"
-                          className="bg-[#111420] text-gray-300 border border-white/10 rounded-md px-3 py-1"
+                          className="bg-[#111420] text-gray-300 border border-white/10 rounded-md px-4 py-1.5 text-xs font-medium"
                         >
                           {tech}
                         </Badge>
@@ -212,14 +212,14 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                     </div>
                   </div>
 
-                  <div className="mb-4">
+                  <div className="mb-12">
                     <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
                     >
                       <Button
                         onClick={handleOrderSimilar}
-                        className="w-full h-12 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-bold text-lg shadow-lg shadow-red-500/20"
+                        className="w-full h-14 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-bold text-lg shadow-xl shadow-red-500/20"
                         data-testid="button-order-similar"
                       >
                         Order Similar Thumbnail
@@ -227,9 +227,9 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                     </motion.div>
                   </div>
 
-                  <div className="border-t border-white/10 pt-8 mt-8">
-                    <h3 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
-                      <MessageCircle className="w-5 h-5 text-red-500" />
+                  <div className="border-t border-white/10 pt-10">
+                    <h3 className="text-xl font-bold text-white mb-8 flex items-center gap-2">
+                      <MessageCircle className="w-6 h-6 text-red-500" />
                       Client Reviews
                     </h3>
 
