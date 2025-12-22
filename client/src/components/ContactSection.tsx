@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Send, Mail, MessageSquare, DollarSign, Youtube, Zap, Clock, CheckCircle2, Star, ArrowRight, Loader2 } from "lucide-react";
 import { SiLinkedin, SiFiverr, SiInstagram, SiDiscord } from "react-icons/si";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
