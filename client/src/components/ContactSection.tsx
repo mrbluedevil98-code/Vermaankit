@@ -114,9 +114,9 @@ export default function ContactSection() {
             <span className="text-sm font-medium text-foreground">Available for new projects</span>
           </motion.div>
           
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 text-foreground">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 text-foreground leading-[1.2] px-4">
             Let's Create Something
-            <span className="block bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
+            <span className="block mt-2 bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
               Amazing Together
             </span>
           </h2>
@@ -240,15 +240,15 @@ export default function ContactSection() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
-                    whileHover={{ scale: 1.12, y: -4 }}
+                    transition={{ duration: 0.2, delay: index * 0.05 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     className={`flex flex-col items-center gap-2 p-3 rounded-xl ${platform.bg} border border-white/20 dark:border-white/10 hover-elevate transition-all group`}
                     data-testid={`link-social-${platform.label.toLowerCase()}`}
                   >
                     <motion.div
-                      whileHover={{ rotate: 12, scale: 1.1 }}
-                      transition={{ type: "spring", stiffness: 600, damping: 15 }}
+                      whileHover={{ rotate: 8, scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 800, damping: 12 }}
                     >
                       <platform.icon className={`w-5 h-5 ${platform.color}`} />
                     </motion.div>

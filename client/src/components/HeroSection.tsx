@@ -86,12 +86,18 @@ export default function HeroSection() {
             >
               <GlassCard className="px-3 py-2" variant="strong" animate={false}>
                 <div className="flex items-center gap-2">
-                  <div className="flex -space-x-1">
-                    {[0, 1, 2, 3, 4].map((i) => (
+                  <div className="flex -space-x-1 items-center">
+                    {[0, 1, 2, 3].map((i) => (
                       <Star key={i} className="w-3 h-3 text-yellow-500 fill-yellow-500" />
                     ))}
+                    <div className="relative w-3 h-3">
+                      <Star className="absolute inset-0 w-3 h-3 text-yellow-500" />
+                      <div className="absolute inset-0 w-[70%] overflow-hidden">
+                        <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
+                      </div>
+                    </div>
                   </div>
-                  <span className="text-xs sm:text-sm font-semibold text-foreground">5.0 Rating</span>
+                  <span className="text-xs sm:text-sm font-semibold text-foreground">4.7 Rating</span>
                 </div>
               </GlassCard>
             </motion.div>

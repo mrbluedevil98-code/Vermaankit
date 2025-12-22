@@ -29,11 +29,13 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
       document.addEventListener("keydown", handleEscape);
       // Prevent body scroll when modal is open
       document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`;
     }
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     };
   }, [isOpen, onClose]);
 
@@ -298,33 +300,37 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                     </div>
 
                     <div className="space-y-4">
-                      {reviews.map((review) => (
-                        <div
-                          key={review.id}
-                          className="p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10"
-                          data-testid={`review-item-${review.id}`}
-                        >
-                          <div className="flex items-start justify-between mb-2">
-                            <div className="flex-1">
-                              <p className="font-semibold text-foreground">{review.author}</p>
-                              <p className="text-xs text-muted-foreground">{review.date}</p>
+                      {reviews.length > 0 ? (
+                        reviews.map((review) => (
+                          <div
+                            key={review.id}
+                            className="p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/30 dark:border-white/10"
+                            data-testid={`review-item-${review.id}`}
+                          >
+                            <div className="flex items-start justify-between mb-2">
+                              <div className="flex-1 min-w-0 mr-2">
+                                <p className="font-semibold text-foreground truncate">{review.author}</p>
+                                <p className="text-xs text-muted-foreground">{review.date}</p>
+                              </div>
+                              <div className="flex gap-0.5 shrink-0">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star
+                                    key={i}
+                                    className={`w-4 h-4 ${
+                                      i < review.rating
+                                        ? "fill-yellow-400 text-yellow-400"
+                                        : "text-gray-300 dark:text-gray-600"
+                                    }`}
+                                  />
+                                ))}
+                              </div>
                             </div>
-                            <div className="flex gap-0.5">
-                              {[...Array(5)].map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className={`w-4 h-4 ${
-                                    i < review.rating
-                                      ? "fill-yellow-400 text-yellow-400"
-                                      : "text-gray-300 dark:text-gray-600"
-                                  }`}
-                                />
-                              ))}
-                            </div>
+                            <p className="text-sm text-foreground/90 whitespace-pre-wrap break-words">{review.comment}</p>
                           </div>
-                          <p className="text-sm text-foreground/90">{review.comment}</p>
-                        </div>
-                      ))}
+                        ))
+                      ) : (
+                        <p className="text-center text-muted-foreground py-4 italic">No reviews yet for this project. Be the first to leave one!</p>
+                      )}
                     </div>
                   </div>
                 </div>
