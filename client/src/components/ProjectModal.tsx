@@ -112,7 +112,7 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                 onClick={(e) => e.stopPropagation()}
               >
               {/* Image Section - Preserves Aspect Ratio */}
-              <div className="relative flex-1 md:flex-none md:h-[450px] min-h-0 overflow-hidden bg-[#0a0c14] flex items-center justify-center">
+              <div className="relative flex-shrink-0 w-full h-[300px] sm:h-[400px] md:h-[450px] overflow-hidden bg-[#0a0c14] flex items-center justify-center">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -121,26 +121,29 @@ const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onCl
                   decoding="async"
                 />
                 
-                {/* Close Button - Desktop & Mobile */}
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={onClose}
-                  className="absolute top-4 right-4 z-10 bg-black/40 hover:bg-black/60 backdrop-blur-md border border-white/10 text-white rounded-md transition-colors"
-                  data-testid="button-close-modal"
-                  aria-label="Close modal"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-
-                {/* Category & Title Overlay */}
-                <div className="absolute top-0 left-0 right-0 pt-6 px-6 z-10">
-                  <Badge className="mb-2 bg-red-500 hover:bg-red-600 text-white border-none rounded-md px-3 py-1 text-xs font-semibold uppercase tracking-wider">
-                    {project.category}
-                  </Badge>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                    {project.title}
-                  </h2>
+                {/* Overlay Content Wrapper */}
+                <div className="absolute inset-0 z-10 p-4 sm:p-6 flex flex-col justify-between pointer-events-none">
+                  <div className="flex justify-between items-start">
+                    <div className="pointer-events-auto">
+                      <Badge className="mb-2 bg-red-500 hover:bg-red-600 text-white border-none rounded-md px-3 py-1 text-[10px] sm:text-xs font-semibold uppercase tracking-wider shadow-lg">
+                        {project.category}
+                      </Badge>
+                      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight drop-shadow-md">
+                        {project.title}
+                      </h2>
+                    </div>
+                    
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={onClose}
+                      className="pointer-events-auto bg-black/40 hover:bg-black/60 backdrop-blur-md border border-white/10 text-white rounded-md transition-colors"
+                      data-testid="button-close-modal"
+                      aria-label="Close modal"
+                    >
+                      <X className="w-5 h-5" />
+                    </Button>
+                  </div>
                 </div>
               </div>
 
