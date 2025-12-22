@@ -14,8 +14,14 @@ interface ProjectModalProps {
 }
 
 const ProjectModal = memo(function ProjectModalComponent({ project, isOpen, onClose }: ProjectModalProps) {
-  const [reviews, setReviews] = useState<Review[]>(project?.reviews || []);
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [newReview, setNewReview] = useState({ author: "", rating: 5, comment: "" });
+
+  useEffect(() => {
+    if (project) {
+      setReviews(project.reviews || []);
+    }
+  }, [project]);
 
   // Handle escape key to close modal
   useEffect(() => {

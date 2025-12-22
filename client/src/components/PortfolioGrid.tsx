@@ -322,18 +322,22 @@ export default function PortfolioGrid() {
       </div>
 
       <Suspense fallback={null}>
-        <ImagePreviewModal
-          imageUrl={previewImage?.url || null}
-          title={previewImage?.title || ""}
-          isOpen={!!previewImage}
-          onClose={handleClosePreview}
-        />
+        {previewImage && (
+          <ImagePreviewModal
+            imageUrl={previewImage.url}
+            title={previewImage.title}
+            isOpen={true}
+            onClose={handleClosePreview}
+          />
+        )}
 
-        <ProjectModal
-          project={selectedProject}
-          isOpen={!!selectedProject}
-          onClose={handleCloseModal}
-        />
+        {selectedProject && (
+          <ProjectModal
+            project={selectedProject}
+            isOpen={true}
+            onClose={handleCloseModal}
+          />
+        )}
       </Suspense>
     </section>
   );
