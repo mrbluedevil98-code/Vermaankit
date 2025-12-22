@@ -12,6 +12,7 @@ import HeroSection from "@/components/HeroSection";
 import PortfolioGrid from "@/components/PortfolioGrid";
 import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
+import ReviewsSection from "@/components/ReviewsSection";
 import Footer from "@/components/Footer";
 import PageReloadIndicator from "@/components/PageReloadIndicator";
 import LoadingAnimation from "@/components/LoadingAnimation";
@@ -59,6 +60,7 @@ function Portfolio() {
         <PortfolioGrid />
         <AboutSection />
         <ContactSection />
+        <ReviewsSection />
         <RatingSection />
         <Footer />
       </motion.main>
