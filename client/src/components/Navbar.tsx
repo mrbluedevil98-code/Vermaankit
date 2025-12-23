@@ -102,21 +102,22 @@ export default function Navbar() {
                 <motion.button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  whileHover={{ backgroundColor: activeSection === item.href.slice(1) ? undefined : "rgba(255,255,255,0.15)" }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", damping: 20, stiffness: 300 }}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium relative overflow-hidden group ${
+                  className={`px-4 py-2 rounded-lg text-sm font-medium relative overflow-hidden group transition-all duration-200 ${
                     activeSection === item.href.slice(1)
                       ? "bg-white/40 dark:bg-white/15 text-foreground shadow-md shadow-red-500/10 dark:shadow-red-600/5 border border-white/40 dark:border-white/20"
-                      : "text-foreground/70 hover:text-foreground dark:hover:bg-white/5"
+                      : "text-foreground/70 hover:text-foreground hover:bg-white/10 dark:hover:bg-white/5"
                   }`}
                   data-testid={`link-nav-${item.label.toLowerCase()}`}
                 >
                   {activeSection === item.href.slice(1) && (
                     <motion.div 
-                      layoutId="navbar-indicator"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-red-500 to-orange-500 rounded-full" 
-                      transition={{ duration: 0.3 }}
+                      initial={{ opacity: 0, scaleX: 0 }}
+                      animate={{ opacity: 1, scaleX: 1 }}
+                      exit={{ opacity: 0, scaleX: 0 }}
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-red-500 to-orange-500 rounded-full origin-center" 
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
                     />
                   )}
                   <span className="relative z-10 block">{item.label}</span>
