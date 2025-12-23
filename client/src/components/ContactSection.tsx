@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, MessageSquare, DollarSign, Youtube, Zap, Clock, CheckCircle2, Star, ArrowRight, Loader2 } from "lucide-react";
-import { SiLinkedin, SiFiverr, SiInstagram, SiDiscord } from "react-icons/si";
+import { Send, Mail, MessageSquare, DollarSign, Zap, Clock, CheckCircle2, Star, ArrowRight } from "lucide-react";
+import { SiLinkedin, SiInstagram, SiDiscord, SiX } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -33,11 +32,10 @@ const pricingTiers = [
 ];
 
 const platforms = [
-  { icon: Youtube, href: "https://youtube.com/@ankitrikrevo", label: "YouTube", color: "text-red-500", bg: "bg-red-500/10 dark:bg-red-500/20" },
   { icon: SiInstagram, href: "https://instagram.com/ankitrikrevo", label: "Instagram", color: "text-pink-500", bg: "bg-pink-500/10 dark:bg-pink-500/20" },
-  { icon: SiFiverr, href: "https://fiverr.com/ankitrikrevo", label: "Fiverr", color: "text-green-500", bg: "bg-green-500/10 dark:bg-green-500/20" },
   { icon: SiLinkedin, href: "https://www.linkedin.com/in/ankitrikrevoo/", label: "LinkedIn", color: "text-blue-500", bg: "bg-blue-500/10 dark:bg-blue-500/20" },
   { icon: SiDiscord, href: "https://discord.gg/zvWQJkKHvJ", label: "Discord", color: "text-indigo-500", bg: "bg-indigo-500/10 dark:bg-indigo-500/20" },
+  { icon: SiX, href: "https://twitter.com/ankitrikrevo", label: "X", color: "text-black dark:text-white", bg: "bg-black/10 dark:bg-white/10" },
 ];
 
 const features = [
