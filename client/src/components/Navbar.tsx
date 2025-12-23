@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,16 +16,14 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const debounceRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    let scrollTimeout: NodeJS.Timeout;
-    let ticking = false;
-    
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
+      clearTimeout(debounceRef.current);
+      debounceRef.current = setTimeout(() => {
         const sections = navItems.map(item => item.href.slice(1));
         for (const section of sections.reverse()) {
           const element = document.getElementById(section);
@@ -33,25 +31,17 @@ export default function Navbar() {
             const rect = element.getBoundingClientRect();
             if (rect.top <= 150) {
               setActiveSection(section);
-              break;
+              return;
             }
           }
         }
-      }, 100);
+      }, 50);
     };
     
-    const rafHandler = () => {
-      if (!ticking) {
-        handleScroll();
-        ticking = true;
-        setTimeout(() => { ticking = false; }, 200);
-      }
-    };
-    
-    window.addEventListener("scroll", rafHandler, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", rafHandler);
-      clearTimeout(scrollTimeout);
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(debounceRef.current);
     };
   }, []);
 
@@ -115,7 +105,7 @@ export default function Navbar() {
                   whileHover={{ backgroundColor: activeSection === item.href.slice(1) ? undefined : "rgba(255,255,255,0.15)" }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", damping: 20, stiffness: 300 }}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 relative overflow-hidden group ${
+                  className={`px-4 py-2 rounded-lg text-sm font-medium relative overflow-hidden group ${
                     activeSection === item.href.slice(1)
                       ? "bg-white/40 dark:bg-white/15 text-foreground shadow-md shadow-red-500/10 dark:shadow-red-600/5 border border-white/40 dark:border-white/20"
                       : "text-foreground/70 hover:text-foreground dark:hover:bg-white/5"
@@ -123,7 +113,11 @@ export default function Navbar() {
                   data-testid={`link-nav-${item.label.toLowerCase()}`}
                 >
                   {activeSection === item.href.slice(1) && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-red-500 to-orange-500 rounded-full" />
+                    <motion.div 
+                      layoutId="navbar-indicator"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-red-500 to-orange-500 rounded-full" 
+                      transition={{ duration: 0.3 }}
+                    />
                   )}
                   <span className="relative z-10 block">{item.label}</span>
                 </motion.button>
