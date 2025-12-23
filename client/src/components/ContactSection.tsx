@@ -54,7 +54,6 @@ const stats = [
 
 export default function ContactSection() {
   const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -68,25 +67,11 @@ export default function ContactSection() {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    setIsSubmitting(true);
-    try {
-      // Simulate form submission (frontend-only)
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
-      toast({
-        title: "Message sent!",
-        description: "I'll get back to you within 24 hours with a quote. Check your email for confirmation.",
-      });
-      form.reset();
-    } catch (error) {
-      toast({
-        title: "Failed to send message",
-        description: "Please try again or contact me directly on social media.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    toast({
+      title: "Coming Soon",
+      description: "The contact form will be available soon. Please reach out via email or social media for now.",
+      variant: "default",
+    });
   };
 
   return (
@@ -231,7 +216,7 @@ export default function ContactSection() {
 
             <GlassCard className="p-6 hover-elevate" delay={0.3} data-testid="card-social-connect">
               <h3 className="text-lg font-semibold mb-4 text-foreground">Connect With Me</h3>
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-3">
                 {platforms.map((platform, index) => (
                   <motion.a
                     key={platform.label}
@@ -392,22 +377,15 @@ export default function ContactSection() {
                   />
                   <Button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl py-6 text-base font-medium shadow-lg shadow-red-500/25"
+                    disabled={true}
+                    className="w-full bg-gradient-to-r from-red-500/50 to-orange-500/50 text-white rounded-xl py-6 text-base font-medium shadow-lg shadow-red-500/25 opacity-50 cursor-not-allowed"
                     data-testid="button-submit-contact"
                   >
-                    {isSubmitting ? (
-                      <span className="flex items-center gap-2">
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        Sending...
-                      </span>
-                    ) : (
-                      <span className="flex items-center justify-center gap-2">
-                        <Send className="w-4 h-4" />
-                        Get Your Quote
-                        <ArrowRight className="w-4 h-4" />
-                      </span>
-                    )}
+                    <span className="flex items-center justify-center gap-2">
+                      <Send className="w-4 h-4" />
+                      Coming Soon
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
                   </Button>
                   <p className="text-center text-xs text-muted-foreground">
                     Free consultation included with every inquiry
