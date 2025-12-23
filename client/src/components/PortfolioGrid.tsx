@@ -17,6 +17,11 @@ import thumbnail7 from "@assets/Mike_Tyson_1766006303123.jpg";
 import thumbnail8 from "@assets/OBC_THUMBNAIL_FINAL_1766006303123.jpg";
 import thumbnail9 from "@assets/OBS_2_1766006303123.jpg";
 import thumbnail10 from "@assets/valorant_prooo_1766006303124.jpg";
+import thumbnail11 from "@assets/BULB_THUMBNAIL_1766527615226.jpg";
+import thumbnail12 from "@assets/REVISION_2_1766527615252.jpg";
+import thumbnail13 from "@assets/OBS_RECORDING_KENNY_revised_2_1766527615263.jpg";
+import thumbnail14 from "@assets/MAC_RECORDING_KENNY_revision_1_1766527615270.jpg";
+import thumbnail15 from "@assets/INSTA_THUMBNAIL_1766527615277.jpg";
 
 export interface Project {
   id: number;
@@ -160,6 +165,66 @@ const projects: Project[] = [
     year: "2024",
     views: "1.2M",
     ctr: "14.8%",
+  },
+  {
+    id: 11,
+    title: "365 Days Growth",
+    category: "Business",
+    description: "Motivational growth thumbnail featuring a lightbulb as the central element. Represents progression from 30 to 999K subscribers with powerful visual metaphor.",
+    image: thumbnail11,
+    technologies: ["Photoshop", "3D Graphics", "Typography", "Growth Visualization"],
+    role: "Thumbnail Designer",
+    year: "2024",
+    views: "2.1M",
+    ctr: "13.2%",
+  },
+  {
+    id: 12,
+    title: "OBS Quality Settings",
+    category: "Tech",
+    description: "Educational tutorial thumbnail showcasing OBS streaming optimization. Clear settings display with bold 'High Quality' messaging for content creators.",
+    image: thumbnail12,
+    technologies: ["Photoshop", "UI Design", "Screen Capture", "Typography"],
+    role: "Thumbnail Designer",
+    year: "2024",
+    views: "945K",
+    ctr: "12.6%",
+  },
+  {
+    id: 13,
+    title: "OBS Recording Best Settings",
+    category: "Tech",
+    description: "Comprehensive OBS recording guide thumbnail. Features interface walkthrough with person showing optimal configuration for professional quality recording.",
+    image: thumbnail13,
+    technologies: ["Photoshop", "Tutorial Design", "Interface Display", "Expression Capture"],
+    role: "Thumbnail Designer",
+    year: "2024",
+    views: "1.3M",
+    ctr: "11.9%",
+  },
+  {
+    id: 14,
+    title: "Mac OBS Settings Guide",
+    category: "Tech",
+    description: "Mac-specific streaming setup thumbnail showing optimal OBS configurations. Perfect for Apple users wanting professional streaming quality.",
+    image: thumbnail14,
+    technologies: ["Photoshop", "Mac UI Design", "Tutorial Layout", "Settings Visualization"],
+    role: "Thumbnail Designer",
+    year: "2024",
+    views: "820K",
+    ctr: "10.4%",
+  },
+  {
+    id: 15,
+    title: "Instagram Growth Mindset",
+    category: "Lifestyle",
+    description: "Inspirational Instagram-themed thumbnail with motivational message. Combines social media branding with personal growth messaging that resonates with digital creators.",
+    image: thumbnail15,
+    technologies: ["Photoshop", "Social Media Design", "Typography", "Brand Integration"],
+    role: "Thumbnail Designer",
+    year: "2024",
+    views: "1.5M",
+    ctr: "12.1%",
   },
 ];
 
